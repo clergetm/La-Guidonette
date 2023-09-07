@@ -1,0 +1,39 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="category">
+      <h2 data-cy="categoryDetailsHeading"><span jhiTranslate="laGuidonetteApp.category.detail.title">Category</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ category.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="laGuidonetteApp.category.name">Name</span></dt>
+        <dd>
+          <span>{{ category.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="laGuidonetteApp.category.product">Product</span></dt>
+        <dd>
+          <span *ngFor="let product of category.products; let last = last">
+            <a [routerLink]="['/product', product.id, 'view']">{{ product.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/category', category.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+export enum Brand {
+  BTWIN = 'BTWIN',
+
+  SPECIALIZED = 'SPECIALIZED',
+
+  ORBEA = 'ORBEA',
+
+  SANTA = 'SANTA',
+
+  CRUZ = 'CRUZ',
+
+  WETHEPEOPLE = 'WETHEPEOPLE',
+
+  LAPIERRE = 'LAPIERRE',
+
+  CANYON = 'CANYON',
+}
