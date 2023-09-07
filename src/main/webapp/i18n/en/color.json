@@ -1,0 +1,13 @@
+{
+  "laGuidonetteApp": {
+    "Color": {
+      "null": "",
+      "WHITE": "WHITE",
+      "BLACK": "BLACK",
+      "YELLOW": "YELLOW",
+      "RED": "RED",
+      "BLUE": "BLUE",
+      "GREEN": "GREEN"
+    }
+  }
+}
