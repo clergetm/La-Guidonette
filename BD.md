@@ -5,30 +5,18 @@
 Pour modéliser cette application, le schéma relationnel est donné ci-dessous. 
 Les identifiants des relations sont les attributs en italique:
 
-- LesProduits(_idProduit_, libellé, description, prixAchat, marque, modèle, couleur, taille)
+- LesProduits(_idProduit_, libellé, description, prixVente, marque, modèle, couleur, quantite)
 
-    {<id, l, d, p, m, mo, c, t> dans LesProduits <=> Le produit de libellé l, de description d, acheté au prix p, 
-de marque m, de modèle mo, de couleur c et de taille t est identifié par id. }
+    {<id, l, d, p, m, mo, c, q> dans LesProduits <=> Le produit de libellé l, de description d, vendu au prix p, 
+de marque m, de modèle mo, de couleur c et présent en q exemplaires dans le stock est identifié par id. }
 
-- LesCatégories(_idProduit_, _nomCatégorie_)
+- LesCatégories(_idCat_, _nomCatégorie_)
 
-    {<idp, n> dans LesCatégories <=> Le produit identifié par idp appartient à la catégorie nomCatégorie.  }
-
-- LesStocks(_idProduit_, quantité)
-
-    {<idp, q> dans LesStocks <=> Le produit identifié par idp est présent dans les stocks en q exemplaires. }
-
-- LesPrix(_idProduit_, prixVente)
-
-    {<idp, p> dans LesPrix <=> Le produit identifié par idp est vendu à prixVente euros sur le site. }
+    {<idc, n> dans LesCatégories <=> La catégorie nomCatégorie est identifiée par l'identifiant idc. }
 
 - LesCommandes(_idCommande_, idUtilisateur, date, prixTotal, statut)
     {<idC, idU, d, p, s> dans LesCommandes <=> La commande passée par l'utilisateur idU le d, pour un total de p euros,
 actuellement au statut s, est identifiée par idC. }
-
-- LesLignesDeCommande(_idLigne_, idCommande, idProduit, quantité, prixUnitaire)
-    {<idL, idC, idP, q, p> dans LesLignesDeCommande <=> La ligne de commande appartenant à la commande idC,
-contenant q produits d'identifiant idP au prix unitaire p est identifiée par idL. }
 
 - LesUtilisateurs(_idUtilisateur_, nom, prenom, mdp, mail, tel)
 
@@ -40,8 +28,13 @@ contenant q produits d'identifiant idP au prix unitaire p est identifiée par id
     {<idA, n, p, mdp> dans LesAdministrateurs <=> L'administrateur de nom n, de prénom p se connecte grâce
 à l'identifiant idA et le mot de passe mdp. }
 
+On a les relations :
+- LesCatégories <-manyToMany-> LesProduits
+- LesCommandes  <-manyToMany-> LesProduits
+
 ## Définition des domaines
 ### Définition
+dom(idProduit)=dom(idCat)=dom(idUtilisateur)=dom(idAdmin)=dom(idCommande)= [1; +inf [
 
 ### Exemples
 
