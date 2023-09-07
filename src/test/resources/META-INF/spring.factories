@@ -1,0 +1,1 @@
+org.springframework.test.context.ContextCustomizerFactory = fr.uga.laguidonette.config.TestContainersSpringContextCustomizerFactory
