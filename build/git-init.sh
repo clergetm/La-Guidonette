@@ -1,4 +1,7 @@
 git config --local help.autocorrect 20                          # Autocorrection after 2 seconds
+git config --local pull.rebase true
+git config --local fetch.prune true
+git config --local diff.colorMoved zebra
 git config --local alias.gl 'config --local -l'                 # List configuration
 git config --local alias.st 'status -sb'                        # Less verbose status
 git config --local alias.ll 'log --oneline'                     # Compact logs
