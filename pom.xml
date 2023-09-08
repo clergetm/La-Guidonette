@@ -10,7 +10,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>La Guidonette</name>
-    <description>Description for LaGuidonette</description>
+    <description>A Bike WebShop</description>
 
     <repositories>
         <!-- jhipster-needle-maven-repository -->
@@ -25,9 +25,9 @@
     <properties>
         <!-- Build properties -->
         <maven.version>3.2.5</maven.version>
-        <java.version>11</java.version>
-        <node.version>v16.17.0</node.version>
-        <npm.version>8.19.1</npm.version>
+        <java.version>17</java.version>
+        <node.version>v18.17.1</node.version>
+        <npm.version>10.0.0</npm.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
