@@ -61,7 +61,6 @@
         <jaxb-runtime.version>4.0.0</jaxb-runtime.version>
         <archunit-junit5.version>0.22.0</archunit-junit5.version>
         <mapstruct.version>1.5.2.Final</mapstruct.version>
-        <jackson-databind-nullable.version>0.2.3</jackson-databind-nullable.version>
         <!-- Plugin versions -->
         <maven-clean-plugin.version>3.2.0</maven-clean-plugin.version>
         <maven-site-plugin.version>3.12.1</maven-site-plugin.version>
@@ -88,7 +87,6 @@
         <jib-maven-plugin.image>eclipse-temurin:11-jre-focal</jib-maven-plugin.image>
         <jib-maven-plugin.architecture>amd64</jib-maven-plugin.architecture>
         <lifecycle-mapping.version>1.0.0</lifecycle-mapping.version>
-        <openapi-generator-maven-plugin.version>6.0.1</openapi-generator-maven-plugin.version>
         <properties-maven-plugin.version>1.1.0</properties-maven-plugin.version>
         <sonar-maven-plugin.version>3.9.1.2184</sonar-maven-plugin.version>
 
@@ -151,11 +149,6 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.openapitools</groupId>
-            <artifactId>jackson-databind-nullable</artifactId>
-            <version>${jackson-databind-nullable.version}</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -399,14 +392,6 @@
             <plugin>
                 <groupId>org.gaul</groupId>
                 <artifactId>modernizer-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <!--
-                    Plugin that provides API-first development using openapi-generator-cli to
-                    generate Spring-MVC endpoint stubs at compile time from an OpenAPI definition file
-                -->
-                <groupId>org.openapitools</groupId>
-                <artifactId>openapi-generator-maven-plugin</artifactId>
             </plugin>
             <!-- jhipster-needle-maven-add-plugin -->
         </plugins>
@@ -803,36 +788,6 @@
                     <artifactId>maven-jar-plugin</artifactId>
                     <version>${maven-jar-plugin.version}</version>
                </plugin>
-                <plugin>
-                    <!--
-                        Plugin that provides API-first development using openapi-generator-cli to
-                        generate Spring-MVC endpoint stubs at compile time from an OpenAPI definition file
-                    -->
-                    <groupId>org.openapitools</groupId>
-                    <artifactId>openapi-generator-maven-plugin</artifactId>
-                    <version>${openapi-generator-maven-plugin.version}</version>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>generate</goal>
-                            </goals>
-                            <configuration>
-                                <inputSpec>${project.basedir}/src/main/resources/swagger/api.yml</inputSpec>
-                                <generatorName>spring</generatorName>
-                                <apiPackage>fr.uga.laguidonette.web.api</apiPackage>
-                                <modelPackage>fr.uga.laguidonette.service.api.dto</modelPackage>
-                                <supportingFilesToGenerate>ApiUtil.java</supportingFilesToGenerate>
-                                <importMappings>Problem=org.zalando.problem.Problem</importMappings>
-                                <skipValidateSpec>false</skipValidateSpec>
-                                <configOptions>
-                                    <reactive>true</reactive>
-                                    <delegatePattern>true</delegatePattern>
-                                    <title>la-guidonette</title>
-                                </configOptions>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
                 <plugin>
                     <groupId>org.sonarsource.scanner.maven</groupId>
                     <artifactId>sonar-maven-plugin</artifactId>
@@ -1397,19 +1352,6 @@
                                             </pluginExecutionFilter>
                                             <action>
                                                 <ignore/>
-                                            </action>
-                                        </pluginExecution>
-                                        <pluginExecution>
-                                            <pluginExecutionFilter>
-                                                <groupId>org.openapitools</groupId>
-                                                <artifactId>openapi-generator-maven-plugin</artifactId>
-                                                <versionRange>${openapi-generator-maven-plugin.version}</versionRange>
-                                                <goals>
-                                                    <goal>generate</goal>
-                                                </goals>
-                                            </pluginExecutionFilter>
-                                            <action>
-                                                <ignore />
                                             </action>
                                         </pluginExecution>
                                     </pluginExecutions>

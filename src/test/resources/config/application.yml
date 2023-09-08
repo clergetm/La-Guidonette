@@ -69,7 +69,7 @@ jhipster:
     authentication:
       jwt:
         # This token must be encoded using Base64 (you can type `echo 'secret-key'|base64` on your command line)
-        base64-secret: MjYwZjUxNmY0YTkwYzlkNTIxZjRjNjE3MDU4MDdmMWZjYjk0YjRlNzMxNjg1MTYwZmQ4ZDllZWMyZDU2M2YyMmY2Zjg0MzYxMTYyNzcyYjEwYmUyNjgzMmM4YzFjYjc2NTU3NTg0MzdmM2FiMDRkOWY4MTcxMmZkYzM0NzJlM2Q=
+        base64-secret: YmQwMDk2ZDIwZmJiMzFmMGJjNTVhMjEyMDBjNDdmMmQ3Y2Q0MjBkYjI2MzA1MzczNDNmOTYxYTJlOWExZTFiODdjMzE0MmM5Yjk3ZjEyNzkyNjM2YjRjODQ3OGU1ODc3MzdkNmYxMjllZTI1YTg5NGE2OGVkNTI1M2MxYTNjMDg=
         # Token is valid 24 hours
         token-validity-in-seconds: 86400
 

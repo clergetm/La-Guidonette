@@ -1,6 +1,6 @@
 {
   "applications": "*",
-  "changelogDate": "20230907143156",
+  "changelogDate": "20230908071945",
   "dto": "no",
   "embedded": false,
   "entityTableName": "torder",

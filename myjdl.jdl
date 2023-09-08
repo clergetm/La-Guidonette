@@ -1,0 +1,42 @@
+entity Product {
+    label String
+    description String
+    price Long
+    brand Brand
+    model String
+    color Color
+    quantity Integer
+}
+
+enum Brand {
+	BTWIN, SPECIALIZED, ORBEA, SANTA CRUZ, WETHEPEOPLE, LAPIERRE, CANYON
+}
+
+enum Color {
+	WHITE, BLACK, YELLOW, RED, BLUE, GREEN
+}
+
+entity Category {
+    name String
+}
+
+entity Torder {
+	date Instant
+    total Long
+    status Status
+}
+
+enum Status {
+	IN_PROGRESS, CANCELLED, READY, DONE
+}
+relationship OneToOne {
+	Torder{userID} to User
+}
+
+relationship ManyToMany {
+	Category to Product
+    Torder to Product
+}
+
+// Set service options to all except few
+service all with serviceImpl except User, Product, Category

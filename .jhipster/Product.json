@@ -1,6 +1,6 @@
 {
   "applications": "*",
-  "changelogDate": "20230907143154",
+  "changelogDate": "20230908071943",
   "dto": "no",
   "embedded": false,
   "entityTableName": "product",
