@@ -63,6 +63,7 @@ jobs:
 
       - name: Deploy to Heroku
         run: |
+          chmod +x mvnw
           if [ ! -z "$HEROKU_API_KEY" ]; then
               ./mvnw -ntp com.heroku.sdk:heroku-maven-plugin:2.0.5:deploy -DskipTests -Pprod -Dheroku.buildpacks=heroku/jvm -Dheroku.appName=la-guidonette
           else
