@@ -20,7 +20,7 @@ jobs:
           distribution: 'temurin'
           java-version: 17
       - name: Install node.js packages
-        run: npm install
+        run: npm ci
       - name: Run backend test
         run: |
           chmod +x mvnw
@@ -28,12 +28,29 @@ jobs:
       - name: Run frontend test
         run: npm run ci:frontend:test
 
+      - uses: actions/upload-artifact@v3 
+        with:
+          name: node_modules
+          path: ./node_modules
+
+
   packaging:
     runs-on: ubuntu-22.04
     needs: tests
     steps:
+      - name: Download node_modules artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: node_modules
+          path: ./
+
       - name: Package application
         run: npm run java:jar:prod 
+
+      - uses: actions/upload-artifact@v3 
+        with:
+          name: target
+          path: ./target
 
   deploy:
     runs-on: ubuntu-22.04
@@ -45,6 +62,18 @@ jobs:
       NG_CLI_ANALYTICS: false
       HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
     steps:
+      - name: Download node_modules artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: node_modules
+          path: ./
+
+      - name: Download node_modules artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: target
+          path: ./
+      
       - name: Deploy to Heroku
         run: |
           if [ ! -z "$HEROKU_API_KEY" ]; then
