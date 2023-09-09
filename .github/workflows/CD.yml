@@ -1,0 +1,59 @@
+name: CD
+run-name: Continuous Delivery on ${{ github.event_name }} by ${{ github.triggering_actor }} # Name of the executed workflow
+
+on:
+  pull_request:
+    branches: main
+  push:
+    branches:
+      - feature/CI-CD # TODO: remove before PR
+jobs:
+  tests:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.17.1
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 17
+      - name: Install node.js packages
+        run: npm install
+      - name: Run backend test
+        run: |
+          chmod +x mvnw
+          npm run ci:backend:test
+      - name: Run frontend test
+        run: npm run ci:frontend:test
+
+  packaging:
+    runs-on: ubuntu-22.04
+    needs: tests
+    steps:
+      - name: Package application
+        run: npm run java:jar:prod 
+
+  deploy:
+    runs-on: ubuntu-22.04
+    needs: packaging
+    env:
+      SPRING_OUTPUT_ANSI_ENABLED: DETECT
+      SPRING_JPA_SHOW_SQL: false
+      JHI_DISABLE_WEBPACK_LOGS: true
+      NG_CLI_ANALYTICS: false
+      HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+    steps:
+      - name: Deploy to Heroku
+        run: |
+          if [ ! -z "$HEROKU_API_KEY" ]; then
+              ./mvnw -ntp com.heroku.sdk:heroku-maven-plugin:2.0.5:deploy -DskipTests -Pprod -Dheroku.buildpacks=heroku/jvm -Dheroku.appName=la-guidonette
+          else
+              echo No HEROKU_API_KEY, skipping...
+          fi
+      - name: Build and publish docker image
+        run: |
+          GIT_TAG=:${GITHUB_REF#refs/tags/}
+          DOCKER_TAG=${GIT_TAG#:refs/heads/main}
+          ./mvnw -ntp jib:build -Djib.to.image=jhipster/la-guidonette${DOCKER_TAG} -Djib.to.auth.username="${{ secrets.DOCKERHUB_USERNAME }}" -Djib.to.auth.password="${{ secrets.DOCKERHUB_TOKEN }}" -Pprod
