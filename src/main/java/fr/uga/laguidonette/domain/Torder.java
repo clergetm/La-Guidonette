@@ -6,42 +6,50 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
+import javax.persistence.*;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * A Torder.
  */
-@Table("torder")
+@Entity
+@Table(name = "torder")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @SuppressWarnings("common-java:DuplicatedBlocks")
 public class Torder implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column("id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    @SequenceGenerator(name = "sequenceGenerator")
+    @Column(name = "id")
     private Long id;
 
-    @Column("date")
+    @Column(name = "date")
     private Instant date;
 
-    @Column("total")
+    @Column(name = "total")
     private Long total;
 
-    @Column("status")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
     private Status status;
 
-    @Transient
+    @OneToOne
+    @JoinColumn(unique = true)
     private User userID;
 
-    @Transient
+    @ManyToMany
+    @JoinTable(
+        name = "rel_torder__product",
+        joinColumns = @JoinColumn(name = "torder_id"),
+        inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "categories", "torders" }, allowSetters = true)
     private Set<Product> products = new HashSet<>();
-
-    @Column("userid_id")
-    private Long userIDId;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -103,7 +111,6 @@ public class Torder implements Serializable {
 
     public void setUserID(User user) {
         this.userID = user;
-        this.userIDId = user != null ? user.getId() : null;
     }
 
     public Torder userID(User user) {
@@ -134,14 +141,6 @@ public class Torder implements Serializable {
         this.products.remove(product);
         product.getTorders().remove(this);
         return this;
-    }
-
-    public Long getUserIDId() {
-        return this.userIDId;
-    }
-
-    public void setUserIDId(Long user) {
-        this.userIDId = user;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

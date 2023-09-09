@@ -38,5 +38,5 @@ relationship ManyToMany {
     Torder to Product
 }
 
-// Set service options to all except few
-service all with serviceImpl except User, Product, Category
+// Set service options to all
+service all with serviceImpl

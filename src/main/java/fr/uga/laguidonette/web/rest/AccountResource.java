@@ -1,5 +1,6 @@
 package fr.uga.laguidonette.web.rest;
 
+import fr.uga.laguidonette.domain.User;
 import fr.uga.laguidonette.repository.UserRepository;
 import fr.uga.laguidonette.security.SecurityUtils;
 import fr.uga.laguidonette.service.MailService;
@@ -9,16 +10,14 @@ import fr.uga.laguidonette.service.dto.PasswordChangeDTO;
 import fr.uga.laguidonette.web.rest.errors.*;
 import fr.uga.laguidonette.web.rest.vm.KeyAndPasswordVM;
 import fr.uga.laguidonette.web.rest.vm.ManagedUserVM;
-import java.security.Principal;
-import java.util.Objects;
+import java.util.*;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ServerWebExchange;
-import reactor.core.publisher.Mono;
 
 /**
  * REST controller for managing the current user's account.
@@ -58,11 +57,12 @@ public class AccountResource {
      */
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public Mono<Void> registerAccount(@Valid @RequestBody ManagedUserVM managedUserVM) {
+    public void registerAccount(@Valid @RequestBody ManagedUserVM managedUserVM) {
         if (isPasswordLengthInvalid(managedUserVM.getPassword())) {
             throw new InvalidPasswordException();
         }
-        return userService.registerUser(managedUserVM, managedUserVM.getPassword()).doOnSuccess(mailService::sendActivationEmail).then();
+        User user = userService.registerUser(managedUserVM, managedUserVM.getPassword());
+        mailService.sendActivationEmail(user);
     }
 
     /**
@@ -72,11 +72,11 @@ public class AccountResource {
      * @throws RuntimeException {@code 500 (Internal Server Error)} if the user couldn't be activated.
      */
     @GetMapping("/activate")
-    public Mono<Void> activateAccount(@RequestParam(value = "key") String key) {
-        return userService
-            .activateRegistration(key)
-            .switchIfEmpty(Mono.error(new AccountResourceException("No user was found for this activation key")))
-            .then();
+    public void activateAccount(@RequestParam(value = "key") String key) {
+        Optional<User> user = userService.activateRegistration(key);
+        if (!user.isPresent()) {
+            throw new AccountResourceException("No user was found for this activation key");
+        }
     }
 
     /**
@@ -86,9 +86,9 @@ public class AccountResource {
      * @return the login if the user is authenticated.
      */
     @GetMapping("/authenticate")
-    public Mono<String> isAuthenticated(ServerWebExchange request) {
+    public String isAuthenticated(HttpServletRequest request) {
         log.debug("REST request to check if the current user is authenticated");
-        return request.getPrincipal().map(Principal::getName);
+        return request.getRemoteUser();
     }
 
     /**
@@ -98,11 +98,11 @@ public class AccountResource {
      * @throws RuntimeException {@code 500 (Internal Server Error)} if the user couldn't be returned.
      */
     @GetMapping("/account")
-    public Mono<AdminUserDTO> getAccount() {
+    public AdminUserDTO getAccount() {
         return userService
             .getUserWithAuthorities()
             .map(AdminUserDTO::new)
-            .switchIfEmpty(Mono.error(new AccountResourceException("User could not be found")));
+            .orElseThrow(() -> new AccountResourceException("User could not be found"));
     }
 
     /**
@@ -113,32 +113,25 @@ public class AccountResource {
      * @throws RuntimeException {@code 500 (Internal Server Error)} if the user login wasn't found.
      */
     @PostMapping("/account")
-    public Mono<Void> saveAccount(@Valid @RequestBody AdminUserDTO userDTO) {
-        return SecurityUtils
+    public void saveAccount(@Valid @RequestBody AdminUserDTO userDTO) {
+        String userLogin = SecurityUtils
             .getCurrentUserLogin()
-            .switchIfEmpty(Mono.error(new AccountResourceException("Current user login not found")))
-            .flatMap(userLogin ->
-                userRepository
-                    .findOneByEmailIgnoreCase(userDTO.getEmail())
-                    .filter(existingUser -> !existingUser.getLogin().equalsIgnoreCase(userLogin))
-                    .hasElement()
-                    .flatMap(emailExists -> {
-                        if (emailExists) {
-                            throw new EmailAlreadyUsedException();
-                        }
-                        return userRepository.findOneByLogin(userLogin);
-                    })
-            )
-            .switchIfEmpty(Mono.error(new AccountResourceException("User could not be found")))
-            .flatMap(user ->
-                userService.updateUser(
-                    userDTO.getFirstName(),
-                    userDTO.getLastName(),
-                    userDTO.getEmail(),
-                    userDTO.getLangKey(),
-                    userDTO.getImageUrl()
-                )
-            );
+            .orElseThrow(() -> new AccountResourceException("Current user login not found"));
+        Optional<User> existingUser = userRepository.findOneByEmailIgnoreCase(userDTO.getEmail());
+        if (existingUser.isPresent() && (!existingUser.get().getLogin().equalsIgnoreCase(userLogin))) {
+            throw new EmailAlreadyUsedException();
+        }
+        Optional<User> user = userRepository.findOneByLogin(userLogin);
+        if (!user.isPresent()) {
+            throw new AccountResourceException("User could not be found");
+        }
+        userService.updateUser(
+            userDTO.getFirstName(),
+            userDTO.getLastName(),
+            userDTO.getEmail(),
+            userDTO.getLangKey(),
+            userDTO.getImageUrl()
+        );
     }
 
     /**
@@ -148,11 +141,11 @@ public class AccountResource {
      * @throws InvalidPasswordException {@code 400 (Bad Request)} if the new password is incorrect.
      */
     @PostMapping(path = "/account/change-password")
-    public Mono<Void> changePassword(@RequestBody PasswordChangeDTO passwordChangeDto) {
+    public void changePassword(@RequestBody PasswordChangeDTO passwordChangeDto) {
         if (isPasswordLengthInvalid(passwordChangeDto.getNewPassword())) {
             throw new InvalidPasswordException();
         }
-        return userService.changePassword(passwordChangeDto.getCurrentPassword(), passwordChangeDto.getNewPassword());
+        userService.changePassword(passwordChangeDto.getCurrentPassword(), passwordChangeDto.getNewPassword());
     }
 
     /**
@@ -161,19 +154,15 @@ public class AccountResource {
      * @param mail the mail of the user.
      */
     @PostMapping(path = "/account/reset-password/init")
-    public Mono<Void> requestPasswordReset(@RequestBody String mail) {
-        return userService
-            .requestPasswordReset(mail)
-            .doOnSuccess(user -> {
-                if (Objects.nonNull(user)) {
-                    mailService.sendPasswordResetMail(user);
-                } else {
-                    // Pretend the request has been successful to prevent checking which emails really exist
-                    // but log that an invalid attempt has been made
-                    log.warn("Password reset requested for non existing mail");
-                }
-            })
-            .then();
+    public void requestPasswordReset(@RequestBody String mail) {
+        Optional<User> user = userService.requestPasswordReset(mail);
+        if (user.isPresent()) {
+            mailService.sendPasswordResetMail(user.get());
+        } else {
+            // Pretend the request has been successful to prevent checking which emails really exist
+            // but log that an invalid attempt has been made
+            log.warn("Password reset requested for non existing mail");
+        }
     }
 
     /**
@@ -184,14 +173,15 @@ public class AccountResource {
      * @throws RuntimeException {@code 500 (Internal Server Error)} if the password could not be reset.
      */
     @PostMapping(path = "/account/reset-password/finish")
-    public Mono<Void> finishPasswordReset(@RequestBody KeyAndPasswordVM keyAndPassword) {
+    public void finishPasswordReset(@RequestBody KeyAndPasswordVM keyAndPassword) {
         if (isPasswordLengthInvalid(keyAndPassword.getNewPassword())) {
             throw new InvalidPasswordException();
         }
-        return userService
-            .completePasswordReset(keyAndPassword.getNewPassword(), keyAndPassword.getKey())
-            .switchIfEmpty(Mono.error(new AccountResourceException("No user was found for this reset key")))
-            .then();
+        Optional<User> user = userService.completePasswordReset(keyAndPassword.getNewPassword(), keyAndPassword.getKey());
+
+        if (!user.isPresent()) {
+            throw new AccountResourceException("No user was found for this reset key");
+        }
     }
 
     private static boolean isPasswordLengthInvalid(String password) {
