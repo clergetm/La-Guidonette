@@ -61,17 +61,20 @@ jobs:
       - name: Package application
         run: npm run java:jar:prod 
 
-      - name: Deploy to Heroku
-        run: |
-          chmod +x mvnw
-          if [ ! -z "$HEROKU_API_KEY" ]; then
-              ./mvnw -ntp com.heroku.sdk:heroku-maven-plugin:2.0.5:deploy -DskipTests -Pprod -Dheroku.buildpacks=heroku/jvm -Dheroku.appName=la-guidonette
-          else
-              echo No HEROKU_API_KEY, skipping...
-          fi
+      # TODO: make this part available when the project is ready to be used
+      # - name: Deploy to Heroku
+      #   run: |
+      #     chmod +x mvnw
+      #     if [ ! -z "$HEROKU_API_KEY" ]; then
+      #         ./mvnw -ntp com.heroku.sdk:heroku-maven-plugin:2.0.5:deploy -DskipTests -Pprod -Dheroku.buildpacks=heroku/jvm -Dheroku.appName=la-guidonette
+      #     else
+      #         echo No HEROKU_API_KEY, skipping...
+      #     fi
 
       - name: Build and publish docker image
         run: |
-          GIT_TAG=:${GITHUB_REF#refs/tags/}
-          DOCKER_TAG=${GIT_TAG#:refs/heads/main}
-          ./mvnw -ntp jib:build -Djib.to.image=jhipster/la-guidonette${DOCKER_TAG} -Djib.to.auth.username="${{ secrets.DOCKERHUB_USERNAME }}" -Djib.to.auth.password="${{ secrets.DOCKERHUB_TOKEN }}" -Pprod
+          ./mvnw -ntp jib:build \\
+            -Djib.to.image=jhipster/la-guidonette \\
+            -Djib.to.auth.username="${{ secrets.DOCKERHUB_USERNAME }}" \\
+            -Djib.to.auth.password="${{ secrets.DOCKERHUB_TOKEN }}" \\
+            -Pprod
