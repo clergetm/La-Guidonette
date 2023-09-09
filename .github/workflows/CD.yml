@@ -7,54 +7,36 @@ on:
   push:
     branches:
       - feature/CI-CD # TODO: remove before PR
+
 jobs:
   tests:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
+
       - uses: actions/setup-node@v3
         with:
           node-version: 18.17.1
+
       - uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
           java-version: 17
+
       - name: Install node.js packages
         run: npm ci
+
       - name: Run backend test
         run: |
           chmod +x mvnw
           npm run ci:backend:test
+
       - name: Run frontend test
         run: npm run ci:frontend:test
 
-      - uses: actions/upload-artifact@v3 
-        with:
-          name: node_modules
-          path: ./node_modules
-
-
-  packaging:
-    runs-on: ubuntu-22.04
-    needs: tests
-    steps:
-      - name: Download node_modules artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: node_modules
-          path: ./
-
-      - name: Package application
-        run: npm run java:jar:prod 
-
-      - uses: actions/upload-artifact@v3 
-        with:
-          name: target
-          path: ./target
-
   deploy:
     runs-on: ubuntu-22.04
-    needs: packaging
+    needs: tests
     env:
       SPRING_OUTPUT_ANSI_ENABLED: DETECT
       SPRING_JPA_SHOW_SQL: false
@@ -62,18 +44,23 @@ jobs:
       NG_CLI_ANALYTICS: false
       HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
     steps:
-      - name: Download node_modules artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: node_modules
-          path: ./
+      - uses: actions/checkout@v3
 
-      - name: Download node_modules artifact
-        uses: actions/download-artifact@v2
+      - uses: actions/setup-node@v3
         with:
-          name: target
-          path: ./
-      
+          node-version: 18.17.1
+
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 17
+
+      - name: Install node.js packages
+        run: npm ci
+
+      - name: Package application
+        run: npm run java:jar:prod 
+
       - name: Deploy to Heroku
         run: |
           if [ ! -z "$HEROKU_API_KEY" ]; then
@@ -81,6 +68,7 @@ jobs:
           else
               echo No HEROKU_API_KEY, skipping...
           fi
+
       - name: Build and publish docker image
         run: |
           GIT_TAG=:${GITHUB_REF#refs/tags/}
