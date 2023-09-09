@@ -1,6 +1,6 @@
 {
   "applications": "*",
-  "changelogDate": "20230907143154",
+  "changelogDate": "20230909074810",
   "dto": "no",
   "embedded": false,
   "entityTableName": "product",
@@ -57,5 +57,5 @@
       "relationshipType": "many-to-many"
     }
   ],
-  "service": "no"
+  "service": "serviceImpl"
 }

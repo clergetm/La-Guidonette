@@ -10,13 +10,13 @@ export const sampleWithRequiredData: ITorder = {
 
 export const sampleWithPartialData: ITorder = {
   id: 11430,
-  date: dayjs('2023-09-07T04:26'),
+  date: dayjs('2023-09-08T21:42'),
   status: Status['IN_PROGRESS'],
 };
 
 export const sampleWithFullData: ITorder = {
   id: 6172,
-  date: dayjs('2023-09-07T09:46'),
+  date: dayjs('2023-09-09T03:02'),
   total: 31139,
   status: Status['CANCELLED'],
 };

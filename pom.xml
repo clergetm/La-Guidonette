@@ -55,13 +55,11 @@
         <!-- The liquibase version should match the one managed by
         https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-dependencies/${spring-boot.version} -->
         <liquibase.version>4.15.0</liquibase.version>
+        <liquibase-hibernate5.version>4.15.0</liquibase-hibernate5.version>
         <validation-api.version>2.0.1.Final</validation-api.version>
-        <commons-beanutils.version>1.9.4</commons-beanutils.version>
-        <blockhound-junit-platform.version>1.0.6.RELEASE</blockhound-junit-platform.version>
         <jaxb-runtime.version>4.0.0</jaxb-runtime.version>
         <archunit-junit5.version>0.22.0</archunit-junit5.version>
         <mapstruct.version>1.5.2.Final</mapstruct.version>
-        <jackson-databind-nullable.version>0.2.3</jackson-databind-nullable.version>
         <!-- Plugin versions -->
         <maven-clean-plugin.version>3.2.0</maven-clean-plugin.version>
         <maven-site-plugin.version>3.12.1</maven-site-plugin.version>
@@ -88,7 +86,6 @@
         <jib-maven-plugin.image>eclipse-temurin:17-jre-focal</jib-maven-plugin.image>
         <jib-maven-plugin.architecture>amd64</jib-maven-plugin.architecture>
         <lifecycle-mapping.version>1.0.0</lifecycle-mapping.version>
-        <openapi-generator-maven-plugin.version>6.0.1</openapi-generator-maven-plugin.version>
         <properties-maven-plugin.version>1.1.0</properties-maven-plugin.version>
         <sonar-maven-plugin.version>3.9.1.2184</sonar-maven-plugin.version>
 
@@ -112,25 +109,22 @@
         <dependency>
             <groupId>tech.jhipster</groupId>
             <artifactId>jhipster-framework</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework</groupId>
-                    <artifactId>spring-webmvc</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>javax.annotation</groupId>
             <artifactId>javax.annotation-api</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>
             <artifactId>jackson-module-jaxb-annotations</artifactId>
         </dependency>
         <dependency>
-            <groupId>commons-beanutils</groupId>
-            <artifactId>commons-beanutils</artifactId>
-            <version>${commons-beanutils.version}</version>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-hibernate5</artifactId>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
@@ -142,7 +136,7 @@
         </dependency>
         <dependency>
             <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-webflux-core</artifactId>
+            <artifactId>springdoc-openapi-webmvc-core</artifactId>
         </dependency>
         <dependency>
             <groupId>com.zaxxer</groupId>
@@ -153,9 +147,16 @@
             <artifactId>commons-lang3</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.openapitools</groupId>
-            <artifactId>jackson-databind-nullable</artifactId>
-            <version>${jackson-databind-nullable.version}</version>
+            <groupId>javax.cache</groupId>
+            <artifactId>cache-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-jcache</artifactId>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -202,25 +203,12 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-r2dbc</artifactId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
         <dependency>
             <groupId>org.testcontainers</groupId>
             <artifactId>jdbc</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-validation</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-commons</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.netty</groupId>
-            <artifactId>netty-tcnative-boringssl-static</artifactId>
-            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -240,7 +228,7 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webflux</artifactId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -255,12 +243,6 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.projectreactor.tools</groupId>
-            <artifactId>blockhound-junit-platform</artifactId>
-            <version>${blockhound-junit-platform.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -279,7 +261,11 @@
         </dependency>
         <dependency>
             <groupId>org.zalando</groupId>
-            <artifactId>problem-spring-webflux</artifactId>
+            <artifactId>problem-spring-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-undertow</artifactId>
         </dependency>
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
@@ -293,9 +279,13 @@
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-jackson</artifactId>
-            <scope>compile</scope>
+            <scope>runtime</scope>
         </dependency>
         <!-- Spring Cloud -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-data</artifactId>
+        </dependency>
         <dependency>
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-registry-prometheus</artifactId>
@@ -304,42 +294,12 @@
             <groupId>io.dropwizard.metrics</groupId>
             <artifactId>metrics-core</artifactId>
         </dependency>
-        <!-- Cucumber -->
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-junit-platform-engine</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-java</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-spring</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-console</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <scope>test</scope>
-        </dependency>
         <!-- jhipster-needle-maven-add-dependency -->
     </dependencies>
 
     <build>
         <defaultGoal>spring-boot:run</defaultGoal>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-antrun-plugin</artifactId>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -400,48 +360,10 @@
                 <groupId>org.gaul</groupId>
                 <artifactId>modernizer-maven-plugin</artifactId>
             </plugin>
-            <plugin>
-                <!--
-                    Plugin that provides API-first development using openapi-generator-cli to
-                    generate Spring-MVC endpoint stubs at compile time from an OpenAPI definition file
-                -->
-                <groupId>org.openapitools</groupId>
-                <artifactId>openapi-generator-maven-plugin</artifactId>
-            </plugin>
             <!-- jhipster-needle-maven-add-plugin -->
         </plugins>
         <pluginManagement>
             <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-antrun-plugin</artifactId>
-                    <executions>
-                        <execution>
-                            <!--Work around. Surefire does not use JUnit's Test Engine discovery functionality -->
-                            <id>prepare cucumber feature files</id>
-                            <phase>integration-test</phase>
-                            <goals>
-                                <goal>run</goal>
-                            </goals>
-                            <configuration>
-                                <target>
-                                    <echo message="Running JUnit Platform CLI"/>
-                                    <java classname="org.junit.platform.console.ConsoleLauncher"
-                                          fork="true"
-                                          failonerror="true"
-                                          newenvironment="true"
-                                          maxmemory="512m"
-                                          classpathref="maven.test.classpath">
-                                        <arg value="--include-engine"/>
-                                        <arg value="cucumber"/>
-                                        <arg value="--scan-classpath"/>
-                                        <arg value="${project.build.testOutputDirectory}"/>
-                                    </java>
-                                </target>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-checkstyle-plugin</artifactId>
@@ -794,8 +716,6 @@
                             <exclude>**/*IT*</exclude>
                             <exclude>**/*IntTest*</exclude>
                         </excludes>
-                        <!-- Fix tests at java 13+ https://github.com/reactor/BlockHound/issues/33 -->
-                        <argLine>@{argLine} -XX:+IgnoreUnrecognizedVMOptions -XX:+AllowRedefinitionToAddDeleteMethods</argLine>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -803,36 +723,6 @@
                     <artifactId>maven-jar-plugin</artifactId>
                     <version>${maven-jar-plugin.version}</version>
                </plugin>
-                <plugin>
-                    <!--
-                        Plugin that provides API-first development using openapi-generator-cli to
-                        generate Spring-MVC endpoint stubs at compile time from an OpenAPI definition file
-                    -->
-                    <groupId>org.openapitools</groupId>
-                    <artifactId>openapi-generator-maven-plugin</artifactId>
-                    <version>${openapi-generator-maven-plugin.version}</version>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>generate</goal>
-                            </goals>
-                            <configuration>
-                                <inputSpec>${project.basedir}/src/main/resources/swagger/api.yml</inputSpec>
-                                <generatorName>spring</generatorName>
-                                <apiPackage>fr.uga.laguidonette.web.api</apiPackage>
-                                <modelPackage>fr.uga.laguidonette.service.api.dto</modelPackage>
-                                <supportingFilesToGenerate>ApiUtil.java</supportingFilesToGenerate>
-                                <importMappings>Problem=org.zalando.problem.Problem</importMappings>
-                                <skipValidateSpec>false</skipValidateSpec>
-                                <configOptions>
-                                    <reactive>true</reactive>
-                                    <delegatePattern>true</delegatePattern>
-                                    <title>la-guidonette</title>
-                                </configOptions>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
                 <plugin>
                     <groupId>org.sonarsource.scanner.maven</groupId>
                     <artifactId>sonar-maven-plugin</artifactId>
@@ -1025,10 +915,6 @@
                     <groupId>com.h2database</groupId>
                     <artifactId>h2</artifactId>
                 </dependency>
-                <dependency>
-                    <groupId>io.r2dbc</groupId>
-                    <artifactId>r2dbc-h2</artifactId>
-                </dependency>
             </dependencies>
             <build>
                 <plugins>
@@ -1059,8 +945,7 @@
                                     <include>**/*IT*</include>
                                     <include>**/*IntTest*</include>
                                 </includes>
-                                <!-- Fix tests at java 13+ https://github.com/reactor/BlockHound/issues/33 -->
-                                <argLine>@{argLine} -XX:+IgnoreUnrecognizedVMOptions -XX:+AllowRedefinitionToAddDeleteMethods -Dspring.profiles.active=testdev</argLine>
+                                <argLine>@{argLine} -Dspring.profiles.active=testdev</argLine>
                             </configuration>
                             <executions>
                                 <execution>
@@ -1141,10 +1026,6 @@
                     <groupId>org.postgresql</groupId>
                     <artifactId>postgresql</artifactId>
                 </dependency>
-                <dependency>
-                    <groupId>org.postgresql</groupId>
-                    <artifactId>r2dbc-postgresql</artifactId>
-                </dependency>
             </dependencies>
             <build>
                 <pluginManagement>
@@ -1163,8 +1044,7 @@
                                     <include>**/*IT*</include>
                                     <include>**/*IntTest*</include>
                                 </includes>
-                                <!-- Fix tests at java 13+ https://github.com/reactor/BlockHound/issues/33 -->
-                                <argLine>@{argLine} -XX:+IgnoreUnrecognizedVMOptions -XX:+AllowRedefinitionToAddDeleteMethods -Dspring.profiles.active=testprod</argLine>
+                                <argLine>@{argLine} -Dspring.profiles.active=testprod</argLine>
                             </configuration>
                             <executions>
                                 <execution>
@@ -1397,19 +1277,6 @@
                                             </pluginExecutionFilter>
                                             <action>
                                                 <ignore/>
-                                            </action>
-                                        </pluginExecution>
-                                        <pluginExecution>
-                                            <pluginExecutionFilter>
-                                                <groupId>org.openapitools</groupId>
-                                                <artifactId>openapi-generator-maven-plugin</artifactId>
-                                                <versionRange>${openapi-generator-maven-plugin.version}</versionRange>
-                                                <goals>
-                                                    <goal>generate</goal>
-                                                </goals>
-                                            </pluginExecutionFilter>
-                                            <action>
-                                                <ignore />
                                             </action>
                                         </pluginExecution>
                                     </pluginExecutions>

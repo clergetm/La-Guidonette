@@ -46,13 +46,9 @@ public class TestContainersSpringContextCustomizerFactory implements ContextCust
                             throw new RuntimeException(e);
                         }
                     }
-                    testValues =
-                        testValues.and(
-                            "spring.r2dbc.url=" + prodTestContainer.getTestContainer().getJdbcUrl().replace("jdbc", "r2dbc") + ""
-                        );
-                    testValues = testValues.and("spring.r2dbc.username=" + prodTestContainer.getTestContainer().getUsername());
-                    testValues = testValues.and("spring.r2dbc.password=" + prodTestContainer.getTestContainer().getPassword());
-                    testValues = testValues.and("spring.liquibase.url=" + prodTestContainer.getTestContainer().getJdbcUrl() + "");
+                    testValues = testValues.and("spring.datasource.url=" + prodTestContainer.getTestContainer().getJdbcUrl() + "");
+                    testValues = testValues.and("spring.datasource.username=" + prodTestContainer.getTestContainer().getUsername());
+                    testValues = testValues.and("spring.datasource.password=" + prodTestContainer.getTestContainer().getPassword());
                 }
             }
             testValues.applyTo(context);
