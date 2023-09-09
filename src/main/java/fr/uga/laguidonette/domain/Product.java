@@ -6,50 +6,57 @@ import fr.uga.laguidonette.domain.enumeration.Color;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
+import javax.persistence.*;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * A Product.
  */
-@Table("product")
+@Entity
+@Table(name = "product")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @SuppressWarnings("common-java:DuplicatedBlocks")
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column("id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    @SequenceGenerator(name = "sequenceGenerator")
+    @Column(name = "id")
     private Long id;
 
-    @Column("label")
+    @Column(name = "label")
     private String label;
 
-    @Column("description")
+    @Column(name = "description")
     private String description;
 
-    @Column("price")
+    @Column(name = "price")
     private Long price;
 
-    @Column("brand")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "brand")
     private Brand brand;
 
-    @Column("model")
+    @Column(name = "model")
     private String model;
 
-    @Column("color")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "color")
     private Color color;
 
-    @Column("quantity")
+    @Column(name = "quantity")
     private Integer quantity;
 
-    @Transient
+    @ManyToMany(mappedBy = "products")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "products" }, allowSetters = true)
     private Set<Category> categories = new HashSet<>();
 
-    @Transient
+    @ManyToMany(mappedBy = "products")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "userID", "products" }, allowSetters = true)
     private Set<Torder> torders = new HashSet<>();
 

@@ -12,15 +12,10 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 import tech.jhipster.web.util.HeaderUtil;
-import tech.jhipster.web.util.reactive.ResponseUtil;
+import tech.jhipster.web.util.ResponseUtil;
 
 /**
  * REST controller for managing {@link fr.uga.laguidonette.domain.Torder}.
@@ -53,23 +48,16 @@ public class TorderResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/torders")
-    public Mono<ResponseEntity<Torder>> createTorder(@RequestBody Torder torder) throws URISyntaxException {
+    public ResponseEntity<Torder> createTorder(@RequestBody Torder torder) throws URISyntaxException {
         log.debug("REST request to save Torder : {}", torder);
         if (torder.getId() != null) {
             throw new BadRequestAlertException("A new torder cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        return torderService
-            .save(torder)
-            .map(result -> {
-                try {
-                    return ResponseEntity
-                        .created(new URI("/api/torders/" + result.getId()))
-                        .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
-                        .body(result);
-                } catch (URISyntaxException e) {
-                    throw new RuntimeException(e);
-                }
-            });
+        Torder result = torderService.save(torder);
+        return ResponseEntity
+            .created(new URI("/api/torders/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+            .body(result);
     }
 
     /**
@@ -83,10 +71,8 @@ public class TorderResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/torders/{id}")
-    public Mono<ResponseEntity<Torder>> updateTorder(
-        @PathVariable(value = "id", required = false) final Long id,
-        @RequestBody Torder torder
-    ) throws URISyntaxException {
+    public ResponseEntity<Torder> updateTorder(@PathVariable(value = "id", required = false) final Long id, @RequestBody Torder torder)
+        throws URISyntaxException {
         log.debug("REST request to update Torder : {}, {}", id, torder);
         if (torder.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
@@ -95,23 +81,15 @@ public class TorderResource {
             throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
         }
 
-        return torderRepository
-            .existsById(id)
-            .flatMap(exists -> {
-                if (!exists) {
-                    return Mono.error(new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound"));
-                }
+        if (!torderRepository.existsById(id)) {
+            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
+        }
 
-                return torderService
-                    .update(torder)
-                    .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND)))
-                    .map(result ->
-                        ResponseEntity
-                            .ok()
-                            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
-                            .body(result)
-                    );
-            });
+        Torder result = torderService.update(torder);
+        return ResponseEntity
+            .ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, torder.getId().toString()))
+            .body(result);
     }
 
     /**
@@ -126,7 +104,7 @@ public class TorderResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PatchMapping(value = "/torders/{id}", consumes = { "application/json", "application/merge-patch+json" })
-    public Mono<ResponseEntity<Torder>> partialUpdateTorder(
+    public ResponseEntity<Torder> partialUpdateTorder(
         @PathVariable(value = "id", required = false) final Long id,
         @RequestBody Torder torder
     ) throws URISyntaxException {
@@ -138,24 +116,16 @@ public class TorderResource {
             throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
         }
 
-        return torderRepository
-            .existsById(id)
-            .flatMap(exists -> {
-                if (!exists) {
-                    return Mono.error(new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound"));
-                }
+        if (!torderRepository.existsById(id)) {
+            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
+        }
 
-                Mono<Torder> result = torderService.partialUpdate(torder);
+        Optional<Torder> result = torderService.partialUpdate(torder);
 
-                return result
-                    .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND)))
-                    .map(res ->
-                        ResponseEntity
-                            .ok()
-                            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, res.getId().toString()))
-                            .body(res)
-                    );
-            });
+        return ResponseUtil.wrapOrNotFound(
+            result,
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, torder.getId().toString())
+        );
     }
 
     /**
@@ -165,18 +135,8 @@ public class TorderResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of torders in body.
      */
     @GetMapping("/torders")
-    public Mono<List<Torder>> getAllTorders(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+    public List<Torder> getAllTorders(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get all Torders");
-        return torderService.findAll().collectList();
-    }
-
-    /**
-     * {@code GET  /torders} : get all the torders as a stream.
-     * @return the {@link Flux} of torders.
-     */
-    @GetMapping(value = "/torders", produces = MediaType.APPLICATION_NDJSON_VALUE)
-    public Flux<Torder> getAllTordersAsStream() {
-        log.debug("REST request to get all Torders as a stream");
         return torderService.findAll();
     }
 
@@ -187,9 +147,9 @@ public class TorderResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the torder, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/torders/{id}")
-    public Mono<ResponseEntity<Torder>> getTorder(@PathVariable Long id) {
+    public ResponseEntity<Torder> getTorder(@PathVariable Long id) {
         log.debug("REST request to get Torder : {}", id);
-        Mono<Torder> torder = torderService.findOne(id);
+        Optional<Torder> torder = torderService.findOne(id);
         return ResponseUtil.wrapOrNotFound(torder);
     }
 
@@ -200,17 +160,12 @@ public class TorderResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/torders/{id}")
-    public Mono<ResponseEntity<Void>> deleteTorder(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteTorder(@PathVariable Long id) {
         log.debug("REST request to delete Torder : {}", id);
-        return torderService
-            .delete(id)
-            .then(
-                Mono.just(
-                    ResponseEntity
-                        .noContent()
-                        .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-                        .build()
-                )
-            );
+        torderService.delete(id);
+        return ResponseEntity
+            .noContent()
+            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
+            .build();
     }
 }
