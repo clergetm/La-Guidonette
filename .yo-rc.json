@@ -24,7 +24,6 @@
     "enableTranslation": true,
     "entities": ["Product", "Category", "Torder"],
     "entitySuffix": "",
-    "gatewayType": "SpringCloudGateway",
     "herokuAppName": "la-guidonette",
     "herokuDeployType": "jar",
     "herokuJavaVersion": "17",
