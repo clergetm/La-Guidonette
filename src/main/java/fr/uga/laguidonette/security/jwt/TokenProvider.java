@@ -3,7 +3,6 @@ package fr.uga.laguidonette.security.jwt;
 import fr.uga.laguidonette.management.SecurityMetersService;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
-import io.jsonwebtoken.jackson.io.JacksonSerializer;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
 import java.nio.charset.StandardCharsets;
@@ -80,7 +79,6 @@ public class TokenProvider {
             .claim(AUTHORITIES_KEY, authorities)
             .signWith(key, SignatureAlgorithm.HS512)
             .setExpiration(validity)
-            .serializeToJsonWith(new JacksonSerializer<>())
             .compact();
     }
 

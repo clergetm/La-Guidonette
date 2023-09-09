@@ -1,63 +1,31 @@
 package fr.uga.laguidonette.repository;
 
 import fr.uga.laguidonette.domain.Category;
+import java.util.List;
+import java.util.Optional;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.r2dbc.repository.Query;
-import org.springframework.data.relational.core.query.Criteria;
-import org.springframework.data.repository.reactive.ReactiveCrudRepository;
+import org.springframework.data.jpa.repository.*;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 
 /**
- * Spring Data R2DBC repository for the Category entity.
+ * Spring Data JPA repository for the Category entity.
+ *
+ * When extending this class, extend CategoryRepositoryWithBagRelationships too.
+ * For more information refer to https://github.com/jhipster/generator-jhipster/issues/17990.
  */
-@SuppressWarnings("unused")
 @Repository
-public interface CategoryRepository extends ReactiveCrudRepository<Category, Long>, CategoryRepositoryInternal {
-    @Override
-    Mono<Category> findOneWithEagerRelationships(Long id);
+public interface CategoryRepository extends CategoryRepositoryWithBagRelationships, JpaRepository<Category, Long> {
+    default Optional<Category> findOneWithEagerRelationships(Long id) {
+        return this.fetchBagRelationships(this.findById(id));
+    }
 
-    @Override
-    Flux<Category> findAllWithEagerRelationships();
+    default List<Category> findAllWithEagerRelationships() {
+        return this.fetchBagRelationships(this.findAll());
+    }
 
-    @Override
-    Flux<Category> findAllWithEagerRelationships(Pageable page);
-
-    @Query(
-        "SELECT entity.* FROM category entity JOIN rel_category__product joinTable ON entity.id = joinTable.product_id WHERE joinTable.product_id = :id"
-    )
-    Flux<Category> findByProduct(Long id);
-
-    @Override
-    <S extends Category> Mono<S> save(S entity);
-
-    @Override
-    Flux<Category> findAll();
-
-    @Override
-    Mono<Category> findById(Long id);
-
-    @Override
-    Mono<Void> deleteById(Long id);
-}
-
-interface CategoryRepositoryInternal {
-    <S extends Category> Mono<S> save(S entity);
-
-    Flux<Category> findAllBy(Pageable pageable);
-
-    Flux<Category> findAll();
-
-    Mono<Category> findById(Long id);
-    // this is not supported at the moment because of https://github.com/jhipster/generator-jhipster/issues/18269
-    // Flux<Category> findAllBy(Pageable pageable, Criteria criteria);
-
-    Mono<Category> findOneWithEagerRelationships(Long id);
-
-    Flux<Category> findAllWithEagerRelationships();
-
-    Flux<Category> findAllWithEagerRelationships(Pageable page);
-
-    Mono<Void> deleteById(Long id);
+    default Page<Category> findAllWithEagerRelationships(Pageable pageable) {
+        return this.fetchBagRelationships(this.findAll(pageable));
+    }
 }

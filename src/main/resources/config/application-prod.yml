@@ -31,18 +31,23 @@ spring:
       enabled: false
     livereload:
       enabled: false
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:postgresql://localhost:5432/LaGuidonette
+    username: LaGuidonette
+    password:
+    hikari:
+      poolName: Hikari
+      auto-commit: false
+  jpa:
+    database-platform: tech.jhipster.domain.util.FixedPostgreSQL10Dialect
   # Replace by 'prod, faker' to add the faker context and have sample data loaded in production
   liquibase:
     contexts: prod
-    url: jdbc:postgresql://localhost:5432/LaGuidonette
   mail:
     host: localhost
     port: 25
     username:
-    password:
-  r2dbc:
-    url: r2dbc:postgresql://localhost:5432/LaGuidonette
-    username: LaGuidonette
     password:
   thymeleaf:
     cache: true
@@ -84,6 +89,10 @@ jhipster:
   http:
     cache: # Used by the CachingHttpHeadersFilter
       timeToLiveInDays: 1461
+  cache: # Cache configuration
+    ehcache: # Ehcache configuration
+      time-to-live-seconds: 3600 # By default objects stay 1 hour in the cache
+      max-entries: 1000 # Number of objects in each cache entry
   security:
     authentication:
       jwt:
@@ -92,7 +101,7 @@ jhipster:
         # - In the JHipster Registry (which includes a Spring Cloud Config server)
         # - In a separate `application-prod.yml` file, in the same folder as your executable JAR file
         # - In the `JHIPSTER_SECURITY_AUTHENTICATION_JWT_BASE64_SECRET` environment variable
-        base64-secret: YmQwMDk2ZDIwZmJiMzFmMGJjNTVhMjEyMDBjNDdmMmQ3Y2Q0MjBkYjI2MzA1MzczNDNmOTYxYTJlOWExZTFiODdjMzE0MmM5Yjk3ZjEyNzkyNjM2YjRjODQ3OGU1ODc3MzdkNmYxMjllZTI1YTg5NGE2OGVkNTI1M2MxYTNjMDg=
+        base64-secret: MjVhODA1ZmZhZmVlMDE3MDkwY2MxZDY3NDI2MGEzNGYxYjAwZDNhYzRlMGRhMWJkNzBkMTFhYmIxZWU5NzI1ZmQyNjI1MjM3ZWE5M2UzMzNjODc1YWI0MDhkZmNkNDA5YmQwODI0MjQ2YWQ5NTA1MDgyMDhmMDRhNTVkYzVlMjA=
         # Token is valid 24 hours
         token-validity-in-seconds: 86400
         token-validity-in-seconds-for-remember-me: 2592000

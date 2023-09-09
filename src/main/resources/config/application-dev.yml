@@ -30,14 +30,22 @@ spring:
   jackson:
     serialization:
       indent-output: true
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:h2:file:./target/h2db/db/laguidonette;DB_CLOSE_DELAY=-1;MODE=LEGACY
+    username: LaGuidonette
+    password:
+    hikari:
+      poolName: Hikari
+      auto-commit: false
   h2:
     console:
       # disable spring boot built-in h2-console since we start it manually with correct configuration
       enabled: false
+  jpa:
   liquibase:
     # Remove 'faker' if you do not want the sample data to be loaded automatically
     contexts: dev, faker
-    url: jdbc:h2:file:./target/h2db/db/laguidonette;DB_CLOSE_DELAY=-1;MODE=LEGACY
   mail:
     host: localhost
     port: 25
@@ -45,10 +53,6 @@ spring:
     password:
   messages:
     cache-duration: PT1S # 1 second, see the ISO 8601 standard
-  r2dbc:
-    url: r2dbc:h2:file://././target/h2db/db/laguidonette;DB_CLOSE_DELAY=-1;MODE=LEGACY
-    username: LaGuidonette
-    password:
   thymeleaf:
     cache: false
 
@@ -62,6 +66,10 @@ server:
 # ===================================================================
 
 jhipster:
+  cache: # Cache configuration
+    ehcache: # Ehcache configuration
+      time-to-live-seconds: 3600 # By default objects stay 1 hour in the cache
+      max-entries: 100 # Number of objects in each cache entry
   # CORS is only enabled by default with the "dev" profile
   cors:
     # Allow Ionic for JHipster by default (* no longer allowed in Spring Boot 2.4+)
@@ -77,7 +85,7 @@ jhipster:
     authentication:
       jwt:
         # This token must be encoded using Base64 and be at least 256 bits long (you can type `openssl rand -base64 64` on your command line to generate a 512 bits one)
-        base64-secret: YmQwMDk2ZDIwZmJiMzFmMGJjNTVhMjEyMDBjNDdmMmQ3Y2Q0MjBkYjI2MzA1MzczNDNmOTYxYTJlOWExZTFiODdjMzE0MmM5Yjk3ZjEyNzkyNjM2YjRjODQ3OGU1ODc3MzdkNmYxMjllZTI1YTg5NGE2OGVkNTI1M2MxYTNjMDg=
+        base64-secret: MjVhODA1ZmZhZmVlMDE3MDkwY2MxZDY3NDI2MGEzNGYxYjAwZDNhYzRlMGRhMWJkNzBkMTFhYmIxZWU5NzI1ZmQyNjI1MjM3ZWE5M2UzMzNjODc1YWI0MDhkZmNkNDA5YmQwODI0MjQ2YWQ5NTA1MDgyMDhmMDRhNTVkYzVlMjA=
         # Token is valid 24 hours
         token-validity-in-seconds: 86400
         token-validity-in-seconds-for-remember-me: 2592000

@@ -1,24 +1,3 @@
-<div id="top"></div>
-
-<!-- TITLE -->
-<div align="center">
-<h1 align="center">La Guidonette</h1>
-
-  <p align="center">
-    Bike Online Shop
-  </p>
-</div>
-
-## First Step
-
-_Clone the project and launch the initialization git script_
-
-```bash
-  git clone git@github.com:MathysC/La-Guidonette.git
-  git switch develop
-  bash build/git-init.sh
-```
-
 # LaGuidonette
 
 This application was generated using JHipster 7.9.4, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v7.9.4](https://www.jhipster.tech/documentation-archive/v7.9.4).
@@ -183,12 +162,6 @@ Unit tests are run by [Jest][]. They're located in [src/test/javascript/](src/te
 npm test
 ```
 
-### Other tests
-
-Performance tests are run by [Gatling][] and written in Scala. They're located in [src/test/gatling](src/test/gatling).
-
-To use those tests, you must install Gatling from [https://gatling.io/](https://gatling.io/).
-
 For more information, refer to the [Running tests page][].
 
 ### Code quality
@@ -277,9 +250,7 @@ To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`)
 [definitelytyped]: https://definitelytyped.org/
 [angular cli]: https://cli.angular.io/
 [gatling]: https://gatling.io/
-<<<<<<< HEAD
 [openapi-generator]: https://openapi-generator.tech
 [swagger-editor]: https://editor.swagger.io
 [doing api-first development]: https://www.jhipster.tech/documentation-archive/v7.9.4/doing-api-first-development/
-=======
->>>>>>> 1aaad88 (bugfix : fixing jhipster)
+
