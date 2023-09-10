@@ -7,7 +7,6 @@ on:
   push:
     branches:
       - develop
-      - feature/CI-CD # TODO: remove before PR
 
 jobs:
   jacoco-coverage:
