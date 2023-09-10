@@ -78,4 +78,5 @@ jobs:
           
       - name: Build and publish docker image
         run: |
+          chmod +x mvnw
           ./mvnw -ntp jib:build -Djib.to.image=${{ secrets.DOCKERHUB_USERNAME }}/la-guidonette -Djib.to.auth.username="${{ secrets.DOCKERHUB_USERNAME }}" -Djib.to.auth.password="${{ secrets.DOCKERHUB_TOKEN }}" -Pprod
