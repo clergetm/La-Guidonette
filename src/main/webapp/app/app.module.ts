@@ -31,6 +31,7 @@ import { ProductCardComponent } from './layouts/product-card/product-card.compon
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { CartComponent } from './cart/cart.component';
 
 @NgModule({
   imports: [
@@ -54,7 +55,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     { provide: NgbDateAdapter, useClass: NgbDateDayjsAdapter },
     httpInterceptorProviders,
   ],
-  declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent, ListProductsComponent, ProductCardComponent],
+  declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent, ListProductsComponent, ProductCardComponent, CartComponent],
   bootstrap: [MainComponent],
 })
 export class AppModule {
