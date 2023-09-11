@@ -1,0 +1,7 @@
+<h2>Liste des produits</h2>
+<div class="products-container">
+  <div *ngFor="let product of products" style="float: left">
+    <!-- Generic bike link : https://photos.app.goo.gl/E3xHnReHZc1mn3nV6 -->
+    <jhi-product-card [product]="product"> </jhi-product-card>
+  </div>
+</div>
