@@ -9,25 +9,26 @@ import { Product } from './list-products/product';
 // cart data inside the session storage to avoid refresh deleting the cart.
 // Maybe we can detect an exit of the site and backup on the server when it happens
 export class CartContentService {
+
+  private cartItems: Product[] = [];
+  private size = 0;
+
   constructor() {
-    const localStorageCart = localStorage.getItem('user-cart');
+    const localStorageCart:string | null = localStorage.getItem('user-cart');
     if (localStorageCart) {
       this.cartItems = JSON.parse(localStorageCart);
       this.size = this.cartItems.length;
     }
   }
 
-  private cartItems: Product[] = [];
-  private size: number = 0;
-
-  addToCart(product: Product) {
+  addToCart(product: Product):void {
     this.cartItems.push(product);
     this.size += 1;
     this.updatelocalStorageCart();
   }
 
-  removeFromCart(product: Product) {
-    const index = this.cartItems.indexOf(product);
+  removeFromCart(product: Product):void {
+    const index:number = this.cartItems.indexOf(product);
     if (index > -1) {
       this.cartItems.splice(index, 1);
       this.size -= 1;
@@ -35,15 +36,10 @@ export class CartContentService {
     }
   }
 
-  removeAll() {
+  removeAll():void {
     this.cartItems = [];
     this.size = this.cartItems.length;
     this.updatelocalStorageCart();
-  }
-
-  private updatelocalStorageCart() {
-    localStorage.setItem('user-cart', JSON.stringify(this.cartItems));
-    console.log('cart : ' + localStorage.getItem('user-cart'));
   }
 
   getCartItems(): Product[] {
@@ -53,4 +49,9 @@ export class CartContentService {
   getSize(): number {
     return this.size;
   }
+
+  private updatelocalStorageCart():void {
+    localStorage.setItem('user-cart', JSON.stringify(this.cartItems));
+  }
+
 }
