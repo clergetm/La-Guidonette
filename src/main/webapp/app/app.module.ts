@@ -33,6 +33,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { CartComponent } from './cart/cart.component';
 import { OrderComponent } from './order/order.component';
+import { PaymentComponent } from './payment/payment.component';
+import { StepperAnimationComponent } from './layouts/stepper-animation/stepper-animation.component';
 
 @NgModule({
   imports: [
@@ -56,7 +58,7 @@ import { OrderComponent } from './order/order.component';
     { provide: NgbDateAdapter, useClass: NgbDateDayjsAdapter },
     httpInterceptorProviders,
   ],
-  declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent, ListProductsComponent, ProductCardComponent, CartComponent, OrderComponent],
+  declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent, ListProductsComponent, ProductCardComponent, CartComponent, OrderComponent, PaymentComponent, StepperAnimationComponent],
   bootstrap: [MainComponent],
 })
 export class AppModule {
