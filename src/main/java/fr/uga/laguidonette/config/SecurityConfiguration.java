@@ -66,8 +66,6 @@ public class SecurityConfiguration {
             .and()
                 .referrerPolicy(ReferrerPolicyHeaderWriter.ReferrerPolicy.STRICT_ORIGIN_WHEN_CROSS_ORIGIN)
             .and()
-                .contentSecurityPolicy("img-src 'self' data: https://contents.mediadecathlon.com;")
-            .and()
                 .permissionsPolicy().policy("camera=(), fullscreen=(self), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), midi=(), payment=(), sync-xhr=()")
             .and()
                 .frameOptions().sameOrigin()
