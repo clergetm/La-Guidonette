@@ -1,0 +1,34 @@
+{
+  "applications": ["LaGuidonette"],
+  "changelogDate": "20230911125402",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "order_line",
+  "fields": [
+    {
+      "fieldName": "quantity",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "OrderLine",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "product",
+      "otherEntityRelationshipName": "orderLine",
+      "relationshipName": "product",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "torder",
+      "otherEntityRelationshipName": "orderLine",
+      "relationshipName": "torder",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

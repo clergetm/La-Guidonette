@@ -91,7 +91,6 @@ export class TorderComponent implements OnInit {
   protected queryBackend(predicate?: string, ascending?: boolean): Observable<EntityArrayResponseType> {
     this.isLoading = true;
     const queryObject = {
-      eagerload: true,
       sort: this.getSortQueryParam(predicate, ascending),
     };
     return this.torderService.query(queryObject).pipe(tap(() => (this.isLoading = false)));

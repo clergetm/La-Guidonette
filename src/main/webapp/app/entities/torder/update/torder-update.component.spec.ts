@@ -12,8 +12,6 @@ import { ITorder } from '../torder.model';
 
 import { IUser } from 'app/entities/user/user.model';
 import { UserService } from 'app/entities/user/user.service';
-import { IProduct } from 'app/entities/product/product.model';
-import { ProductService } from 'app/entities/product/service/product.service';
 
 import { TorderUpdateComponent } from './torder-update.component';
 
@@ -24,7 +22,6 @@ describe('Torder Management Update Component', () => {
   let torderFormService: TorderFormService;
   let torderService: TorderService;
   let userService: UserService;
-  let productService: ProductService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -48,7 +45,6 @@ describe('Torder Management Update Component', () => {
     torderFormService = TestBed.inject(TorderFormService);
     torderService = TestBed.inject(TorderService);
     userService = TestBed.inject(UserService);
-    productService = TestBed.inject(ProductService);
 
     comp = fixture.componentInstance;
   });
@@ -76,40 +72,15 @@ describe('Torder Management Update Component', () => {
       expect(comp.usersSharedCollection).toEqual(expectedCollection);
     });
 
-    it('Should call Product query and add missing value', () => {
-      const torder: ITorder = { id: 456 };
-      const products: IProduct[] = [{ id: 39497 }];
-      torder.products = products;
-
-      const productCollection: IProduct[] = [{ id: 97796 }];
-      jest.spyOn(productService, 'query').mockReturnValue(of(new HttpResponse({ body: productCollection })));
-      const additionalProducts = [...products];
-      const expectedCollection: IProduct[] = [...additionalProducts, ...productCollection];
-      jest.spyOn(productService, 'addProductToCollectionIfMissing').mockReturnValue(expectedCollection);
-
-      activatedRoute.data = of({ torder });
-      comp.ngOnInit();
-
-      expect(productService.query).toHaveBeenCalled();
-      expect(productService.addProductToCollectionIfMissing).toHaveBeenCalledWith(
-        productCollection,
-        ...additionalProducts.map(expect.objectContaining)
-      );
-      expect(comp.productsSharedCollection).toEqual(expectedCollection);
-    });
-
     it('Should update editForm', () => {
       const torder: ITorder = { id: 456 };
       const userID: IUser = { id: 55421 };
       torder.userID = userID;
-      const product: IProduct = { id: 33068 };
-      torder.products = [product];
 
       activatedRoute.data = of({ torder });
       comp.ngOnInit();
 
       expect(comp.usersSharedCollection).toContain(userID);
-      expect(comp.productsSharedCollection).toContain(product);
       expect(comp.torder).toEqual(torder);
     });
   });
@@ -190,16 +161,6 @@ describe('Torder Management Update Component', () => {
         jest.spyOn(userService, 'compareUser');
         comp.compareUser(entity, entity2);
         expect(userService.compareUser).toHaveBeenCalledWith(entity, entity2);
-      });
-    });
-
-    describe('compareProduct', () => {
-      it('Should forward to productService', () => {
-        const entity = { id: 123 };
-        const entity2 = { id: 456 };
-        jest.spyOn(productService, 'compareProduct');
-        comp.compareProduct(entity, entity2);
-        expect(productService.compareProduct).toHaveBeenCalledWith(entity, entity2);
       });
     });
   });

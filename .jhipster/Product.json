@@ -1,5 +1,5 @@
 {
-  "applications": "*",
+  "applications": ["LaGuidonette"],
   "changelogDate": "20230909074810",
   "dto": "no",
   "embedded": false,
@@ -7,33 +7,40 @@
   "fields": [
     {
       "fieldName": "label",
-      "fieldType": "String"
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "description",
-      "fieldType": "String"
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "price",
-      "fieldType": "Long"
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "brand",
       "fieldType": "Brand",
+      "fieldValidateRules": ["required"],
       "fieldValues": "BTWIN,SPECIALIZED,ORBEA,SANTA,CRUZ,WETHEPEOPLE,LAPIERRE,CANYON"
     },
     {
       "fieldName": "model",
-      "fieldType": "String"
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "color",
       "fieldType": "Color",
+      "fieldValidateRules": ["required"],
       "fieldValues": "WHITE,BLACK,YELLOW,RED,BLUE,GREEN"
     },
     {
       "fieldName": "quantity",
-      "fieldType": "Integer"
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
     }
   ],
   "fluentMethods": true,
@@ -43,17 +50,16 @@
   "readOnly": false,
   "relationships": [
     {
+      "otherEntityName": "orderLine",
+      "otherEntityRelationshipName": "product",
+      "relationshipName": "orderLine",
+      "relationshipType": "one-to-many"
+    },
+    {
       "otherEntityName": "category",
       "otherEntityRelationshipName": "product",
       "ownerSide": false,
       "relationshipName": "category",
-      "relationshipType": "many-to-many"
-    },
-    {
-      "otherEntityName": "torder",
-      "otherEntityRelationshipName": "product",
-      "ownerSide": false,
-      "relationshipName": "torder",
       "relationshipType": "many-to-many"
     }
   ],

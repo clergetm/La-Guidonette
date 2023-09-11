@@ -39,7 +39,9 @@ export class CategoryFormService {
           validators: [Validators.required],
         }
       ),
-      name: new FormControl(categoryRawValue.name),
+      name: new FormControl(categoryRawValue.name, {
+        validators: [Validators.required],
+      }),
       products: new FormControl(categoryRawValue.products ?? []),
     });
   }
