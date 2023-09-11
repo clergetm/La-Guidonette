@@ -13,17 +13,5 @@
                                  constraintName="fk_torder__userid_id"
                                  referencedColumnNames="id"
                                  referencedTableName="jhi_user"/>
-
-        <addForeignKeyConstraint baseColumnNames="torder_id"
-                                 baseTableName="rel_torder__product"
-                                 constraintName="fk_rel_torder__product__torder_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="torder"/>
-
-        <addForeignKeyConstraint baseColumnNames="product_id"
-                                 baseTableName="rel_torder__product"
-                                 constraintName="fk_rel_torder__product__product_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="product"/>
     </changeSet>
 </databaseChangeLog>

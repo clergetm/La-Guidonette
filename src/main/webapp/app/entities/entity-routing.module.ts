@@ -19,6 +19,11 @@ import { RouterModule } from '@angular/router';
         data: { pageTitle: 'laGuidonetteApp.torder.home.title' },
         loadChildren: () => import('./torder/torder.module').then(m => m.TorderModule),
       },
+      {
+        path: 'order-line',
+        data: { pageTitle: 'laGuidonetteApp.orderLine.home.title' },
+        loadChildren: () => import('./order-line/order-line.module').then(m => m.OrderLineModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

@@ -9,8 +9,6 @@ import { ITorder } from '../torder.model';
 import { TorderService } from '../service/torder.service';
 import { IUser } from 'app/entities/user/user.model';
 import { UserService } from 'app/entities/user/user.service';
-import { IProduct } from 'app/entities/product/product.model';
-import { ProductService } from 'app/entities/product/service/product.service';
 import { Status } from 'app/entities/enumerations/status.model';
 
 @Component({
@@ -23,7 +21,6 @@ export class TorderUpdateComponent implements OnInit {
   statusValues = Object.keys(Status);
 
   usersSharedCollection: IUser[] = [];
-  productsSharedCollection: IProduct[] = [];
 
   editForm: TorderFormGroup = this.torderFormService.createTorderFormGroup();
 
@@ -31,13 +28,10 @@ export class TorderUpdateComponent implements OnInit {
     protected torderService: TorderService,
     protected torderFormService: TorderFormService,
     protected userService: UserService,
-    protected productService: ProductService,
     protected activatedRoute: ActivatedRoute
   ) {}
 
   compareUser = (o1: IUser | null, o2: IUser | null): boolean => this.userService.compareUser(o1, o2);
-
-  compareProduct = (o1: IProduct | null, o2: IProduct | null): boolean => this.productService.compareProduct(o1, o2);
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ torder }) => {
@@ -88,10 +82,6 @@ export class TorderUpdateComponent implements OnInit {
     this.torderFormService.resetForm(this.editForm, torder);
 
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing<IUser>(this.usersSharedCollection, torder.userID);
-    this.productsSharedCollection = this.productService.addProductToCollectionIfMissing<IProduct>(
-      this.productsSharedCollection,
-      ...(torder.products ?? [])
-    );
   }
 
   protected loadRelationshipsOptions(): void {
@@ -100,15 +90,5 @@ export class TorderUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
       .pipe(map((users: IUser[]) => this.userService.addUserToCollectionIfMissing<IUser>(users, this.torder?.userID)))
       .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
-
-    this.productService
-      .query()
-      .pipe(map((res: HttpResponse<IProduct[]>) => res.body ?? []))
-      .pipe(
-        map((products: IProduct[]) =>
-          this.productService.addProductToCollectionIfMissing<IProduct>(products, ...(this.torder?.products ?? []))
-        )
-      )
-      .subscribe((products: IProduct[]) => (this.productsSharedCollection = products));
   }
 }

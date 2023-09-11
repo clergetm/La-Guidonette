@@ -7,6 +7,7 @@ import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -27,29 +28,27 @@ public class Torder implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "date")
+    @NotNull
+    @Column(name = "date", nullable = false)
     private Instant date;
 
-    @Column(name = "total")
+    @NotNull
+    @Column(name = "total", nullable = false)
     private Long total;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "status")
+    @Column(name = "status", nullable = false)
     private Status status;
 
     @OneToOne
     @JoinColumn(unique = true)
     private User userID;
 
-    @ManyToMany
-    @JoinTable(
-        name = "rel_torder__product",
-        joinColumns = @JoinColumn(name = "torder_id"),
-        inverseJoinColumns = @JoinColumn(name = "product_id")
-    )
+    @OneToMany(mappedBy = "torder")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "categories", "torders" }, allowSetters = true)
-    private Set<Product> products = new HashSet<>();
+    @JsonIgnoreProperties(value = { "product", "torder" }, allowSetters = true)
+    private Set<OrderLine> orderLines = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -118,28 +117,34 @@ public class Torder implements Serializable {
         return this;
     }
 
-    public Set<Product> getProducts() {
-        return this.products;
+    public Set<OrderLine> getOrderLines() {
+        return this.orderLines;
     }
 
-    public void setProducts(Set<Product> products) {
-        this.products = products;
+    public void setOrderLines(Set<OrderLine> orderLines) {
+        if (this.orderLines != null) {
+            this.orderLines.forEach(i -> i.setTorder(null));
+        }
+        if (orderLines != null) {
+            orderLines.forEach(i -> i.setTorder(this));
+        }
+        this.orderLines = orderLines;
     }
 
-    public Torder products(Set<Product> products) {
-        this.setProducts(products);
+    public Torder orderLines(Set<OrderLine> orderLines) {
+        this.setOrderLines(orderLines);
         return this;
     }
 
-    public Torder addProduct(Product product) {
-        this.products.add(product);
-        product.getTorders().add(this);
+    public Torder addOrderLine(OrderLine orderLine) {
+        this.orderLines.add(orderLine);
+        orderLine.setTorder(this);
         return this;
     }
 
-    public Torder removeProduct(Product product) {
-        this.products.remove(product);
-        product.getTorders().remove(this);
+    public Torder removeOrderLine(OrderLine orderLine) {
+        this.orderLines.remove(orderLine);
+        orderLine.setTorder(null);
         return this;
     }
 
