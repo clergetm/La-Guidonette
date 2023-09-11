@@ -62,8 +62,6 @@ public class SecurityConfiguration {
             .headers()
                 .contentSecurityPolicy(jHipsterProperties.getSecurity().getContentSecurityPolicy())
             .and()
-                .contentSecurityPolicy("img-src 'self' data: https://contents.mediadecathlon.com;")
-            .and()
                 .referrerPolicy(ReferrerPolicyServerHttpHeadersWriter.ReferrerPolicy.STRICT_ORIGIN_WHEN_CROSS_ORIGIN)
             .and()
                 .contentSecurityPolicy("img-src 'self' data: https://contents.mediadecathlon.com;")
