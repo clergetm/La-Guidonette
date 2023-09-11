@@ -1,0 +1,11 @@
+<div>
+  <h1>Recapitulatif de commande :</h1>
+  <h3>Articles contenus dans la commande :</h3>
+  <div *ngFor="let product of cartService.getCartItems()">
+    <p>{{ product.name }}, {{ product.brand }}, {{ product.color }} ({{ product.price }}€</p>
+  </div>
+  <h3>Prix total : {{ getPrice() }}€</h3>
+  <div class="bot-container" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+    <button type="button" routerLink="/payment">Continuer vers le paiement</button>
+  </div>
+</div>
