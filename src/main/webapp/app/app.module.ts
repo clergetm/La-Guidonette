@@ -27,6 +27,14 @@ import { ActiveMenuDirective } from './layouts/navbar/active-menu.directive';
 import { ErrorComponent } from './layouts/error/error.component';
 import { HeaderComponent } from './layouts/header/header.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { ListProductsComponent } from './list-products/list-products.component';
+import { ProductCardComponent } from './layouts/product-card/product-card.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { CartComponent } from './cart/cart.component';
+import { OrderComponent } from './order/order.component';
+import { PaymentComponent } from './payment/payment.component';
+import { StepperAnimationComponent } from './layouts/stepper-animation/stepper-animation.component';
 
 @NgModule({
   imports: [
@@ -41,6 +49,9 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     NgxWebstorageModule.forRoot({ prefix: 'jhi', separator: '-', caseSensitive: true }),
     TranslationModule,
     MatSlideToggleModule,
+    MatCardModule,
+    MatButtonModule,
+    MatButtonModule,
   ],
   providers: [
     Title,
@@ -56,8 +67,15 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     ActiveMenuDirective,
     FooterComponent,
     HeaderComponent,
+    ProductCardComponent,
+    ListProductsComponent,
+    CartComponent,
+    OrderComponent,
+    PaymentComponent,
+    StepperAnimationComponent,
   ],
   bootstrap: [MainComponent],
+  exports: [ProductCardComponent],
 })
 export class AppModule {
   constructor(applicationConfigService: ApplicationConfigService, iconLibrary: FaIconLibrary, dpConfig: NgbDatepickerConfig) {
