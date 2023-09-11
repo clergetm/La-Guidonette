@@ -12,6 +12,7 @@ import { ProfileService } from 'app/layouts/profiles/profile.service';
 import { EntityNavbarItems } from 'app/entities/entity-navbar-items';
 
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import {CartContentService} from "../../cart-content.service";
 
 @NgModule({
   imports: [MatSlideToggleModule],
@@ -38,7 +39,8 @@ export class NavbarComponent implements OnInit {
     private sessionStorageService: SessionStorageService,
     private accountService: AccountService,
     private profileService: ProfileService,
-    private router: Router
+    private router: Router,
+    public cartContentService: CartContentService
   ) {
     if (VERSION) {
       this.version = VERSION.toLowerCase().startsWith('v') ? VERSION : `v${VERSION}`;

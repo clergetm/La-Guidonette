@@ -5,7 +5,7 @@
     <p>{{ product.name }}, {{ product.brand }}, {{ product.color }} ({{ product.price }}€</p>
   </div>
   <h3>Prix total : {{ getPrice() }}€</h3>
-  <div class="bot-container" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+  <div class="bot-container" routerLinkActive="active" >
     <button type="button" routerLink="/payment">Continuer vers le paiement</button>
   </div>
 </div>
