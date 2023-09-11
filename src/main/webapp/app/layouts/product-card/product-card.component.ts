@@ -1,7 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
 import { Product } from '../../list-products/product';
 import { CartContentService } from '../../cart-content.service';
 
@@ -10,7 +8,7 @@ import { CartContentService } from '../../cart-content.service';
   templateUrl: './product-card.component.html',
   styleUrls: ['./product-card.component.scss'],
 })
-export class ProductCardComponent implements OnInit {
+export class ProductCardComponent {
   @Input() product: Product = {
     id: 1,
     price: '233',
@@ -23,13 +21,7 @@ export class ProductCardComponent implements OnInit {
   };
   constructor(private cartService: CartContentService) {}
 
-  ngOnInit(): void {}
-
-  addToCart(product: Product) {
+  addToCart(product: Product):void {
     this.cartService.addToCart(product);
-    var products: Product[] = this.cartService.getCartItems();
-    products.forEach(product => {
-      console.log(product.name);
-    });
   }
 }
