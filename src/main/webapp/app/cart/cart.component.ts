@@ -7,14 +7,14 @@ import { Product } from '../list-products/product';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss'],
 })
-export class CartComponent{
+export class CartComponent {
   constructor(public cartService: CartContentService) {}
 
   deleteCart():void {
     this.cartService.removeAll();
   }
 
-  deleteItem(prod: Product): void {
+  deleteItem(prod: Product):void {
     this.cartService.removeFromCart(prod);
   }
 }

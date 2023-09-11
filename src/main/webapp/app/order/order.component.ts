@@ -7,9 +7,10 @@ import { Product } from '../list-products/product';
   templateUrl: './order.component.html',
   styleUrls: ['./order.component.scss'],
 })
-export class OrderComponent{
+export class OrderComponent {
   price = '';
   constructor(public cartService: CartContentService) {}
+
 
   getPrice(): string {
     if (this.price === '') {
