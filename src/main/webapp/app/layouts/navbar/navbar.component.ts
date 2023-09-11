@@ -13,7 +13,6 @@ import { EntityNavbarItems } from 'app/entities/entity-navbar-items';
 
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { CartContentService } from '../../cart-content.service';
-
 @NgModule({
   imports: [MatSlideToggleModule],
 })
