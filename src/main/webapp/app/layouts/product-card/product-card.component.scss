@@ -1,0 +1,21 @@
+.example-header-image {
+  background-size: cover;
+}
+
+.bordered-card {
+  flex-grow: 1;
+  min-width: calc(10% - 10px);
+  background-color: #ffffff;
+  border: 2px solid transparent;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  padding: 20px;
+  transition: border 0.3s ease, transform 0.3s ease;
+  width: 400px;
+}
+
+.bordered-card:hover {
+  border: 2px solid #ffffff;
+  transform: scale(1.05);
+  z-index: 1;
+}
