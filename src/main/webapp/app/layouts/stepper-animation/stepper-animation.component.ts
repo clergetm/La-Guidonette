@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: './stepper-animation.component.html',
   styleUrls: ['./stepper-animation.component.scss'],
 })
-export class StepperAnimationComponent {
-
+export class StepperAnimationComponent{
 }
+

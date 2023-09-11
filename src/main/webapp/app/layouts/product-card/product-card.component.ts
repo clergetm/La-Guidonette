@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+
 import { Product } from '../../list-products/product';
 import { CartContentService } from '../../cart-content.service';
 
@@ -7,7 +8,7 @@ import { CartContentService } from '../../cart-content.service';
   templateUrl: './product-card.component.html',
   styleUrls: ['./product-card.component.scss'],
 })
-export class ProductCardComponent {
+export class ProductCardComponent{
   @Input() product: Product = {
     id: 1,
     price: '233',
@@ -19,7 +20,6 @@ export class ProductCardComponent {
     description: '',
   };
   constructor(private cartService: CartContentService) {}
-
 
   addToCart(product: Product):void {
     this.cartService.addToCart(product);

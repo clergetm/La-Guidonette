@@ -7,6 +7,6 @@ import {Product, products} from './product';
   templateUrl: './list-products.component.html',
   styleUrls: ['./list-products.component.scss'],
 })
-export class ListProductsComponent  {
-  products: Product[] = [...products];
+export class ListProductsComponent{
+  products:Product[] = [...products];
 }
