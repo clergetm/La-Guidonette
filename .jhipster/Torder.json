@@ -1,5 +1,5 @@
 {
-  "applications": "*",
+  "applications": ["LaGuidonette"],
   "changelogDate": "20230909074812",
   "dto": "no",
   "embedded": false,
@@ -7,15 +7,18 @@
   "fields": [
     {
       "fieldName": "date",
-      "fieldType": "Instant"
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "total",
-      "fieldType": "Long"
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "status",
       "fieldType": "Status",
+      "fieldValidateRules": ["required"],
       "fieldValues": "IN_PROGRESS,CANCELLED,READY,DONE"
     }
   ],
@@ -32,11 +35,10 @@
       "relationshipType": "one-to-one"
     },
     {
-      "otherEntityName": "product",
+      "otherEntityName": "orderLine",
       "otherEntityRelationshipName": "torder",
-      "ownerSide": true,
-      "relationshipName": "product",
-      "relationshipType": "many-to-many"
+      "relationshipName": "orderLine",
+      "relationshipType": "one-to-many"
     }
   ],
   "service": "serviceImpl"

@@ -1,0 +1,72 @@
+
+
+application {
+	config {
+    	baseName LaGuidonette
+        applicationType monolith
+        authenticationType jwt
+        buildTool maven
+        clientFramework angular
+        clientPackageManager npm
+        databaseType sql
+        devDatabaseType h2Disk
+        languages [en]
+        nativeLanguage en
+        packageName fr.uga.laguidonette
+        prodDatabaseType postgresql
+        reactive false
+        serverPort 8080
+    }
+    entities *
+}
+
+entity Product {
+    label String required
+    description String required
+    price Long required
+    brand Brand required
+    model String required
+    color Color required
+    quantity Integer required
+}
+
+enum Brand {
+	BTWIN, SPECIALIZED, ORBEA, SANTA CRUZ, WETHEPEOPLE, LAPIERRE, CANYON
+}
+
+enum Color {
+	WHITE, BLACK, YELLOW, RED, BLUE, GREEN
+}
+
+entity Category {
+    name String required unique
+}
+
+entity Torder {
+	date Instant required
+    total Long required
+    status Status required
+}
+
+entity OrderLine {
+	quantity Integer required
+}
+
+enum Status {
+	IN_PROGRESS, CANCELLED, READY, DONE
+}
+relationship OneToOne {
+	Torder{userID} to User
+}
+
+relationship ManyToMany {
+	Category to Product
+}
+
+relationship OneToMany {
+	Product to OrderLine
+    Torder to OrderLine
+}
+
+// Set service options to all
+service all with serviceImpl

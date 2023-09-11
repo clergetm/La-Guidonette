@@ -62,12 +62,6 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="product.id">
-            <div class="d-flex">
-              <span jhiTranslate="laGuidonetteApp.torder.product">Product</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -81,12 +75,6 @@
           <td jhiTranslate="{{ 'laGuidonetteApp.Status.' + torder.status }}">{{ torder.status }}</td>
           <td>
             {{ torder.userID?.id }}
-          </td>
-          <td>
-            <span *ngFor="let product of torder.products; let last = last">
-              <a class="form-control-static" [routerLink]="['/product', product.id, 'view']">{{ product.id }}</a
-              >{{ last ? '' : ', ' }}
-            </span>
           </td>
           <td class="text-end">
             <div class="btn-group">

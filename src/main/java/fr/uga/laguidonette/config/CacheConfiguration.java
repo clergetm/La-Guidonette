@@ -49,12 +49,13 @@ public class CacheConfiguration {
             createCache(cm, fr.uga.laguidonette.domain.Authority.class.getName());
             createCache(cm, fr.uga.laguidonette.domain.User.class.getName() + ".authorities");
             createCache(cm, fr.uga.laguidonette.domain.Product.class.getName());
+            createCache(cm, fr.uga.laguidonette.domain.Product.class.getName() + ".orderLines");
             createCache(cm, fr.uga.laguidonette.domain.Product.class.getName() + ".categories");
-            createCache(cm, fr.uga.laguidonette.domain.Product.class.getName() + ".torders");
             createCache(cm, fr.uga.laguidonette.domain.Category.class.getName());
             createCache(cm, fr.uga.laguidonette.domain.Category.class.getName() + ".products");
             createCache(cm, fr.uga.laguidonette.domain.Torder.class.getName());
-            createCache(cm, fr.uga.laguidonette.domain.Torder.class.getName() + ".products");
+            createCache(cm, fr.uga.laguidonette.domain.Torder.class.getName() + ".orderLines");
+            createCache(cm, fr.uga.laguidonette.domain.OrderLine.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }
