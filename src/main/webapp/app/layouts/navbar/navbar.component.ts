@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgModule, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { SessionStorageService } from 'ngx-webstorage';
@@ -10,6 +10,14 @@ import { AccountService } from 'app/core/auth/account.service';
 import { LoginService } from 'app/login/login.service';
 import { ProfileService } from 'app/layouts/profiles/profile.service';
 import { EntityNavbarItems } from 'app/entities/entity-navbar-items';
+
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { CartContentService } from '../../cart-content.service';
+
+@NgModule({
+  imports: [MatSlideToggleModule],
+})
+class AppModule {}
 
 @Component({
   selector: 'jhi-navbar',
@@ -31,6 +39,7 @@ export class NavbarComponent implements OnInit {
     private sessionStorageService: SessionStorageService,
     private accountService: AccountService,
     private profileService: ProfileService,
+    public cartContentService: CartContentService,
     private router: Router
   ) {
     if (VERSION) {
