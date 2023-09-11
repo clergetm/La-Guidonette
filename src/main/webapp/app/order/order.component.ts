@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CartContentService } from '../cart-content.service';
 import { Product } from '../list-products/product';
 
@@ -7,14 +7,12 @@ import { Product } from '../list-products/product';
   templateUrl: './order.component.html',
   styleUrls: ['./order.component.scss'],
 })
-export class OrderComponent implements OnInit {
-  price: string = '';
+export class OrderComponent{
+  price = '';
   constructor(public cartService: CartContentService) {}
 
-  ngOnInit(): void {}
-
   getPrice(): string {
-    if (this.price == '') {
+    if (this.price === '') {
       let sum = 0;
       const prods: Product[] = this.cartService.getCartItems();
       prods.forEach(product => {
