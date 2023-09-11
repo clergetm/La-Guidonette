@@ -4,7 +4,6 @@
       <span class="logo-img"></span>
       <span jhiTranslate="global.title" class="navbar-title">LaGuidonette</span>
       <span class="navbar-version">{{ version }}</span>
-      <span><mat-slide-toggle>Toggle me!</mat-slide-toggle></span>
     </a>
     <a
       class="navbar-toggler d-lg-none"
@@ -20,6 +19,15 @@
     </a>
     <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed" [ngSwitch]="account !== null">
       <ul class="navbar-nav ms-auto">
+        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <a class="nav-link" routerLink="/cart" (click)="collapseNavbar()">
+            <div class="cart-icon-container">
+              <span class="logo-cart"></span>
+              <span class="number-items-in-cart" *ngIf="cartContentService.getSize() > 0">{{ cartContentService.getSize() }}</span>
+              <span>Panier</span>
+            </div>
+          </a>
+        </li>
         <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
           <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
             <span>
