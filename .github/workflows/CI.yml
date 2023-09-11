@@ -64,6 +64,8 @@ jobs:
           message: '${{ env.ci_commit_message }}'
           add: '*.svg'
           pull: '--rebase --autostash'
+        env:
+          GITHUB_TOKEN: ${{ secrets.DEVOPS_TOKEN }}
 
       # Create an artifact containing the jacoco report
       - name: Upload JaCoCo coverage report
