@@ -15,13 +15,13 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="date" type="${datetimeType}">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
             <column name="total" type="bigint">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
             <column name="status" type="varchar(255)">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
             <column name="userid_id" type="bigint">
                 <constraints nullable="true" unique="true" uniqueConstraintName="ux_torder__userid_id" />
@@ -29,20 +29,6 @@
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
         <dropDefaultValue tableName="torder" columnName="date" columnDataType="${datetimeType}"/>
-    </changeSet>
-
-    <changeSet id="20230909074812-1-relations" author="jhipster">
-
-        <createTable tableName="rel_torder__product">
-            <column name="product_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="torder_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="torder_id, product_id" tableName="rel_torder__product"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->

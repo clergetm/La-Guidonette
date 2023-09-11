@@ -5,27 +5,45 @@ import { IProduct, NewProduct } from './product.model';
 
 export const sampleWithRequiredData: IProduct = {
   id: 77672,
+  label: 'Customer-focused',
+  description: 'cross-platform Unbranded deposit',
+  price: 49054,
+  brand: Brand['ORBEA'],
+  model: 'Bangladesh Administrator',
+  color: Color['WHITE'],
+  quantity: 45804,
 };
 
 export const sampleWithPartialData: IProduct = {
-  id: 94362,
-  brand: Brand['BTWIN'],
-  model: 'Programmable Networked deliver',
-  color: Color['YELLOW'],
+  id: 82094,
+  label: 'invoice bluetooth District',
+  description: 'Garden Customer-focused Island',
+  price: 13074,
+  brand: Brand['ORBEA'],
+  model: 'Incredible',
+  color: Color['GREEN'],
+  quantity: 90500,
 };
 
 export const sampleWithFullData: IProduct = {
-  id: 99933,
-  label: 'driver synthesizing',
-  description: 'neural Automotive Assurance',
-  price: 33131,
-  brand: Brand['SANTA'],
-  model: 'Fresh',
-  color: Color['BLUE'],
-  quantity: 86156,
+  id: 19060,
+  label: 'encompassing vertical policy',
+  description: 'neural intuitive SDR',
+  price: 76296,
+  brand: Brand['BTWIN'],
+  model: 'Groves',
+  color: Color['RED'],
+  quantity: 21588,
 };
 
 export const sampleWithNewData: NewProduct = {
+  label: 'Loaf withdrawal architectures',
+  description: 'Universal bricks-and-clicks',
+  price: 72638,
+  brand: Brand['LAPIERRE'],
+  model: 'Horizontal',
+  color: Color['BLACK'],
+  quantity: 22531,
   id: null,
 };
 

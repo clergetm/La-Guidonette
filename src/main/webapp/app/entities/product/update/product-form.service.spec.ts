@@ -28,7 +28,6 @@ describe('Product Form Service', () => {
             color: expect.any(Object),
             quantity: expect.any(Object),
             categories: expect.any(Object),
-            torders: expect.any(Object),
           })
         );
       });
@@ -47,7 +46,6 @@ describe('Product Form Service', () => {
             color: expect.any(Object),
             quantity: expect.any(Object),
             categories: expect.any(Object),
-            torders: expect.any(Object),
           })
         );
       });

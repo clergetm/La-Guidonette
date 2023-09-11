@@ -30,13 +30,6 @@
         <dd>
           <span>{{ torder.userID?.id }}</span>
         </dd>
-        <dt><span jhiTranslate="laGuidonetteApp.torder.product">Product</span></dt>
-        <dd>
-          <span *ngFor="let product of torder.products; let last = last">
-            <a [routerLink]="['/product', product.id, 'view']">{{ product.id }}</a
-            >{{ last ? '' : ', ' }}
-          </span>
-        </dd>
       </dl>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

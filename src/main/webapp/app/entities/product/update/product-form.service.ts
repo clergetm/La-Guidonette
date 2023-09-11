@@ -14,7 +14,7 @@ type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>
  */
 type ProductFormGroupInput = IProduct | PartialWithRequiredKeyOf<NewProduct>;
 
-type ProductFormDefaults = Pick<NewProduct, 'id' | 'categories' | 'torders'>;
+type ProductFormDefaults = Pick<NewProduct, 'id' | 'categories'>;
 
 type ProductFormGroupContent = {
   id: FormControl<IProduct['id'] | NewProduct['id']>;
@@ -26,7 +26,6 @@ type ProductFormGroupContent = {
   color: FormControl<IProduct['color']>;
   quantity: FormControl<IProduct['quantity']>;
   categories: FormControl<IProduct['categories']>;
-  torders: FormControl<IProduct['torders']>;
 };
 
 export type ProductFormGroup = FormGroup<ProductFormGroupContent>;
@@ -46,15 +45,28 @@ export class ProductFormService {
           validators: [Validators.required],
         }
       ),
-      label: new FormControl(productRawValue.label),
-      description: new FormControl(productRawValue.description),
-      price: new FormControl(productRawValue.price),
-      brand: new FormControl(productRawValue.brand),
-      model: new FormControl(productRawValue.model),
-      color: new FormControl(productRawValue.color),
-      quantity: new FormControl(productRawValue.quantity),
+      label: new FormControl(productRawValue.label, {
+        validators: [Validators.required],
+      }),
+      description: new FormControl(productRawValue.description, {
+        validators: [Validators.required],
+      }),
+      price: new FormControl(productRawValue.price, {
+        validators: [Validators.required],
+      }),
+      brand: new FormControl(productRawValue.brand, {
+        validators: [Validators.required],
+      }),
+      model: new FormControl(productRawValue.model, {
+        validators: [Validators.required],
+      }),
+      color: new FormControl(productRawValue.color, {
+        validators: [Validators.required],
+      }),
+      quantity: new FormControl(productRawValue.quantity, {
+        validators: [Validators.required],
+      }),
       categories: new FormControl(productRawValue.categories ?? []),
-      torders: new FormControl(productRawValue.torders ?? []),
     });
   }
 
@@ -76,7 +88,6 @@ export class ProductFormService {
     return {
       id: null,
       categories: [],
-      torders: [],
     };
   }
 }

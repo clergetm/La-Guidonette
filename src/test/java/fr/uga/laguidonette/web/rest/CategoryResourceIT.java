@@ -128,6 +128,23 @@ class CategoryResourceIT {
 
     @Test
     @Transactional
+    void checkNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = categoryRepository.findAll().size();
+        // set the field null
+        category.setName(null);
+
+        // Create the Category, which fails.
+
+        restCategoryMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(category)))
+            .andExpect(status().isBadRequest());
+
+        List<Category> categoryList = categoryRepository.findAll();
+        assertThat(categoryList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     void getAllCategories() throws Exception {
         // Initialize the database
         categoryRepository.saveAndFlush(category);

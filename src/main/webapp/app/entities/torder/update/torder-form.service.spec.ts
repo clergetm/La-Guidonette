@@ -24,7 +24,6 @@ describe('Torder Form Service', () => {
             total: expect.any(Object),
             status: expect.any(Object),
             userID: expect.any(Object),
-            products: expect.any(Object),
           })
         );
       });
@@ -39,7 +38,6 @@ describe('Torder Form Service', () => {
             total: expect.any(Object),
             status: expect.any(Object),
             userID: expect.any(Object),
-            products: expect.any(Object),
           })
         );
       });
