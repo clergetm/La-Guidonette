@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -27,38 +28,45 @@ public class Product implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "label")
+    @NotNull
+    @Column(name = "label", nullable = false)
     private String label;
 
-    @Column(name = "description")
+    @NotNull
+    @Column(name = "description", nullable = false)
     private String description;
 
-    @Column(name = "price")
+    @NotNull
+    @Column(name = "price", nullable = false)
     private Long price;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "brand")
+    @Column(name = "brand", nullable = false)
     private Brand brand;
 
-    @Column(name = "model")
+    @NotNull
+    @Column(name = "model", nullable = false)
     private String model;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "color")
+    @Column(name = "color", nullable = false)
     private Color color;
 
-    @Column(name = "quantity")
+    @NotNull
+    @Column(name = "quantity", nullable = false)
     private Integer quantity;
+
+    @OneToMany(mappedBy = "product")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "product", "torder" }, allowSetters = true)
+    private Set<OrderLine> orderLines = new HashSet<>();
 
     @ManyToMany(mappedBy = "products")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "products" }, allowSetters = true)
     private Set<Category> categories = new HashSet<>();
-
-    @ManyToMany(mappedBy = "products")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "userID", "products" }, allowSetters = true)
-    private Set<Torder> torders = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -166,6 +174,37 @@ public class Product implements Serializable {
         this.quantity = quantity;
     }
 
+    public Set<OrderLine> getOrderLines() {
+        return this.orderLines;
+    }
+
+    public void setOrderLines(Set<OrderLine> orderLines) {
+        if (this.orderLines != null) {
+            this.orderLines.forEach(i -> i.setProduct(null));
+        }
+        if (orderLines != null) {
+            orderLines.forEach(i -> i.setProduct(this));
+        }
+        this.orderLines = orderLines;
+    }
+
+    public Product orderLines(Set<OrderLine> orderLines) {
+        this.setOrderLines(orderLines);
+        return this;
+    }
+
+    public Product addOrderLine(OrderLine orderLine) {
+        this.orderLines.add(orderLine);
+        orderLine.setProduct(this);
+        return this;
+    }
+
+    public Product removeOrderLine(OrderLine orderLine) {
+        this.orderLines.remove(orderLine);
+        orderLine.setProduct(null);
+        return this;
+    }
+
     public Set<Category> getCategories() {
         return this.categories;
     }
@@ -194,37 +233,6 @@ public class Product implements Serializable {
     public Product removeCategory(Category category) {
         this.categories.remove(category);
         category.getProducts().remove(this);
-        return this;
-    }
-
-    public Set<Torder> getTorders() {
-        return this.torders;
-    }
-
-    public void setTorders(Set<Torder> torders) {
-        if (this.torders != null) {
-            this.torders.forEach(i -> i.removeProduct(this));
-        }
-        if (torders != null) {
-            torders.forEach(i -> i.addProduct(this));
-        }
-        this.torders = torders;
-    }
-
-    public Product torders(Set<Torder> torders) {
-        this.setTorders(torders);
-        return this;
-    }
-
-    public Product addTorder(Torder torder) {
-        this.torders.add(torder);
-        torder.getProducts().add(this);
-        return this;
-    }
-
-    public Product removeTorder(Torder torder) {
-        this.torders.remove(torder);
-        torder.getProducts().remove(this);
         return this;
     }
 

@@ -22,7 +22,7 @@
       "total": "Total",
       "status": "Status",
       "userID": "User ID",
-      "product": "Product"
+      "orderLine": "Order Line"
     }
   }
 }

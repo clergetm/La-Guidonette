@@ -27,7 +27,7 @@ type TorderFormRawValue = FormValueOf<ITorder>;
 
 type NewTorderFormRawValue = FormValueOf<NewTorder>;
 
-type TorderFormDefaults = Pick<NewTorder, 'id' | 'date' | 'products'>;
+type TorderFormDefaults = Pick<NewTorder, 'id' | 'date'>;
 
 type TorderFormGroupContent = {
   id: FormControl<TorderFormRawValue['id'] | NewTorder['id']>;
@@ -35,7 +35,6 @@ type TorderFormGroupContent = {
   total: FormControl<TorderFormRawValue['total']>;
   status: FormControl<TorderFormRawValue['status']>;
   userID: FormControl<TorderFormRawValue['userID']>;
-  products: FormControl<TorderFormRawValue['products']>;
 };
 
 export type TorderFormGroup = FormGroup<TorderFormGroupContent>;
@@ -55,11 +54,16 @@ export class TorderFormService {
           validators: [Validators.required],
         }
       ),
-      date: new FormControl(torderRawValue.date),
-      total: new FormControl(torderRawValue.total),
-      status: new FormControl(torderRawValue.status),
+      date: new FormControl(torderRawValue.date, {
+        validators: [Validators.required],
+      }),
+      total: new FormControl(torderRawValue.total, {
+        validators: [Validators.required],
+      }),
+      status: new FormControl(torderRawValue.status, {
+        validators: [Validators.required],
+      }),
       userID: new FormControl(torderRawValue.userID),
-      products: new FormControl(torderRawValue.products ?? []),
     });
   }
 
@@ -83,7 +87,6 @@ export class TorderFormService {
     return {
       id: null,
       date: currentTime,
-      products: [],
     };
   }
 
@@ -100,7 +103,6 @@ export class TorderFormService {
     return {
       ...torder,
       date: torder.date ? torder.date.format(DATE_TIME_FORMAT) : undefined,
-      products: torder.products ?? [],
     };
   }
 }

@@ -9,6 +9,8 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -48,7 +50,7 @@ public class TorderResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/torders")
-    public ResponseEntity<Torder> createTorder(@RequestBody Torder torder) throws URISyntaxException {
+    public ResponseEntity<Torder> createTorder(@Valid @RequestBody Torder torder) throws URISyntaxException {
         log.debug("REST request to save Torder : {}", torder);
         if (torder.getId() != null) {
             throw new BadRequestAlertException("A new torder cannot already have an ID", ENTITY_NAME, "idexists");
@@ -71,8 +73,10 @@ public class TorderResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/torders/{id}")
-    public ResponseEntity<Torder> updateTorder(@PathVariable(value = "id", required = false) final Long id, @RequestBody Torder torder)
-        throws URISyntaxException {
+    public ResponseEntity<Torder> updateTorder(
+        @PathVariable(value = "id", required = false) final Long id,
+        @Valid @RequestBody Torder torder
+    ) throws URISyntaxException {
         log.debug("REST request to update Torder : {}, {}", id, torder);
         if (torder.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
@@ -106,7 +110,7 @@ public class TorderResource {
     @PatchMapping(value = "/torders/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Torder> partialUpdateTorder(
         @PathVariable(value = "id", required = false) final Long id,
-        @RequestBody Torder torder
+        @NotNull @RequestBody Torder torder
     ) throws URISyntaxException {
         log.debug("REST request to partial update Torder partially : {}, {}", id, torder);
         if (torder.getId() == null) {
@@ -131,11 +135,10 @@ public class TorderResource {
     /**
      * {@code GET  /torders} : get all the torders.
      *
-     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of torders in body.
      */
     @GetMapping("/torders")
-    public List<Torder> getAllTorders(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+    public List<Torder> getAllTorders() {
         log.debug("REST request to get all Torders");
         return torderService.findAll();
     }
