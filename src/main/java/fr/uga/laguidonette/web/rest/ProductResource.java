@@ -3,6 +3,7 @@ package fr.uga.laguidonette.web.rest;
 import fr.uga.laguidonette.domain.Product;
 import fr.uga.laguidonette.repository.ProductRepository;
 import fr.uga.laguidonette.service.ProductService;
+import fr.uga.laguidonette.service.dto.GetProductsPageResponseDto;
 import fr.uga.laguidonette.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -14,13 +15,16 @@ import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
 /**
- * REST controller for managing {@link fr.uga.laguidonette.domain.Product}.
+ * REST controller for managing {@link Product}.
  */
 @RestController
 @RequestMapping("/api")
@@ -141,6 +145,21 @@ public class ProductResource {
     public List<Product> getAllProducts() {
         log.debug("REST request to get all Products");
         return productService.findAll();
+    }
+
+    @GetMapping(value = "/products", params = { "page", "size" })
+    public GetProductsPageResponseDto getProductPage(@RequestParam("page") int page, @RequestParam("size") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Product> productsPage = productRepository.findAll(pageable);
+        List<Product> products = productsPage.getContent();
+        GetProductsPageResponseDto getProductsPageResponseDto = new GetProductsPageResponseDto();
+        getProductsPageResponseDto.setProducts(products);
+        getProductsPageResponseDto.setPage(productsPage.getNumber());
+        getProductsPageResponseDto.setSize(productsPage.getSize());
+        getProductsPageResponseDto.setLast(productsPage.isLast());
+        getProductsPageResponseDto.setTotalPages(productsPage.getTotalPages());
+        getProductsPageResponseDto.setTotalProducts(productsPage.getTotalElements());
+        return getProductsPageResponseDto;
     }
 
     /**
