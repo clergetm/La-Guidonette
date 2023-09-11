@@ -1,16 +1,12 @@
-import { Component, NgModule, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
-import { Product, products } from './product';
-import { CartContentService } from '../cart-content.service';
+import {Product, products} from './product';
 
 @Component({
   selector: 'jhi-list-products',
   templateUrl: './list-products.component.html',
   styleUrls: ['./list-products.component.scss'],
 })
-export class ListProductsComponent implements OnInit {
-  products = [...products];
-  constructor(private cartService: CartContentService) {}
-
-  ngOnInit(): void {}
+export class ListProductsComponent  {
+  products: Product[] = [...products];
 }

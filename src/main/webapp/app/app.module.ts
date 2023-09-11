@@ -25,7 +25,6 @@ import { FooterComponent } from './layouts/footer/footer.component';
 import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ActiveMenuDirective } from './layouts/navbar/active-menu.directive';
 import { ErrorComponent } from './layouts/error/error.component';
-import { HeaderComponent } from './layouts/header/header.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ListProductsComponent } from './list-products/list-products.component';
 import { ProductCardComponent } from './layouts/product-card/product-card.component';
@@ -66,7 +65,6 @@ import { StepperAnimationComponent } from './layouts/stepper-animation/stepper-a
     PageRibbonComponent,
     ActiveMenuDirective,
     FooterComponent,
-    HeaderComponent,
     ProductCardComponent,
     ListProductsComponent,
     CartComponent,
