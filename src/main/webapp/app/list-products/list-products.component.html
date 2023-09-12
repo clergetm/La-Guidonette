@@ -5,3 +5,5 @@
     <jhi-product-card [product]="product"> </jhi-product-card>
   </div>
 </div>
+<mat-paginator [length]="totalProducts" [pageSize]="currentPageSize" [pageSizeOptions]="size" (page)="onPageChange($event)">
+</mat-paginator>

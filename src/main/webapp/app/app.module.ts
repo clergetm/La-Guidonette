@@ -27,6 +27,7 @@ import { ActiveMenuDirective } from './layouts/navbar/active-menu.directive';
 import { ErrorComponent } from './layouts/error/error.component';
 import { HeaderComponent } from './layouts/header/header.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [
@@ -41,6 +42,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     NgxWebstorageModule.forRoot({ prefix: 'jhi', separator: '-', caseSensitive: true }),
     TranslationModule,
     MatSlideToggleModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     Title,
@@ -48,15 +50,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     { provide: NgbDateAdapter, useClass: NgbDateDayjsAdapter },
     httpInterceptorProviders,
   ],
-  declarations: [
-    MainComponent,
-    NavbarComponent,
-    ErrorComponent,
-    PageRibbonComponent,
-    ActiveMenuDirective,
-    FooterComponent,
-    HeaderComponent,
-  ],
+  declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, HeaderComponent],
   bootstrap: [MainComponent],
 })
 export class AppModule {

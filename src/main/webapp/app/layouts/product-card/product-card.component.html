@@ -1,8 +1,8 @@
 <mat-card class="bordered-card">
   <mat-card-header>
-    <mat-card-title>{{ this.product.name }}</mat-card-title>
+    <mat-card-title>{{ this.product.label }}</mat-card-title>
   </mat-card-header>
-  <img mat-card-image src="{{ this.product.mediaUrl }}" alt="{{ this.product.name }}" />
+  <img mat-card-image src="{{ this.product.mediaUrl }}" alt="{{ this.product.label }}" />
   <mat-card-content>
     <p>
       {{ this.product.description }}
