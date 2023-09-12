@@ -57,6 +57,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     PageRibbonComponent,
     ActiveMenuDirective,
     HeaderComponent,
+    ProductPageComponent,
   ],
   bootstrap: [
     MainComponent,
