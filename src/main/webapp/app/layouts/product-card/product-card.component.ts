@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
-import { IProduct, Product } from '../../list-products/product';
 import { CartContentService } from '../../cart-content.service';
+import { IProduct } from '../../entities/product/product.model';
 
 @Component({
   selector: 'jhi-product-card',
@@ -9,19 +9,10 @@ import { CartContentService } from '../../cart-content.service';
   styleUrls: ['./product-card.component.scss'],
 })
 export class ProductCardComponent {
-  @Input() product: Product = {
-    id: 1,
-    price: '233',
-    label: '',
-    brand: '',
-    mediaUrl: '',
-    stock: -1,
-    color: '',
-    description: '',
-  };
+  @Input() product: IProduct | null = null;
   constructor(private cartService: CartContentService) {}
 
-  addToCart(product: Product): void {
+  addToCart(product: IProduct): void {
     this.cartService.addToCart(product);
   }
 }

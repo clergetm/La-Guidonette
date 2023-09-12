@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { ProductService } from '../entities/product/service/product.service';
 import { PageEvent } from '@angular/material/paginator';
-import { IProduct, Product } from './product';
+import { IProduct } from '../entities/product/product.model';
 
 @Component({
   selector: 'jhi-list-products',
@@ -11,7 +11,7 @@ import { IProduct, Product } from './product';
 })
 export class ListProductsComponent {
   // products:Product[] = [...products];
-  products: Product[] | null = null;
+  products: IProduct[] | null = null;
   totalProducts: number = 0;
   size: number[] = [3, 6, 9];
   currentPageSize: number = 3;

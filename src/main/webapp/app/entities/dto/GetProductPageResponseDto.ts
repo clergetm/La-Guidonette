@@ -1,7 +1,7 @@
-import { Product } from '../../list-products/product';
+import { IProduct } from '../product/product.model';
 
 export interface GetProductPageResponseDto {
-  products: Product[];
+  products: IProduct[];
   size: number;
   totalProducts: number;
   totalPages: number;
