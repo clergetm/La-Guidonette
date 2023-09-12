@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { StepperAnimationComponent } from 'app/layouts/stepper-animation/stepper-animation.component';
 
 import { PaymentComponent } from './payment.component';
 
@@ -8,7 +9,7 @@ describe('PaymentComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PaymentComponent],
+      declarations: [PaymentComponent, StepperAnimationComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(PaymentComponent);
