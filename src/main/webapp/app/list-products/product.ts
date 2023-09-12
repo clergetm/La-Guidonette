@@ -25,6 +25,25 @@ export function getProductIdentifier(product: IProduct): number {
   return product.id;
 }
 
+export function getProductById(id: number): Product | null {
+  let prod: Product = {
+    id: -1,
+    price: '233',
+    name: '',
+    brand: '',
+    mediaUrl: '',
+    stock: -1,
+    color: '',
+    description: '',
+  };
+  products.forEach( value => {
+    if (value.id == id) {
+      prod = value;
+    }
+  })
+  return prod;
+}
+
 export const products: Product[] = [
   {
     id: 1,
