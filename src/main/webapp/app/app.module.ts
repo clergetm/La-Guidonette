@@ -27,6 +27,7 @@ import { ActiveMenuDirective } from './layouts/navbar/active-menu.directive';
 import { ErrorComponent } from './layouts/error/error.component';
 import { HeaderComponent } from './layouts/header/header.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { ProductPageComponent } from './product-page/product-page.component';
 
 @NgModule({
   imports: [
@@ -56,6 +57,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     ActiveMenuDirective,
     FooterComponent,
     HeaderComponent,
+    ProductPageComponent,
   ],
   bootstrap: [MainComponent],
 })
