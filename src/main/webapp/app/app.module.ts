@@ -26,6 +26,7 @@ import { ActiveMenuDirective } from './layouts/navbar/active-menu.directive';
 import { ErrorComponent } from './layouts/error/error.component';
 import { HeaderComponent } from './layouts/header/header.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { ProductPageComponent } from './product-page/product-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -56,6 +57,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     PageRibbonComponent,
     ActiveMenuDirective,
     HeaderComponent,
+    ProductPageComponent,
   ],
   bootstrap: [
     MainComponent,
