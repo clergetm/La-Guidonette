@@ -57,7 +57,6 @@ import { ProductPageComponent } from './product-page/product-page.component';
     ActiveMenuDirective,
     FooterComponent,
     HeaderComponent,
-    ProductPageComponent,
   ],
   bootstrap: [MainComponent],
 })
