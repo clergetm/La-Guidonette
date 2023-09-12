@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {CartContentService} from '../services/cart-content.service';
 import {IProduct} from "../entities/product/product.model";
@@ -9,7 +9,6 @@ import {PageEvent} from "@angular/material/paginator";
   selector: 'jhi-product-page',
   templateUrl: './product-page.component.html',
   styleUrls: ['./product-page.component.scss']
-
 })
 export class ProductPageComponent implements OnInit {
   productId: string | null = "-1"
