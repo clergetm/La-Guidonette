@@ -10,6 +10,9 @@
   </mat-card-content>
   <mat-card-actions>
     <button mat-button (click)="addToCart(product)">AJOUTER AU PANIER</button>
-    <button mat-button>VOIR PRODUIT</button>
+    <div class="bot-container" routerLinkActive="active" >
+      <button mat-button type="button" id="btn-cart-continue" routerLink="/product/{{product.id}}">VOIR PRODUIT</button>
+    </div>
+
   </mat-card-actions>
 </mat-card>

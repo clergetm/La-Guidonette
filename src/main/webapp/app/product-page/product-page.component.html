@@ -1,2 +1,23 @@
-<p>product-page works!</p>
-{{product?.description}}
+<div class="product-page">
+  <div class="product-infos">
+    <div class="product-image">
+      <img src={{product?.mediaUrl}}/>
+    </div>
+    <div class="product-text">
+      <div class="product-header">
+        <h1>{{product?.brand}}</h1>
+        <h2>{{product?.name}}</h2>
+      </div>
+      <div class="product-description">
+        <p>{{product?.description}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="purchase-column">
+    <h3>{{product?.price}}€</h3>
+    <div class="product-purchase">
+      <input id="numberOfItem" required type="number" [defaultValue]="1" min="1" max=99/>
+      <button type="button" (click)="addToCart()">Ajouter au panier</button>
+    </div>
+  </div>
+</div>
