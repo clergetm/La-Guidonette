@@ -1,6 +1,12 @@
 <div class="container">
   <h2>Liste des produits</h2>
-
+  <form class="example-form searchForm" (submit)="onSubmit()">
+    <mat-form-field class="example-full-width" style="width: 100%">
+      <mat-label>Search For Your bike </mat-label>
+      <input matInput [(ngModel)]="query" name="query" />
+      <mat-icon matSuffix fontIcon="search">search</mat-icon>
+    </mat-form-field>
+  </form>
   <div class="products-container">
     <div *ngFor="let product of products">
       <!-- Generic bike link : https://photos.app.goo.gl/E3xHnReHZc1mn3nV6 -->
@@ -15,6 +21,7 @@
     (page)="onPageChange($event)"
     class="paginator"
     showFirstLastButtons
+    *ngIf="!searchMode"
   >
   </mat-paginator>
 </div>

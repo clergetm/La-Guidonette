@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { ProductService } from '../entities/product/service/product.service';
 import { PageEvent } from '@angular/material/paginator';
 import { IProduct } from '../entities/product/product.model';
+import { SearchService } from '../search/search-service';
 
 @Component({
   selector: 'jhi-list-products',
@@ -15,16 +16,31 @@ export class ListProductsComponent {
   size: number[] = [6, 9, 12];
   currentPageSize: number = 6;
   page: number = 0;
+  query: string | null = null;
+  searchMode: boolean = false;
+
   answerFormState: boolean = false;
-  constructor(public productService: ProductService) {}
+  constructor(public productService: ProductService, public searchService: SearchService) {}
   ngOnInit(): void {
-    this.fetchQuestions(this.page, this.currentPageSize);
+    this.fetchProducts(this.page, this.currentPageSize);
     console.log(this.products);
   }
-  onPageChange(event: PageEvent) {
-    this.fetchQuestions(event.pageIndex, event.pageSize);
+  onSubmit() {
+    if (this.query) {
+      this.searchMode = true;
+      this.searchService.search(this.query).subscribe(data => {
+        this.products = data;
+      });
+      this.query = '';
+    } else {
+      this.searchMode = false;
+      this.fetchProducts(this.page, this.currentPageSize);
+    }
   }
-  fetchQuestions(page: number, size: number) {
+  onPageChange(event: PageEvent) {
+    this.fetchProducts(event.pageIndex, event.pageSize);
+  }
+  fetchProducts(page: number, size: number) {
     this.productService.findProductsPage(page, size).subscribe(data => {
       this.products = data.products;
       this.totalProducts = data.totalProducts;
@@ -32,4 +48,5 @@ export class ListProductsComponent {
       this.page = data.page;
     });
   }
+  protected readonly onsubmit = onsubmit;
 }
