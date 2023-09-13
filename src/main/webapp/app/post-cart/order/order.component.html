@@ -4,5 +4,5 @@
   <div *ngFor="let product of cartService.getCartItems()">
     <p>{{ product.label }}, {{ product.brand }}, {{ product.color }} ({{ product.price }}€)</p>
   </div>
-  <h3>Prix total : {{ getPrice() }}€</h3>
+  <h3>Prix total : {{ cartService.getPrice() }}€</h3>
 </div>

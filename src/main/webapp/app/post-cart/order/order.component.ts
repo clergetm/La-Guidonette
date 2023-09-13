@@ -10,16 +10,4 @@ import { IProduct } from '../../entities/product/product.model';
 export class OrderComponent {
   price = '';
   constructor(public cartService: CartContentService) {}
-
-  getPrice(): string {
-    if (this.price === '') {
-      let sum = 0;
-      const prods: IProduct[] = this.cartService.getCartItems();
-      prods.forEach(product => {
-        if (product.price) sum += product.price;
-      });
-      this.price = sum.toString();
-    }
-    return this.price;
-  }
 }
