@@ -16,5 +16,6 @@
 </div>
 
 <div class="bot-container" routerLinkActive="active">
-  <button type="button" id="btn-cart-continue" routerLink="/order">Commander panier</button>
+  <button type="button" id="btn-cart-login" routerLink="/order" *ngIf="account.isAuthenticated()">Commander panier</button>
+  <button type="button" id="btn-cart-continue" routerLink="/login" *ngIf="!account.isAuthenticated()">Commander panier</button>
 </div>
