@@ -113,6 +113,20 @@
             </small>
           </div>
         </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="laGuidonetteApp.product.imageName" for="field_imageName">Image Name</label>
+          <input type="text" class="form-control" name="imageName" id="field_imageName" data-cy="imageName" formControlName="imageName" />
+          <div *ngIf="editForm.get('imageName')!.invalid && (editForm.get('imageName')!.dirty || editForm.get('imageName')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('imageName')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
       </div>
 
       <div>

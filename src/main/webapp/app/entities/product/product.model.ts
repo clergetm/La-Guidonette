@@ -11,6 +11,7 @@ export interface IProduct {
   model?: string | null;
   color?: Color | null;
   quantity?: number | null;
+  imageName?: string | null;
   categories?: Pick<ICategory, 'id'>[] | null;
 }
 
