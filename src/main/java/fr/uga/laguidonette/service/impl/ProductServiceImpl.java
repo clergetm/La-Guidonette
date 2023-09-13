@@ -44,8 +44,23 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> search(String query) {
-        return productRepository.search(query);
+    public GetProductsPageResponseDto search(String query, Integer page, Integer size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Product> productsPage = productRepository.search(query, pageable);
+        List<Product> products = productsPage.getContent();
+        GetProductsPageResponseDto getProductsPageResponseDto = new GetProductsPageResponseDto();
+        getProductsPageResponseDto.setProducts(products);
+        getProductsPageResponseDto.setPage(productsPage.getNumber());
+        getProductsPageResponseDto.setSize(productsPage.getSize());
+        getProductsPageResponseDto.setLast(productsPage.isLast());
+        getProductsPageResponseDto.setTotalPages(productsPage.getTotalPages());
+        getProductsPageResponseDto.setTotalProducts(productsPage.getTotalElements());
+        return getProductsPageResponseDto;
+    }
+
+    @Override
+    public List<Product> getBestSellers() {
+        return productRepository.getBestSellers(PageRequest.of(0, 3));
     }
 
     @Override
@@ -79,9 +94,6 @@ public class ProductServiceImpl implements ProductService {
                 if (product.getImageName() != null) {
                     existingProduct.setImageName(product.getImageName());
                 }
-                if (product.getVersion() != null) {
-                    existingProduct.setVersion(product.getVersion());
-                }
 
                 return existingProduct;
             })
@@ -94,7 +106,6 @@ public class ProductServiceImpl implements ProductService {
         log.debug("Request to get all Products");
         return productRepository.findAll();
     }
-
     @Override
     @Transactional(readOnly = true)
     public List<Product> filterProducts(List<String> categories, List<Color> colors, List<Brand> brands) {

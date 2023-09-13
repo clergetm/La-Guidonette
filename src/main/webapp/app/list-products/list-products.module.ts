@@ -21,5 +21,6 @@ import { MatInputModule } from '@angular/material/input';
     MatInputModule,
   ],
   declarations: [ListProductsComponent],
+  exports: [ListProductsComponent],
 })
 export class ListProductsModule {}

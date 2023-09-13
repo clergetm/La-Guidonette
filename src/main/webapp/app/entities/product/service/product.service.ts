@@ -37,6 +37,9 @@ export class ProductService {
   findProductsPage(page: number, size: number) {
     return this.http.get<GetProductPageResponseDto>(`${this.resourceUrl}?page=${page}&size=${size}`);
   }
+  findBestSellers(): Observable<IProduct[]> {
+    return this.http.get<IProduct[]>(`${this.resourceUrl}/bestSellers`);
+  }
 
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
