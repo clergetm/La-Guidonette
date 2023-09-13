@@ -10,7 +10,6 @@ import { IProduct } from '../entities/product/product.model';
   styleUrls: ['./list-products.component.scss'],
 })
 export class ListProductsComponent {
-  // products:Product[] = [...products];
   products: IProduct[] | null = null;
   totalProducts: number = 0;
   size: number[] = [3, 6, 9];
