@@ -1,31 +1,28 @@
 import { Injectable } from '@angular/core';
-import { Product } from './list-products/product';
+import { IProduct } from './entities/product/product.model';
 
 @Injectable({
   providedIn: 'root',
 })
-
 export class CartContentService {
-  private cartItems: Product[] = [];
+  private cartItems: IProduct[] = [];
   private size = 0;
   constructor() {
-    const localStorageCart:string | null = localStorage.getItem('user-cart');
+    const localStorageCart: string | null = localStorage.getItem('user-cart');
     if (localStorageCart) {
       this.cartItems = JSON.parse(localStorageCart);
       this.size = this.cartItems.length;
     }
   }
 
-
-
-  addToCart(product: Product):void {
+  addToCart(product: IProduct): void {
     this.cartItems.push(product);
     this.size += 1;
     this.updatelocalStorageCart();
   }
 
-  removeFromCart(product: Product):void {
-    const index:number = this.cartItems.indexOf(product);
+  removeFromCart(product: IProduct): void {
+    const index: number = this.cartItems.indexOf(product);
     if (index > -1) {
       this.cartItems.splice(index, 1);
       this.size -= 1;
@@ -33,14 +30,13 @@ export class CartContentService {
     }
   }
 
-  removeAll():void {
+  removeAll(): void {
     this.cartItems = [];
     this.size = this.cartItems.length;
     this.updatelocalStorageCart();
   }
 
-
-  getCartItems(): Product[] {
+  getCartItems(): IProduct[] {
     return this.cartItems;
   }
 
@@ -48,8 +44,7 @@ export class CartContentService {
     return this.size;
   }
 
-  private updatelocalStorageCart():void {
+  private updatelocalStorageCart(): void {
     localStorage.setItem('user-cart', JSON.stringify(this.cartItems));
   }
-
 }

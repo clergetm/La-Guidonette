@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CartContentService } from '../cart-content.service';
-import { Product } from '../list-products/product';
+import { IProduct } from '../entities/product/product.model';
 
 @Component({
   selector: 'jhi-order',
@@ -11,13 +11,12 @@ export class OrderComponent {
   price = '';
   constructor(public cartService: CartContentService) {}
 
-
   getPrice(): string {
     if (this.price === '') {
       let sum = 0;
-      const prods: Product[] = this.cartService.getCartItems();
+      const prods: IProduct[] = this.cartService.getCartItems();
       prods.forEach(product => {
-        sum += parseFloat(product.price);
+        if (product.price) sum += product.price;
       });
       this.price = sum.toString();
     }
