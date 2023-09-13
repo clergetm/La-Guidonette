@@ -40,6 +40,14 @@ export class CartContentService {
     return this.cartItems;
   }
 
+  getPrice(): string {
+    let sum = 0;
+    this.cartItems.forEach(product => {
+      if (product.price) sum += product.price;
+    });
+    return sum.toString();
+  }
+
   getSize(): number {
     return this.size;
   }
