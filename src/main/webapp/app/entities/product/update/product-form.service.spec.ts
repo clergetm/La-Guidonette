@@ -27,6 +27,7 @@ describe('Product Form Service', () => {
             model: expect.any(Object),
             color: expect.any(Object),
             quantity: expect.any(Object),
+            imageName: expect.any(Object),
             categories: expect.any(Object),
           })
         );
@@ -45,6 +46,7 @@ describe('Product Form Service', () => {
             model: expect.any(Object),
             color: expect.any(Object),
             quantity: expect.any(Object),
+            imageName: expect.any(Object),
             categories: expect.any(Object),
           })
         );

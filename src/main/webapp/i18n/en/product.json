@@ -25,6 +25,7 @@
       "model": "Model",
       "color": "Color",
       "quantity": "Quantity",
+      "imageName": "Image Name",
       "orderLine": "Order Line",
       "category": "Category"
     }
