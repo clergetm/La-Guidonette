@@ -51,14 +51,6 @@ public class TorderResource {
      */
     @PostMapping("/torders")
     public ResponseEntity<Torder> createTorder(@Valid @RequestBody Torder torder) throws URISyntaxException {
-        //TODO
-        //verify if all products are in stock+ verify if quantity of products is less than the number of product added to the cart
-        //        for(int i=0;i<torder.getOrderLines().size();i++){
-        //
-        //        }
-        //if no send an error product out of stock if yes:
-        //update product with stock subtraction
-        //finally save the order
         log.debug("REST request to save Torder : {}", torder);
         if (torder.getId() != null) {
             throw new BadRequestAlertException("A new torder cannot already have an ID", ENTITY_NAME, "idexists");
