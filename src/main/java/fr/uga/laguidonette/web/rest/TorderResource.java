@@ -135,10 +135,11 @@ public class TorderResource {
     /**
      * {@code GET  /torders} : get all the torders.
      *
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of torders in body.
      */
     @GetMapping("/torders")
-    public List<Torder> getAllTorders() {
+    public List<Torder> getAllTorders(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get all Torders");
         return torderService.findAll();
     }

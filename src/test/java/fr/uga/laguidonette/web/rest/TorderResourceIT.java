@@ -2,23 +2,33 @@ package fr.uga.laguidonette.web.rest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import fr.uga.laguidonette.IntegrationTest;
 import fr.uga.laguidonette.domain.Torder;
+import fr.uga.laguidonette.domain.User;
 import fr.uga.laguidonette.domain.enumeration.Status;
 import fr.uga.laguidonette.repository.TorderRepository;
+import fr.uga.laguidonette.service.TorderService;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
 import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -28,6 +38,7 @@ import org.springframework.transaction.annotation.Transactional;
  * Integration tests for the {@link TorderResource} REST controller.
  */
 @IntegrationTest
+@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 class TorderResourceIT {
@@ -50,6 +61,12 @@ class TorderResourceIT {
     @Autowired
     private TorderRepository torderRepository;
 
+    @Mock
+    private TorderRepository torderRepositoryMock;
+
+    @Mock
+    private TorderService torderServiceMock;
+
     @Autowired
     private EntityManager em;
 
@@ -66,6 +83,11 @@ class TorderResourceIT {
      */
     public static Torder createEntity(EntityManager em) {
         Torder torder = new Torder().date(DEFAULT_DATE).total(DEFAULT_TOTAL).status(DEFAULT_STATUS);
+        // Add required entity
+        User user = UserResourceIT.createEntity(em);
+        em.persist(user);
+        em.flush();
+        torder.setUserID(user);
         return torder;
     }
 
@@ -77,6 +99,11 @@ class TorderResourceIT {
      */
     public static Torder createUpdatedEntity(EntityManager em) {
         Torder torder = new Torder().date(UPDATED_DATE).total(UPDATED_TOTAL).status(UPDATED_STATUS);
+        // Add required entity
+        User user = UserResourceIT.createEntity(em);
+        em.persist(user);
+        em.flush();
+        torder.setUserID(user);
         return torder;
     }
 
@@ -187,6 +214,23 @@ class TorderResourceIT {
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
             .andExpect(jsonPath("$.[*].total").value(hasItem(DEFAULT_TOTAL.intValue())))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())));
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllTordersWithEagerRelationshipsIsEnabled() throws Exception {
+        when(torderServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restTorderMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
+
+        verify(torderServiceMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllTordersWithEagerRelationshipsIsNotEnabled() throws Exception {
+        when(torderServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restTorderMockMvc.perform(get(ENTITY_API_URL + "?eagerload=false")).andExpect(status().isOk());
+        verify(torderRepositoryMock, times(1)).findAll(any(Pageable.class));
     }
 
     @Test

@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -66,11 +68,15 @@ public class TorderServiceImpl implements TorderService {
         return torderRepository.findAll();
     }
 
+    public Page<Torder> findAllWithEagerRelationships(Pageable pageable) {
+        return torderRepository.findAllWithEagerRelationships(pageable);
+    }
+
     @Override
     @Transactional(readOnly = true)
     public Optional<Torder> findOne(Long id) {
         log.debug("Request to get Torder : {}", id);
-        return torderRepository.findById(id);
+        return torderRepository.findOneWithEagerRelationships(id);
     }
 
     @Override

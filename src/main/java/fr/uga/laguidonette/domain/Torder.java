@@ -41,14 +41,14 @@ public class Torder implements Serializable {
     @Column(name = "status", nullable = false)
     private Status status;
 
-    @OneToOne
-    @JoinColumn(unique = true)
-    private User userID;
-
     @OneToMany(mappedBy = "torder")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "product", "torder" }, allowSetters = true)
     private Set<OrderLine> orderLines = new HashSet<>();
+
+    @ManyToOne(optional = false)
+    @NotNull
+    private User userID;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -104,19 +104,6 @@ public class Torder implements Serializable {
         this.status = status;
     }
 
-    public User getUserID() {
-        return this.userID;
-    }
-
-    public void setUserID(User user) {
-        this.userID = user;
-    }
-
-    public Torder userID(User user) {
-        this.setUserID(user);
-        return this;
-    }
-
     public Set<OrderLine> getOrderLines() {
         return this.orderLines;
     }
@@ -145,6 +132,19 @@ public class Torder implements Serializable {
     public Torder removeOrderLine(OrderLine orderLine) {
         this.orderLines.remove(orderLine);
         orderLine.setTorder(null);
+        return this;
+    }
+
+    public User getUserID() {
+        return this.userID;
+    }
+
+    public void setUserID(User user) {
+        this.userID = user;
+    }
+
+    public Torder userID(User user) {
+        this.setUserID(user);
         return this;
     }
 
