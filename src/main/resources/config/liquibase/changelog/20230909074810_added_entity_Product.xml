@@ -35,6 +35,9 @@
             <column name="quantity" type="integer">
                 <constraints nullable="false" />
             </column>
+            <column name="image_name" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
     </changeSet>
@@ -63,6 +66,7 @@
             <column name="model" type="string"/>
             <column name="color" type="string"/>
             <column name="quantity" type="numeric"/>
+            <column name="image_name" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>
