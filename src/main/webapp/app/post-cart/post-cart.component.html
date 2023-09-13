@@ -1,5 +1,3 @@
-<p>payment works!</p>
-
 <div class="ligne-arianne">
   <div class="ball-wrapper">
     <div class="ball" [ngStyle]="(step >= 1)?{'background-color': '#26408B'} : {'background-color': '#8DE2D6'}"></div>
@@ -11,6 +9,14 @@
   </div>
   <div class="ball-wrapper">
     <div class="ball" [ngStyle]="(step >= 3)?{'background-color': '#26408B'} : {'background-color': '#8DE2D6'}"></div>
-    <span>Livraison</span>
+    <span>Finalisation</span>
   </div>
+</div>
+
+<div *ngIf="step === 1">
+  <jhi-order></jhi-order>
+</div>
+
+<div *ngIf="step === 2">
+  <jhi-payment></jhi-payment>
 </div>

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {AccountService} from "../core/auth/account.service";
-import {accountState} from "../account/account.route";
+import {AccountService} from "../../core/auth/account.service";
+import {accountState} from "../../account/account.route";
 
 @Component({
   selector: 'jhi-payment',
