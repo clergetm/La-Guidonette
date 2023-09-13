@@ -22,4 +22,12 @@ export class PostCartComponent implements OnInit {
       this.router.navigate(['login'])
     }
   }
+
+  nextStep():void {
+    this.step ++;
+  }
+
+  previousStep():void {
+    this.step --;
+  }
 }

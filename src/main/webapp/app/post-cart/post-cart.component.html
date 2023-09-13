@@ -20,3 +20,11 @@
 <div *ngIf="step === 2">
   <jhi-payment></jhi-payment>
 </div>
+
+<div *ngIf="step === 3">
+  <jhi-finalisation></jhi-finalisation>
+</div>
+
+<div class="bottom-button">
+  <button type="button" class="btn-continue" (click)="previousStep()" *ngIf="step!=1">Retour</button><button type="button" class="btn-continue" (click)="nextStep()" *ngIf="step!=3">Continuer</button>
+</div>
