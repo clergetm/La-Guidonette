@@ -7,15 +7,14 @@
 
 <div class="mid-container">
   <div class="product-container" *ngFor="let product of cartService.getCartItems()">
-    <img class="product-image" src="{{ product.mediaUrl }}" alt="{{ product.name }} picture" />
     <div class="top-bottom-text">
-      <p>{{ product.name }}</p>
+      <p>{{ product.label }}</p>
       <p>{{ product.brand }}, {{ product.color }}</p>
     </div>
     <button type="button" id="delete-one-from-cart" (click)="deleteItem(product)">Delete</button>
   </div>
 </div>
 
-<div class="bot-container" routerLinkActive="active" >
+<div class="bot-container" routerLinkActive="active">
   <button type="button" id="btn-cart-continue" routerLink="/order">Commander panier</button>
 </div>

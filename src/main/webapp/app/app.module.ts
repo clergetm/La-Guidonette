@@ -21,12 +21,12 @@ import { fontAwesomeIcons } from './config/font-awesome-icons';
 import { httpInterceptorProviders } from 'app/core/interceptor/index';
 import { MainComponent } from './layouts/main/main.component';
 import { NavbarComponent } from './layouts/navbar/navbar.component';
-import { FooterComponent } from './layouts/footer/footer.component';
 import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ActiveMenuDirective } from './layouts/navbar/active-menu.directive';
 import { ErrorComponent } from './layouts/error/error.component';
 import { HeaderComponent } from './layouts/header/header.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [
@@ -41,6 +41,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     NgxWebstorageModule.forRoot({ prefix: 'jhi', separator: '-', caseSensitive: true }),
     TranslationModule,
     MatSlideToggleModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     Title,
@@ -54,10 +55,11 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     ErrorComponent,
     PageRibbonComponent,
     ActiveMenuDirective,
-    FooterComponent,
     HeaderComponent,
   ],
-  bootstrap: [MainComponent],
+  bootstrap: [
+    MainComponent,
+  ],
 })
 export class AppModule {
   constructor(applicationConfigService: ApplicationConfigService, iconLibrary: FaIconLibrary, dpConfig: NgbDatepickerConfig) {
