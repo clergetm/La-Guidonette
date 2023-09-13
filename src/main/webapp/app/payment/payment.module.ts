@@ -8,7 +8,7 @@ import {PaymentComponent} from "./payment.component";
 
 @NgModule({
   declarations:[PaymentComponent],
-  imports: [SharedModule, RouterModule.forChild([PAYMENT_ROUTE]), StepperAnimationModule],
+    imports: [SharedModule, RouterModule.forChild([PAYMENT_ROUTE]), StepperAnimationModule],
   exports: [PaymentComponent]
 })
 export class PaymentModule {}
