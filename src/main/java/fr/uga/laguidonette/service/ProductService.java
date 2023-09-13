@@ -3,6 +3,7 @@ package fr.uga.laguidonette.service;
 import fr.uga.laguidonette.domain.Product;
 import fr.uga.laguidonette.domain.enumeration.Brand;
 import fr.uga.laguidonette.domain.enumeration.Color;
+import fr.uga.laguidonette.service.dto.GetProductsPageResponseDto;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,7 +41,24 @@ public interface ProductService {
      * @return the list of entities.
      */
     List<Product> findAll();
+
+    /**
+     * Apply filters on a list of product.
+     * 
+     * @param categories the list of categories to find.
+     * @param colors the list of colors to find.
+     * @param brands the list of brands to find.
+     * @return the list of product that contains at least one of these filters.
+     */
     List<Product> filterProducts(List<String> categories, List<Color> colors, List<Brand> brands);
+
+    /**
+     * Search a list of product.
+     * 
+     * @param query the query to apply.
+     * @return the list of products found.
+     */
+    List<Product> search(String query);
 
     /**
      * Get the "id" product.
@@ -49,6 +67,7 @@ public interface ProductService {
      * @return the entity.
      */
     Optional<Product> findOne(Long id);
+    GetProductsPageResponseDto getProductPage(Integer page, Integer size);
 
     /**
      * Delete the "id" product.
