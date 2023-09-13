@@ -63,7 +63,9 @@ export class TorderFormService {
       status: new FormControl(torderRawValue.status, {
         validators: [Validators.required],
       }),
-      userID: new FormControl(torderRawValue.userID),
+      userID: new FormControl(torderRawValue.userID, {
+        validators: [Validators.required],
+      }),
     });
   }
 
