@@ -12,7 +12,7 @@
         id="jh-create-entity"
         data-cy="entityCreateButton"
         class="btn btn-primary jh-create-entity create-category"
-        [routerLink]="['/category/new']"
+        [routerLink]="['/entity/category/new']"
       >
         <fa-icon icon="plus"></fa-icon>
         <span jhiTranslate="laGuidonetteApp.category.home.createLabel"> Create a new Category </span>
@@ -56,7 +56,7 @@
       <tbody>
         <tr *ngFor="let category of categories; trackBy: trackId" data-cy="entityTable">
           <td>
-            <a [routerLink]="['/category', category.id, 'view']">{{ category.id }}</a>
+            <a [routerLink]="['/entity/category', category.id, 'view']">{{ category.id }}</a>
           </td>
           <td>{{ category.name }}</td>
           <td>
@@ -69,7 +69,7 @@
             <div class="btn-group">
               <button
                 type="submit"
-                [routerLink]="['/category', category.id, 'view']"
+                [routerLink]="['/entity/category', category.id, 'view']"
                 class="btn btn-info btn-sm"
                 data-cy="entityDetailsButton"
               >
@@ -79,7 +79,7 @@
 
               <button
                 type="submit"
-                [routerLink]="['/category', category.id, 'edit']"
+                [routerLink]="['/entity/category', category.id, 'edit']"
                 class="btn btn-primary btn-sm"
                 data-cy="entityEditButton"
               >
