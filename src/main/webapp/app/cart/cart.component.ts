@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CartContentService } from '../cart-content.service';
-import { Product } from '../list-products/product';
+
+import { IProduct } from '../entities/product/product.model';
 
 @Component({
   selector: 'jhi-cart',
@@ -10,11 +11,11 @@ import { Product } from '../list-products/product';
 export class CartComponent {
   constructor(public cartService: CartContentService) {}
 
-  deleteCart():void {
+  deleteCart(): void {
     this.cartService.removeAll();
   }
 
-  deleteItem(prod: Product):void {
+  deleteItem(prod: IProduct): void {
     this.cartService.removeFromCart(prod);
   }
 }
