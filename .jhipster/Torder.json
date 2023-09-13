@@ -29,17 +29,21 @@
   "readOnly": false,
   "relationships": [
     {
-      "otherEntityName": "user",
-      "ownerSide": true,
-      "relationshipName": "userID",
-      "relationshipType": "one-to-one"
-    },
-    {
       "otherEntityName": "orderLine",
       "otherEntityRelationshipName": "torder",
       "relationshipName": "orderLine",
       "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "login",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "torder",
+      "ownerSide": true,
+      "relationshipName": "userID",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": ["required"]
     }
   ],
-  "service": "serviceImpl"
+  "service": "serviceImpl",
+  "skipClient": true
 }
