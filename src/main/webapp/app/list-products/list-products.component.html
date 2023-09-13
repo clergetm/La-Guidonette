@@ -8,11 +8,13 @@
     </div>
   </div>
   <mat-paginator
+    aria-label="Select Page"
     [length]="totalProducts"
-    [pageSize]="currentPageSize"
     [pageSizeOptions]="size"
+    [pageSize]="currentPageSize"
     (page)="onPageChange($event)"
     class="paginator"
+    showFirstLastButtons
   >
   </mat-paginator>
 </div>

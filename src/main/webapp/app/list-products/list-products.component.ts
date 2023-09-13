@@ -12,8 +12,8 @@ import { IProduct } from '../entities/product/product.model';
 export class ListProductsComponent {
   products: IProduct[] | null = null;
   totalProducts: number = 0;
-  size: number[] = [3, 6, 9];
-  currentPageSize: number = 3;
+  size: number[] = [6, 9, 12];
+  currentPageSize: number = 6;
   page: number = 0;
   answerFormState: boolean = false;
   constructor(public productService: ProductService) {}
