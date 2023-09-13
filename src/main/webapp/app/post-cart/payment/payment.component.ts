@@ -1,23 +1,35 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {AccountService} from "../../core/auth/account.service";
-import {accountState} from "../../account/account.route";
+import {CartContentService} from "../../cart-content.service";
 
 @Component({
   selector: 'jhi-payment',
   templateUrl: './payment.component.html',
   styleUrls: ['./payment.component.scss'],
 })
-export class PaymentComponent implements OnInit{
+export class PaymentComponent{
   step:number = 1;
-  constructor(public accountService: AccountService) {
 
+
+  cardNumber: string = '';
+  expiryDate: string = '';
+  ccv: string = '';
+  constructor(
+    public accountService: AccountService,
+    public cartContentService: CartContentService
+  ) {}
+
+  formatCardNumber(): void {
+    let formatted = this.cardNumber.replace(/\D/g, '').match(/.{1,4}/g);
+    this.cardNumber = formatted ? formatted.join(' ') : '';
   }
 
-  ngOnInit(): void {
-    if (this.accountService.isAuthenticated()){
-      this.step = 2;
+  formatExpiryDate(): void {
+    let formatted = this.expiryDate.replace(/\D/g, '').match(/.{1,2}/g);
+    this.expiryDate = formatted ? formatted.join('/') : '';
+    if (this.expiryDate.length > 5) {
+      this.expiryDate = this.expiryDate.substr(0, 5);
     }
   }
-
 
 }
