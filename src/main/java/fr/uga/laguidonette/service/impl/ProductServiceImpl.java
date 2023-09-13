@@ -65,6 +65,9 @@ public class ProductServiceImpl implements ProductService {
                 if (product.getQuantity() != null) {
                     existingProduct.setQuantity(product.getQuantity());
                 }
+                if (product.getImageName() != null) {
+                    existingProduct.setImageName(product.getImageName());
+                }
 
                 return existingProduct;
             })

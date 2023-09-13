@@ -162,3 +162,4 @@ Desktop.ini
 # Workflows
 ######################
 .github/workflows/CI.yml
+src/main/webapp/environments/environment.ts

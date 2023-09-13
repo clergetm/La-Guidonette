@@ -64,6 +64,8 @@ public class SecurityConfiguration {
             .and()
                 .contentSecurityPolicy("img-src 'self' data: https://contents.mediadecathlon.com;")
             .and()
+                .contentSecurityPolicy("img-src 'self' data: https://laguidonette-images.s3.eu-west-3.amazonaws.com")
+            .and()
                 .referrerPolicy(ReferrerPolicyHeaderWriter.ReferrerPolicy.STRICT_ORIGIN_WHEN_CROSS_ORIGIN)
             .and()
                 .permissionsPolicy().policy("camera=(), fullscreen=(self), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), midi=(), payment=(), sync-xhr=()")
