@@ -1,0 +1,22 @@
+<div class="searchContainer">
+  <form class="example-form searchForm" (submit)="onSubmit()">
+    <mat-form-field class="example-full-width" style="width: 100%">
+      <mat-label>Search For Your bike </mat-label>
+      <input matInput [(ngModel)]="query" name="query" />
+      <mat-icon matSuffix fontIcon="search">search</mat-icon>
+    </mat-form-field>
+  </form>
+  <h1 *ngIf="!searchMode">Best-Selling Bikes: Discover Our Customer Favorites!</h1>
+  <jhi-list-products [products]="products"></jhi-list-products>
+  <mat-paginator
+    aria-label="Select Page"
+    [length]="totalProducts"
+    [pageSizeOptions]="size"
+    [pageSize]="currentPageSize"
+    (page)="onPageChange($event)"
+    class="paginator"
+    showFirstLastButtons
+    *ngIf="searchMode"
+  >
+  </mat-paginator>
+</div>
