@@ -28,6 +28,7 @@ entity Product {
     model String required
     color Color required
     quantity Integer required
+    imageName String required pattern(/.png$/)
 }
 
 enum Brand {
@@ -55,7 +56,8 @@ entity OrderLine {
 enum Status {
 	IN_PROGRESS, CANCELLED, READY, DONE
 }
-relationship OneToOne {
+
+relationship ManyToOne {
 	Torder{userID} to User
 }
 
