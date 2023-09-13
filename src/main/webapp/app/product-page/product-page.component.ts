@@ -9,6 +9,7 @@ import {PageEvent} from "@angular/material/paginator";
   selector: 'jhi-product-page',
   templateUrl: './product-page.component.html',
   styleUrls: ['./product-page.component.scss']
+
 })
 export class ProductPageComponent implements OnInit {
   productId: string | null = "-1"
