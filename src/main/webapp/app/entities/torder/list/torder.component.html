@@ -1,18 +1,16 @@
 <div>
   <h2 id="page-heading" data-cy="TorderHeading">
     <span jhiTranslate="laGuidonetteApp.torder.home.title">Torders</span>
-
     <div class="d-flex justify-content-end">
       <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
         <span jhiTranslate="laGuidonetteApp.torder.home.refreshListLabel">Refresh list</span>
       </button>
-
       <button
         id="jh-create-entity"
         data-cy="entityCreateButton"
         class="btn btn-primary jh-create-entity create-torder"
-        [routerLink]="['/torder/new']"
+        [routerLink]="['/entity/torder/new']"
       >
         <fa-icon icon="plus"></fa-icon>
         <span jhiTranslate="laGuidonetteApp.torder.home.createLabel"> Create a new Torder </span>
@@ -68,7 +66,7 @@
       <tbody>
         <tr *ngFor="let torder of torders; trackBy: trackId" data-cy="entityTable">
           <td>
-            <a [routerLink]="['/torder', torder.id, 'view']">{{ torder.id }}</a>
+            <a [routerLink]="['/entity/torder', torder.id, 'view']">{{ torder.id }}</a>
           </td>
           <td>{{ torder.date | formatMediumDatetime }}</td>
           <td>{{ torder.total }}</td>
@@ -78,12 +76,22 @@
           </td>
           <td class="text-end">
             <div class="btn-group">
-              <button type="submit" [routerLink]="['/torder', torder.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+              <button
+                type="submit"
+                [routerLink]="['/entity/torder', torder.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
                 <fa-icon icon="eye"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
               </button>
 
-              <button type="submit" [routerLink]="['/torder', torder.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+              <button
+                type="submit"
+                [routerLink]="['/entity/torder', torder.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
                 <fa-icon icon="pencil-alt"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
               </button>

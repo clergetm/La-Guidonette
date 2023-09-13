@@ -151,10 +151,7 @@ public class ProductResource {
         return productService.getProductPage(page, size);
     }
 
-    @GetMapping(value = "/search", params = { "query" })
-    public List<Product> search(@RequestParam("query") String query) {
-        return productService.search(query);
-    }
+
 
     @GetMapping(value = "/products", params = { "categories", "colors", "brands" })
     public List<Product> GetFilteredProducts(
@@ -163,6 +160,21 @@ public class ProductResource {
         @RequestParam("brands") List<Brand> brands
     ) {
         return productService.filterProducts(categories, colors, brands);
+    }
+
+    @GetMapping(value = "/search", params = { "query", "page", "size" })
+    public GetProductsPageResponseDto search(
+        @RequestParam("query") String query,
+        @RequestParam("page") Integer page,
+        @RequestParam("size") Integer size
+    ){
+            return productService.search(query, page, size);
+        }
+
+    @GetMapping("/products/bestSellers")
+    public List<Product> getBestSellers() {
+        return productService.getBestSellers();
+
     }
 
     /**

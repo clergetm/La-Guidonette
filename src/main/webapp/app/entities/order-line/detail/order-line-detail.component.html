@@ -21,13 +21,13 @@
         <dt><span jhiTranslate="laGuidonetteApp.orderLine.product">Product</span></dt>
         <dd>
           <div *ngIf="orderLine.product">
-            <a [routerLink]="['/product', orderLine.product.id, 'view']">{{ orderLine.product.id }}</a>
+            <a [routerLink]="['/entity/product', orderLine.product.id, 'view']">{{ orderLine.product.id }}</a>
           </div>
         </dd>
         <dt><span jhiTranslate="laGuidonetteApp.orderLine.torder">Torder</span></dt>
         <dd>
           <div *ngIf="orderLine.torder">
-            <a [routerLink]="['/torder', orderLine.torder.id, 'view']">{{ orderLine.torder.id }}</a>
+            <a [routerLink]="['/entity/torder', orderLine.torder.id, 'view']">{{ orderLine.torder.id }}</a>
           </div>
         </dd>
       </dl>
@@ -36,7 +36,7 @@
         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
       </button>
 
-      <button type="button" [routerLink]="['/order-line', orderLine.id, 'edit']" class="btn btn-primary">
+      <button type="button" [routerLink]="['/entity/order-line', orderLine.id, 'edit']" class="btn btn-primary">
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
       </button>
     </div>

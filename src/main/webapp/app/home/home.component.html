@@ -1,1 +1,12 @@
-<div class="row">Hello</div>
+<h1>Explore Our Stunning Collection of Bikes</h1>
+<jhi-list-products [products]="products"></jhi-list-products>
+<mat-paginator
+  aria-label="Select Page"
+  [length]="totalProducts"
+  [pageSizeOptions]="size"
+  [pageSize]="currentPageSize"
+  (page)="onPageChange($event)"
+  class="paginator"
+  showFirstLastButtons
+>
+</mat-paginator>
