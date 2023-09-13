@@ -5,10 +5,14 @@ import fr.uga.laguidonette.domain.enumeration.Brand;
 import fr.uga.laguidonette.domain.enumeration.Color;
 import fr.uga.laguidonette.repository.ProductRepository;
 import fr.uga.laguidonette.service.ProductService;
+import fr.uga.laguidonette.service.dto.GetProductsPageResponseDto;
 import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,6 +41,11 @@ public class ProductServiceImpl implements ProductService {
     public Product update(Product product) {
         log.debug("Request to update Product : {}", product);
         return productRepository.save(product);
+    }
+
+    @Override
+    public List<Product> search(String query) {
+        return productRepository.search(query);
     }
 
     @Override
@@ -90,6 +99,22 @@ public class ProductServiceImpl implements ProductService {
     @Transactional(readOnly = true)
     public List<Product> filterProducts(List<String> categories, List<Color> colors, List<Brand> brands) {
         return productRepository.filterProducts(categories, colors, brands);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public GetProductsPageResponseDto getProductPage(Integer page, Integer size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Product> productsPage = productRepository.findAll(pageable);
+        List<Product> products = productsPage.getContent();
+        GetProductsPageResponseDto getProductsPageResponseDto = new GetProductsPageResponseDto();
+        getProductsPageResponseDto.setProducts(products);
+        getProductsPageResponseDto.setPage(productsPage.getNumber());
+        getProductsPageResponseDto.setSize(productsPage.getSize());
+        getProductsPageResponseDto.setLast(productsPage.isLast());
+        getProductsPageResponseDto.setTotalPages(productsPage.getTotalPages());
+        getProductsPageResponseDto.setTotalProducts(productsPage.getTotalElements());
+        return getProductsPageResponseDto;
     }
 
     @Override
