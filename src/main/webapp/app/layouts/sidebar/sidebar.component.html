@@ -1,0 +1,30 @@
+<div class="w3-sidebar w3-bar-block w3-light-grey w3-card" style="width: 20%">
+  <div class="categories">
+    <button class="w3-button w3-block w3-left-align" (click)="openAccordeon('categories')">
+      Categories <i class="fa fa-caret-down"></i>
+    </button>
+    <div id="categories" class="w3-hide w3-white w3-card">
+      <a *ngFor="let category of categories" href="/products?category={{ category.name }}" class="w3-bar-item w3-button">
+        {{ category.name }}
+      </a>
+    </div>
+  </div>
+
+  <div class="couleurs">
+    <button class="w3-button w3-block w3-left-align" (click)="openAccordeon('Couleurs')">Couleurs <i class="fa fa-caret-down"></i></button>
+    <div id="Couleurs" class="w3-hide w3-white w3-card">
+      <a *ngFor="let color of colors" href="/products?category={{ color }}" class="w3-bar-item w3-button">
+        {{ color }}
+      </a>
+    </div>
+  </div>
+
+  <div class="marques">
+    <button class="w3-button w3-block w3-left-align" (click)="openAccordeon('Marques')">Marques <i class="fa fa-caret-down"></i></button>
+    <div id="Marques" class="w3-hide w3-white w3-card">
+      <a *ngFor="let brand of brands" href="/products?category={{ brand }}" class="w3-bar-item w3-button">
+        {{ brand }}
+      </a>
+    </div>
+  </div>
+</div>

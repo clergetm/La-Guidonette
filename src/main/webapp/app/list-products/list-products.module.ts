@@ -6,6 +6,7 @@ import { LISTPRODUCTS_ROUTE } from './list-products.route';
 import { ProductCardModule } from '../layouts/product-card/product-card.module';
 import { ListProductsComponent } from './list-products.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import {SidebarComponent} from "../layouts/sidebar/sidebar.component";
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -20,6 +21,12 @@ import { MatInputModule } from '@angular/material/input';
     MatIconModule,
     MatInputModule,
   ],
-  declarations: [ListProductsComponent],
+  declarations: [
+    ListProductsComponent,
+    SidebarComponent
+  ],
+  exports: [
+    SidebarComponent
+  ]
 })
 export class ListProductsModule {}

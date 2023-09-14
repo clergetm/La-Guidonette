@@ -20,6 +20,7 @@ Navbar
   position: fixed;
   z-index: 1000;
   width: 100%;
+  height: 70px;
   top: 0;
   a.nav-link {
     font-weight: 400;
@@ -31,14 +32,14 @@ Navbar
 
   .number-items-in-cart {
     position: absolute;
-    top: 0; /* Adjust as necessary */
-    right: 0; /* Adjust as necessary */
-    background-color: red; /* Bubble color */
-    border-radius: 50%; /* Makes it circular */
-    padding: 0.2rem 0.5rem; /* Adjust as necessary */
-    font-size: 0.8rem; /* Adjust as necessary */
+    top: 0;
+    right: 0;
+    background-color: #e92f00;
+    border-radius: 50%;
+    padding: 0.2rem 0.5rem;
+    font-size: 0.8rem;
     color: white;
-    min-width: 20px; /* Ensures bubble is round and not oval with 1 digit numbers */
+    min-width: 20px;
     text-align: center;
   }
 }

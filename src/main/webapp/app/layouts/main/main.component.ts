@@ -55,4 +55,17 @@ export class MainComponent implements OnInit {
     }
     this.translateService.get(pageTitle).subscribe(title => this.titleService.setTitle(title));
   }
+
+  public showSideBar(): boolean {
+    const navbarRoutes: string[] = ['/products']; //TODO add home ('/') when it is made
+    const thisUrl: string = this.router.url;
+    console.log("== URL : '" + thisUrl + "'");
+    var retur = false;
+    navbarRoutes.forEach(currentRoute => {
+      if (thisUrl.startsWith(currentRoute)) {
+        retur = true;
+      }
+    });
+    return retur;
+  }
 }

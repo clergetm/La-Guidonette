@@ -4,6 +4,7 @@ import { ProductService } from '../entities/product/service/product.service';
 import { PageEvent } from '@angular/material/paginator';
 import { IProduct } from '../entities/product/product.model';
 import { SearchService } from '../search/search-service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'jhi-list-products',
@@ -20,10 +21,22 @@ export class ListProductsComponent {
   searchMode: boolean = false;
 
   answerFormState: boolean = false;
-  constructor(public productService: ProductService, public searchService: SearchService) {}
+  constructor(public productService: ProductService, public searchService: SearchService, private route: ActivatedRoute) {}
   ngOnInit(): void {
     this.fetchProducts(this.page, this.currentPageSize);
     console.log(this.products);
+    this.route.queryParams.subscribe(params => {
+      for (const key in params) {
+        if (Object.prototype.hasOwnProperty.call(params, key)) {
+          const paramValue = params[key];
+          if (key === 'category') {
+            this.searchService.search(paramValue).subscribe(data => {
+              this.products = data;
+            });
+          }
+        }
+      }
+    });
   }
   onSubmit() {
     if (this.query) {
