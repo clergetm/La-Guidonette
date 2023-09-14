@@ -45,6 +45,10 @@ import { UserRouteAccessService } from 'app/core/auth/user-route-access.service'
           loadChildren: () => import('./product-page/product-page.module').then(m => m.ProductPageModule),
         },
         {
+          path: 'product/:id',
+          loadChildren: () => import('./product-page/product-page.module').then(m => m.ProductPageModule),
+        },
+        {
           path: '',
           loadChildren: () => import(`./entities/entity-routing.module`).then(m => m.EntityRoutingModule),
         },
