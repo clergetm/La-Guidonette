@@ -4,9 +4,11 @@ import { IProduct } from '../entities/product/product.model';
 @Injectable({
   providedIn: 'root',
 })
+
 export class CartContentService {
   private cartItems: IProduct[] = [];
   private size = 0;
+
   constructor() {
     const localStorageCart: string | null = localStorage.getItem('user-cart');
     if (localStorageCart) {
@@ -18,6 +20,14 @@ export class CartContentService {
   addToCart(product: IProduct): void {
     this.cartItems.push(product);
     this.size += 1;
+    this.updatelocalStorageCart();
+  }
+
+  addMultipleToCart(product: IProduct, number: number): void {
+    for (let i = 0; i < number; i++) {
+      this.cartItems.push(product);
+      this.size += 1;
+    }
     this.updatelocalStorageCart();
   }
 
