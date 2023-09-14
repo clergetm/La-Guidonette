@@ -38,16 +38,9 @@ import { UserRouteAccessService } from 'app/core/auth/user-route-access.service'
         },
         {
           path: 'order',
-          loadChildren: () => import('./order/order.module').then(m => m.OrderModule),
+          loadChildren: () => import('./post-cart/post-cart.module').then(m => m.PostCartModule),
         },
-        {
-          path: 'payment',
-          loadChildren: () => import('./payment/payment.module').then(m => m.PaymentModule),
-        },
-        // {
-        //   path: '**',
-        //   loadChildren: () => import('./list-products/list-products.module').then(m => m.ListProductsModule),
-        // },
+
         {
           path: '',
           loadChildren: () => import(`./entities/entity-routing.module`).then(m => m.EntityRoutingModule),
