@@ -12,6 +12,7 @@ export interface IProduct {
   color?: Color | null;
   quantity?: number | null;
   imageName?: string | null;
+  version?: number | null;
   categories?: Pick<ICategory, 'id'>[] | null;
 }
 

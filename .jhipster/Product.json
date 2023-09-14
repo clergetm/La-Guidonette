@@ -7,29 +7,24 @@
   "fields": [
     {
       "fieldName": "label",
-      "fieldType": "String",
-      "fieldValidateRules": ["required"]
+      "fieldType": "String"
     },
     {
       "fieldName": "description",
-      "fieldType": "String",
-      "fieldValidateRules": ["required"]
+      "fieldType": "String"
     },
     {
       "fieldName": "price",
-      "fieldType": "Long",
-      "fieldValidateRules": ["required"]
+      "fieldType": "Long"
     },
     {
       "fieldName": "brand",
       "fieldType": "Brand",
-      "fieldValidateRules": ["required"],
       "fieldValues": "BTWIN,SPECIALIZED,ORBEA,SANTA,CRUZ,WETHEPEOPLE,LAPIERRE,CANYON"
     },
     {
       "fieldName": "model",
-      "fieldType": "String",
-      "fieldValidateRules": ["required"]
+      "fieldType": "String"
     },
     {
       "fieldName": "color",
@@ -46,6 +41,11 @@
       "fieldName": "imageName",
       "fieldType": "String",
       "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "version",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
     }
   ],
   "fluentMethods": true,
@@ -55,16 +55,17 @@
   "readOnly": false,
   "relationships": [
     {
-      "otherEntityName": "orderLine",
-      "otherEntityRelationshipName": "product",
-      "relationshipName": "orderLine",
-      "relationshipType": "one-to-many"
-    },
-    {
       "otherEntityName": "category",
       "otherEntityRelationshipName": "product",
       "ownerSide": false,
       "relationshipName": "category",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "torder",
+      "otherEntityRelationshipName": "product",
+      "ownerSide": false,
+      "relationshipName": "torder",
       "relationshipType": "many-to-many"
     }
   ],
