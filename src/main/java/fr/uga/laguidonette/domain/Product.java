@@ -62,6 +62,11 @@ public class Product implements Serializable {
     @Column(name = "image_name", nullable = false)
     private String imageName;
 
+    @Version
+    @NotNull
+    @Column(name = "version", nullable = false)
+    private Integer version;
+
     @OneToMany(mappedBy = "product")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "product", "torder" }, allowSetters = true)
@@ -191,6 +196,19 @@ public class Product implements Serializable {
         this.imageName = imageName;
     }
 
+    public Integer getVersion() {
+        return this.version;
+    }
+
+    public Product version(Integer version) {
+        this.setVersion(version);
+        return this;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
+
     public Set<OrderLine> getOrderLines() {
         return this.orderLines;
     }
@@ -285,6 +303,7 @@ public class Product implements Serializable {
             ", color='" + getColor() + "'" +
             ", quantity=" + getQuantity() +
             ", imageName='" + getImageName() + "'" +
+            ", version=" + getVersion() +
             "}";
     }
 }

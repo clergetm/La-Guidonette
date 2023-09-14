@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IProduct } from '../entities/product/product.model';
+import { NewOrderLine } from '../entities/order-line/order-line.model';
 
 @Injectable({
   providedIn: 'root',
@@ -60,6 +61,32 @@ export class CartContentService {
 
   getSize(): number {
     return this.size;
+  }
+
+  getNewOrderlines() {
+    let newOrderlines: NewOrderLine[] = [];
+    for (let product of this.getCartItems()) {
+      let added = false;
+      for (let index in newOrderlines) {
+        // @ts-ignore
+        if (product.id == newOrderlines[index].product.id) {
+          // @ts-ignore
+          newOrderlines[index].quantity++;
+          added = true;
+          break;
+        }
+      }
+      if (!added) {
+        let anNewOrderLine: NewOrderLine = {
+          id: null,
+          product: product,
+          quantity: 1,
+          torder: null,
+        };
+        newOrderlines.push(anNewOrderLine);
+      }
+    }
+    return newOrderlines;
   }
 
   private updatelocalStorageCart(): void {
