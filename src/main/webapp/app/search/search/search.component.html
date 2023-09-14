@@ -1,13 +1,28 @@
 <div class="searchContainer">
-  <form class="example-form searchForm" (submit)="onSubmit()">
-    <mat-form-field class="example-full-width" style="width: 100%">
-      <mat-label>Search For Your bike </mat-label>
-      <input matInput [(ngModel)]="query" name="query" />
-      <mat-icon matSuffix fontIcon="search">search</mat-icon>
-    </mat-form-field>
-  </form>
-  <h1 *ngIf="!searchMode">Best-Selling Bikes: Discover Our Customer Favorites!</h1>
-  <jhi-list-products [products]="products"></jhi-list-products>
+  <div class="searchPageBody">
+    <div class="left-part">
+      <jhi-sidebar
+        [query]="query"
+        (selectedCategoriesEvent)="getSelectedCategories($event)"
+        (selectedBrandsEvent)="getSelectedBrands($event)"
+        (selectedColorsEvent)="getSelectedColors($event)"
+      ></jhi-sidebar>
+      <button mat-stroked-button style="width: 100%" (click)="submitFilters()">Appliquer</button>
+    </div>
+    <div class="right-part">
+      <form class="example-form searchForm" (submit)="onSubmit($event)">
+        <mat-form-field class="example-full-width" style="width: 100%">
+          <mat-label>Search For Your bike </mat-label>
+          <input matInput [(ngModel)]="query" name="query" />
+          <mat-icon matSuffix fontIcon="search">search</mat-icon>
+        </mat-form-field>
+      </form>
+      <h1 *ngIf="noProductMode">No results for your search</h1>
+      <h1 *ngIf="noProductMode">Best-Selling Bikes: Discover Our Customer Favorites!</h1>
+      <jhi-list-products [products]="products"></jhi-list-products>
+    </div>
+  </div>
+
   <mat-paginator
     aria-label="Select Page"
     [length]="totalProducts"
@@ -16,7 +31,7 @@
     (page)="onPageChange($event)"
     class="paginator"
     showFirstLastButtons
-    *ngIf="searchMode"
+    *ngIf="!noProductMode"
   >
   </mat-paginator>
 </div>
