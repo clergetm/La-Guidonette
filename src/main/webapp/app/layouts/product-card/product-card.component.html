@@ -1,6 +1,6 @@
 <mat-card class="bordered-card" *ngIf="product">
   <mat-card-header>
-    <mat-card-title *ngIf="product.label">{{ product.label }}</mat-card-title>
+    <mat-card-title *ngIf="product.label">{{ product.label }} <span class="price-text">{{product.price}}€</span></mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <p>
