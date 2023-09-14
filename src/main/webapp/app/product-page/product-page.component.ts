@@ -1,7 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {getProductById, Product, products} from "../list-products/product";
 import {CartContentService} from '../cart-content.service';
+import {IProduct} from "../entities/product/product.model";
+import {ProductService} from "../entities/product/service/product.service";
 
 @Component({
   selector: 'jhi-product-page',
@@ -11,25 +12,23 @@ import {CartContentService} from '../cart-content.service';
 })
 export class ProductPageComponent implements OnInit {
   productId: string | null = "-1"
-  product: Product | null = {
-    id: -1,
-    price: '233',
-    name: '',
-    brand: '',
-    mediaUrl: '',
-    stock: -1,
-    color: '',
-    description: '',
-  };
+  product: IProduct | null = null;
 
-  constructor(public route: ActivatedRoute, private cartService: CartContentService) {
+  constructor(public route: ActivatedRoute, public productService: ProductService, private cartService: CartContentService) {
   }
 
   ngOnInit(): void {
     this.productId = this.route.snapshot.paramMap.get('id');
     if (typeof this.productId === "string") {
-      this.product = getProductById(parseInt(this.productId));
+      this.getProductById(parseInt(this.productId));
     }
+  }
+
+  getProductById(productId: number): void {
+    this.productService.find(productId).subscribe(data => {
+        this.product = data.body
+      }
+    )
   }
 
   addToCart(): void {

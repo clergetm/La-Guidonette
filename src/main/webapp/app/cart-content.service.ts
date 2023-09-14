@@ -1,6 +1,5 @@
-import { Injectable } from '@angular/core';
-import { IProduct } from './entities/product/product.model';
-import {Product} from './list-products/product';
+import {Injectable} from '@angular/core';
+import {IProduct} from './entities/product/product.model';
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +8,7 @@ import {Product} from './list-products/product';
 export class CartContentService {
   private cartItems: IProduct[] = [];
   private size = 0;
+
   constructor() {
     const localStorageCart: string | null = localStorage.getItem('user-cart');
     if (localStorageCart) {
