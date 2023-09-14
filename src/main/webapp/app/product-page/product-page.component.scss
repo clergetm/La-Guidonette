@@ -1,6 +1,7 @@
 .product-page {
   display: flex;
   justify-content: space-between;
+  overflow-block: scroll;
 }
 
 .product {
@@ -17,6 +18,7 @@
   max-height: 50em;
   overflow: scroll;
   justify-content: space-evenly;
+  word-wrap: break-word;
 }
 
 .product-header {
