@@ -3,7 +3,7 @@
   <h4>Attention tout colis sera livré dans notre magasin à Grenoble !</h4>
 
   <h4>Montant à régler : {{cartContentService.getPrice()}}</h4>
-  <label>Numéro de carte de crédit :<br><input type="text" [(ngModel)]="cardNumber" (input)="formatCardNumber()" placeholder="xxxx xxxx xxxx xxxx" maxlength="19"/></label>
-  <label>Expiration : <br><input type="text" [(ngModel)]="expiryDate" (input)="formatExpiryDate()" placeholder="MM/YY" maxlength="5"/></label>
-  <label>CCV :<br><input type="text" [(ngModel)]="ccv" placeholder="XXX" maxlength="3"/></label>
+  <label>Numéro de carte de crédit :<br><input type="text" [(ngModel)]="cardNumber" (keyup)="formatCardNumber()" placeholder="xxxx xxxx xxxx xxxx" maxlength="19"/></label>
+  <label>Expiration : <br><input type="text" [(ngModel)]="expiryDate" (keyup)="formatExpiryDate()" placeholder="MM/YY" maxlength="5"/></label>
+  <label>CCV :<br><input type="text" [(ngModel)]="cvv" placeholder="XXX" maxlength="3" (keyup)="formatCVV()"/></label>
 </div>

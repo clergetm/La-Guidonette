@@ -26,5 +26,5 @@
 </div>
 
 <div class="bottom-button">
-  <button type="button" class="btn-continue" (click)="previousStep()" *ngIf="step!=1">Retour</button><button type="button" class="btn-continue" (click)="nextStep()" *ngIf="step!=3">Continuer</button>
+  <button type="button" class="btn-continue" (click)="previousStep()" *ngIf="step!=1">Retour</button><button type="button" class="btn-continue" (click)="nextStep()" *ngIf="step!=3">Continuer</button><button type="button" class="btn-continue" (click)="goToHome()" *ngIf="step===3">Retour à l'accueil</button>
 </div>

@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {AccountService} from "../../core/auth/account.service";
-import {CartContentService} from "../../cart-content.service";
+import {CartContentService} from "../../services/cart-content.service";
 
 @Component({
   selector: 'jhi-payment',
@@ -13,7 +13,7 @@ export class PaymentComponent{
 
   cardNumber: string = '';
   expiryDate: string = '';
-  ccv: string = '';
+  cvv: string = '';
   constructor(
     public accountService: AccountService,
     public cartContentService: CartContentService
@@ -30,6 +30,10 @@ export class PaymentComponent{
     if (this.expiryDate.length > 5) {
       this.expiryDate = this.expiryDate.substr(0, 5);
     }
+  }
+
+  formatCVV():void {
+    this.cvv = this.cvv.replace(/\D/g, '');
   }
 
 }

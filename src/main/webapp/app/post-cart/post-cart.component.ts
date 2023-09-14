@@ -30,4 +30,8 @@ export class PostCartComponent implements OnInit {
   previousStep():void {
     this.step --;
   }
+
+  goToHome():void {
+    this.router.navigate([''])
+  }
 }
