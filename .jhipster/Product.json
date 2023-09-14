@@ -29,6 +29,7 @@
     {
       "fieldName": "color",
       "fieldType": "Color",
+      "fieldValidateRules": ["required"],
       "fieldValues": "WHITE,BLACK,YELLOW,RED,BLUE,GREEN"
     },
     {
@@ -39,6 +40,11 @@
     {
       "fieldName": "imageName",
       "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "version",
+      "fieldType": "Integer",
       "fieldValidateRules": ["required"]
     }
   ],

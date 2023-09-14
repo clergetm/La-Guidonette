@@ -68,6 +68,9 @@ public class ProductServiceImpl implements ProductService {
                 if (product.getImageName() != null) {
                     existingProduct.setImageName(product.getImageName());
                 }
+                if (product.getVersion() != null) {
+                    existingProduct.setVersion(product.getVersion());
+                }
 
                 return existingProduct;
             })

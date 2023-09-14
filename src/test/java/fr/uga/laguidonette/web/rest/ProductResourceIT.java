@@ -55,6 +55,9 @@ class ProductResourceIT {
     private static final String DEFAULT_IMAGE_NAME = "AAAAAAAAAA";
     private static final String UPDATED_IMAGE_NAME = "BBBBBBBBBB";
 
+    private static final Integer DEFAULT_VERSION = 1;
+    private static final Integer UPDATED_VERSION = 2;
+
     private static final String ENTITY_API_URL = "/api/products";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -87,7 +90,8 @@ class ProductResourceIT {
             .model(DEFAULT_MODEL)
             .color(DEFAULT_COLOR)
             .quantity(DEFAULT_QUANTITY)
-            .imageName(DEFAULT_IMAGE_NAME);
+            .imageName(DEFAULT_IMAGE_NAME)
+            .version(DEFAULT_VERSION);
         return product;
     }
 
@@ -106,7 +110,8 @@ class ProductResourceIT {
             .model(UPDATED_MODEL)
             .color(UPDATED_COLOR)
             .quantity(UPDATED_QUANTITY)
-            .imageName(UPDATED_IMAGE_NAME);
+            .imageName(UPDATED_IMAGE_NAME)
+            .version(UPDATED_VERSION);
         return product;
     }
 
@@ -136,6 +141,7 @@ class ProductResourceIT {
         assertThat(testProduct.getColor()).isEqualTo(DEFAULT_COLOR);
         assertThat(testProduct.getQuantity()).isEqualTo(DEFAULT_QUANTITY);
         assertThat(testProduct.getImageName()).isEqualTo(DEFAULT_IMAGE_NAME);
+        assertThat(testProduct.getVersion()).isEqualTo(DEFAULT_VERSION);
     }
 
     @Test
@@ -294,6 +300,23 @@ class ProductResourceIT {
 
     @Test
     @Transactional
+    void checkVersionIsRequired() throws Exception {
+        int databaseSizeBeforeTest = productRepository.findAll().size();
+        // set the field null
+        product.setVersion(null);
+
+        // Create the Product, which fails.
+
+        restProductMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(product)))
+            .andExpect(status().isBadRequest());
+
+        List<Product> productList = productRepository.findAll();
+        assertThat(productList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     void getAllProducts() throws Exception {
         // Initialize the database
         productRepository.saveAndFlush(product);
@@ -311,7 +334,8 @@ class ProductResourceIT {
             .andExpect(jsonPath("$.[*].model").value(hasItem(DEFAULT_MODEL)))
             .andExpect(jsonPath("$.[*].color").value(hasItem(DEFAULT_COLOR.toString())))
             .andExpect(jsonPath("$.[*].quantity").value(hasItem(DEFAULT_QUANTITY)))
-            .andExpect(jsonPath("$.[*].imageName").value(hasItem(DEFAULT_IMAGE_NAME)));
+            .andExpect(jsonPath("$.[*].imageName").value(hasItem(DEFAULT_IMAGE_NAME)))
+            .andExpect(jsonPath("$.[*].version").value(hasItem(DEFAULT_VERSION)));
     }
 
     @Test
@@ -333,7 +357,8 @@ class ProductResourceIT {
             .andExpect(jsonPath("$.model").value(DEFAULT_MODEL))
             .andExpect(jsonPath("$.color").value(DEFAULT_COLOR.toString()))
             .andExpect(jsonPath("$.quantity").value(DEFAULT_QUANTITY))
-            .andExpect(jsonPath("$.imageName").value(DEFAULT_IMAGE_NAME));
+            .andExpect(jsonPath("$.imageName").value(DEFAULT_IMAGE_NAME))
+            .andExpect(jsonPath("$.version").value(DEFAULT_VERSION));
     }
 
     @Test
@@ -363,7 +388,8 @@ class ProductResourceIT {
             .model(UPDATED_MODEL)
             .color(UPDATED_COLOR)
             .quantity(UPDATED_QUANTITY)
-            .imageName(UPDATED_IMAGE_NAME);
+            .imageName(UPDATED_IMAGE_NAME)
+            .version(UPDATED_VERSION);
 
         restProductMockMvc
             .perform(
@@ -385,6 +411,7 @@ class ProductResourceIT {
         assertThat(testProduct.getColor()).isEqualTo(UPDATED_COLOR);
         assertThat(testProduct.getQuantity()).isEqualTo(UPDATED_QUANTITY);
         assertThat(testProduct.getImageName()).isEqualTo(UPDATED_IMAGE_NAME);
+        assertThat(testProduct.getVersion()).isEqualTo(UPDATED_VERSION);
     }
 
     @Test
@@ -477,6 +504,7 @@ class ProductResourceIT {
         assertThat(testProduct.getColor()).isEqualTo(UPDATED_COLOR);
         assertThat(testProduct.getQuantity()).isEqualTo(DEFAULT_QUANTITY);
         assertThat(testProduct.getImageName()).isEqualTo(DEFAULT_IMAGE_NAME);
+        assertThat(testProduct.getVersion()).isEqualTo(DEFAULT_VERSION);
     }
 
     @Test
@@ -499,7 +527,8 @@ class ProductResourceIT {
             .model(UPDATED_MODEL)
             .color(UPDATED_COLOR)
             .quantity(UPDATED_QUANTITY)
-            .imageName(UPDATED_IMAGE_NAME);
+            .imageName(UPDATED_IMAGE_NAME)
+            .version(UPDATED_VERSION);
 
         restProductMockMvc
             .perform(
@@ -521,6 +550,7 @@ class ProductResourceIT {
         assertThat(testProduct.getColor()).isEqualTo(UPDATED_COLOR);
         assertThat(testProduct.getQuantity()).isEqualTo(UPDATED_QUANTITY);
         assertThat(testProduct.getImageName()).isEqualTo(UPDATED_IMAGE_NAME);
+        assertThat(testProduct.getVersion()).isEqualTo(UPDATED_VERSION);
     }
 
     @Test

@@ -13,6 +13,7 @@ export const sampleWithRequiredData: IProduct = {
   color: Color['WHITE'],
   quantity: 45804,
   imageName: 'calculate neural Automotive',
+  version: 82094,
 };
 
 export const sampleWithPartialData: IProduct = {
@@ -25,6 +26,7 @@ export const sampleWithPartialData: IProduct = {
   color: Color['BLACK'],
   quantity: 73727,
   imageName: 'neural frictionless payment',
+  version: 99151,
 };
 
 export const sampleWithFullData: IProduct = {
@@ -37,6 +39,7 @@ export const sampleWithFullData: IProduct = {
   color: Color['BLUE'],
   quantity: 63146,
   imageName: 'compressing out-of-the-box Progressive',
+  version: 99151,
 };
 
 export const sampleWithNewData: NewProduct = {
@@ -48,6 +51,7 @@ export const sampleWithNewData: NewProduct = {
   color: Color['YELLOW'],
   quantity: 94300,
   imageName: 'mission-critical capacitor',
+  version: 99151,
   id: null,
 };
 
