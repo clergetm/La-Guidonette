@@ -26,6 +26,7 @@ type ProductFormGroupContent = {
   color: FormControl<IProduct['color']>;
   quantity: FormControl<IProduct['quantity']>;
   imageName: FormControl<IProduct['imageName']>;
+  version: FormControl<IProduct['version']>;
   categories: FormControl<IProduct['categories']>;
 };
 
@@ -68,6 +69,9 @@ export class ProductFormService {
         validators: [Validators.required],
       }),
       imageName: new FormControl(productRawValue.imageName, {
+        validators: [Validators.required],
+      }),
+      version: new FormControl(productRawValue.version, {
         validators: [Validators.required],
       }),
       categories: new FormControl(productRawValue.categories ?? []),

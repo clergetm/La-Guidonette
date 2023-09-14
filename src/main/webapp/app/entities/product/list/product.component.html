@@ -86,6 +86,12 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
+          <th scope="col" jhiSortBy="version">
+            <div class="d-flex">
+              <span jhiTranslate="laGuidonetteApp.product.version">Version</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -102,6 +108,7 @@
           <td jhiTranslate="{{ 'laGuidonetteApp.Color.' + product.color }}">{{ product.color }}</td>
           <td>{{ product.quantity }}</td>
           <td>{{ product.imageName }}</td>
+          <td>{{ product.version }}</td>
           <td class="text-end">
             <div class="btn-group">
               <button

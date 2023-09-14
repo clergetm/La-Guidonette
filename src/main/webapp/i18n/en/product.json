@@ -26,6 +26,7 @@
       "color": "Color",
       "quantity": "Quantity",
       "imageName": "Image Name",
+      "version": "Version",
       "orderLine": "Order Line",
       "category": "Category"
     }
