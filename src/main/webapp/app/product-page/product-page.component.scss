@@ -1,13 +1,9 @@
-div {
-}
-
-;
 .product-page {
   display: flex;
   justify-content: space-between;
 }
 
-.product-infos {
+.product {
   display: flex;
   justify-content: space-evenly;
 }
@@ -16,16 +12,29 @@ div {
 }
 
 .product-text { //header and description
-  flex-direction: row;
+  flex-direction: column;
   min-height: 50em;
   max-height: 50em;
   overflow: scroll;
+  justify-content: space-evenly;
 }
 
 .product-header {
 }
 
-.product-description {
+.product-infos {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: baseline;
+
+  p {
+    padding: 1em;
+  }
+}
+
+.product-descriptions {
+  flex-grow: 4;
+  align-self: flex-end;
 }
 
 .purchase-column {
@@ -39,8 +48,8 @@ div {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
 
-input[type="number"] {
-  width: 3em;
+  input[type="number"] {
+    width: 3em;
+  }
 }

@@ -1,18 +1,27 @@
 <div class="product-page">
-  <div class="product-infos">
+  <div class="product">
     <div class="product-image">
-      <img src={{product?.mediaUrl}}/>
+      <img src="{{product?.mediaUrl}}"/>
     </div>
     <div class="product-text">
       <div class="product-header">
         <h1>{{product?.brand}}</h1>
         <h2>{{product?.name}}</h2>
       </div>
-      <div class="product-description">
-        <p>{{product?.description}}</p>
+      <div class="product-infos">
+        <h4>Marque :</h4>
+        <p>{{product?.brand}}</p>
+        <h4>Modèle :</h4>
+        <p>{{product?.name}}</p>
+        <h4>Couleur :</h4>
+        <p>{{product?.color}}</p>
       </div>
+      <h4>Description :</h4>
+      <p>{{product?.description}}</p>
+
     </div>
   </div>
+
   <div class="purchase-column">
     <h3>{{product?.price}}€</h3>
     <div class="product-purchase">
