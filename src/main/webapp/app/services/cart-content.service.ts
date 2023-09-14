@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IProduct } from './entities/product/product.model';
+import { IProduct } from '../entities/product/product.model';
 
 @Injectable({
   providedIn: 'root',
@@ -38,6 +38,14 @@ export class CartContentService {
 
   getCartItems(): IProduct[] {
     return this.cartItems;
+  }
+
+  getPrice(): string {
+    let sum = 0;
+    this.cartItems.forEach(product => {
+      if (product.price) sum += product.price;
+    });
+    return sum.toString();
   }
 
   getSize(): number {

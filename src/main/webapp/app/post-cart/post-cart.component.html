@@ -1,0 +1,30 @@
+<div class="ligne-arianne">
+  <div class="ball-wrapper">
+    <div class="ball" [ngStyle]="(step >= 1)?{'background-color': '#26408B'} : {'background-color': '#8DE2D6'}"></div>
+    <span>Recapitulatif</span>
+  </div>
+  <div class="ball-wrapper">
+    <div class="ball" [ngStyle]="(step >= 2)?{'background-color': '#26408B'} : {'background-color': '#8DE2D6'}"></div>
+    <span>Paiement</span>
+  </div>
+  <div class="ball-wrapper">
+    <div class="ball" [ngStyle]="(step >= 3)?{'background-color': '#26408B'} : {'background-color': '#8DE2D6'}"></div>
+    <span>Finalisation</span>
+  </div>
+</div>
+
+<div *ngIf="step === 1">
+  <jhi-order></jhi-order>
+</div>
+
+<div *ngIf="step === 2">
+  <jhi-payment></jhi-payment>
+</div>
+
+<div *ngIf="step === 3">
+  <jhi-finalisation></jhi-finalisation>
+</div>
+
+<div class="bottom-button">
+  <button type="button" class="btn-continue" (click)="previousStep()" *ngIf="step!=1">Retour</button><button type="button" class="btn-continue" (click)="nextStep()" *ngIf="step!=3">Continuer</button><button type="button" class="btn-continue" (click)="goToHome()" *ngIf="step===3">Retour à l'accueil</button>
+</div>
