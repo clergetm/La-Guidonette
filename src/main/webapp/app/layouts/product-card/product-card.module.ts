@@ -3,20 +3,24 @@ import {ProductCardComponent} from "./product-card.component";
 import {CommonModule} from "@angular/common";
 
 // Angular Material imports
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
+import {RouterLink, RouterLinkActive} from "@angular/router";
 
 @NgModule({
   declarations: [
     ProductCardComponent,
   ],
   exports: [
-    ProductCardComponent
+    ProductCardComponent,
   ],
   imports: [
     CommonModule,
     MatCardModule,
-    MatButtonModule
-  ]
+    MatButtonModule,
+    RouterLink,
+    RouterLinkActive,
+  ],
 })
-export class ProductCardModule { }
+export class ProductCardModule {
+}
