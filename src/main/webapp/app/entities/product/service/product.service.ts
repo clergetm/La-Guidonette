@@ -6,6 +6,7 @@ import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { IProduct, NewProduct } from '../product.model';
+import { GetProductPageResponseDto } from '../../dto/GetProductPageResponseDto';
 
 export type PartialUpdateProduct = Partial<IProduct> & Pick<IProduct, 'id'>;
 
@@ -32,6 +33,9 @@ export class ProductService {
 
   find(id: number): Observable<EntityResponseType> {
     return this.http.get<IProduct>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  }
+  findProductsPage(page: number, size: number) {
+    return this.http.get<GetProductPageResponseDto>(`${this.resourceUrl}?page=${page}&size=${size}`);
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {

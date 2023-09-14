@@ -1,4 +1,5 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
+import { IProduct } from './entities/product/product.model';
 import {Product} from './list-products/product';
 
 @Injectable({
@@ -6,9 +7,8 @@ import {Product} from './list-products/product';
 })
 
 export class CartContentService {
-  private cartItems: Product[] = [];
+  private cartItems: IProduct[] = [];
   private size = 0;
-
   constructor() {
     const localStorageCart: string | null = localStorage.getItem('user-cart');
     if (localStorageCart) {
@@ -17,14 +17,13 @@ export class CartContentService {
     }
   }
 
-
-  addToCart(product: Product): void {
+  addToCart(product: IProduct): void {
     this.cartItems.push(product);
     this.size += 1;
     this.updatelocalStorageCart();
   }
 
-  addMultipleToCart(product: Product, number: number): void {
+  addMultipleToCart(product: IProduct, number: number): void {
     for (let i = 0; i < number; i++) {
       this.cartItems.push(product);
       this.size += 1;
@@ -32,7 +31,7 @@ export class CartContentService {
     this.updatelocalStorageCart();
   }
 
-  removeFromCart(product: Product): void {
+  removeFromCart(product: IProduct): void {
     const index: number = this.cartItems.indexOf(product);
     if (index > -1) {
       this.cartItems.splice(index, 1);
@@ -47,8 +46,7 @@ export class CartContentService {
     this.updatelocalStorageCart();
   }
 
-
-  getCartItems(): Product[] {
+  getCartItems(): IProduct[] {
     return this.cartItems;
   }
 
@@ -59,5 +57,4 @@ export class CartContentService {
   private updatelocalStorageCart(): void {
     localStorage.setItem('user-cart', JSON.stringify(this.cartItems));
   }
-
 }
