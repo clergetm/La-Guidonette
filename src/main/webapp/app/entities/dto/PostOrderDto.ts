@@ -1,7 +1,7 @@
-import { IProduct } from '../product/product.model';
-import {IUser} from "../user/user.model";
+import { IUser } from '../user/user.model';
+import { IOrderLine } from '../order-line/order-line.model';
 
 export interface PostOrderDto {
-  products: IProduct[];
-  user : IUser
+  orderlines: IOrderLine[];
+  user: IUser;
 }
