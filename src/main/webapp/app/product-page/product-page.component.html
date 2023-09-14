@@ -1,21 +1,27 @@
 <div class="product-page">
   <div class="product">
     <div class="product-image">
+      <!--- TODO get product image
       <img src="{{product?.mediaUrl}}"/>
+      --->
     </div>
     <div class="product-text">
       <div class="product-header">
         <h1>{{product?.brand}}</h1>
-        <h2>{{product?.name}}</h2>
+        <h2>{{product?.model}}</h2>
       </div>
       <div class="product-infos">
         <h4>Marque :</h4>
         <p>{{product?.brand}}</p>
         <h4>Modèle :</h4>
-        <p>{{product?.name}}</p>
+        <p>{{product?.model}}</p>
+        <h4>Label :</h4>
+        <p>{{product?.label}}</p>
         <h4>Couleur :</h4>
         <p>{{product?.color}}</p>
       </div>
+      <h4>Catégories :</h4>
+      <p>{{product?.categories}}</p>
       <h4>Description :</h4>
       <p>{{product?.description}}</p>
 
