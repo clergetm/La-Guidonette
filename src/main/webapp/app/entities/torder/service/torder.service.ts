@@ -8,6 +8,7 @@ import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { ITorder, NewTorder } from '../torder.model';
+import {PostOrderDto} from "../../dto/PostOrderDto";
 
 export type PartialUpdateTorder = Partial<ITorder> & Pick<ITorder, 'id'>;
 
@@ -35,6 +36,10 @@ export class TorderService {
     return this.http
       .post<RestTorder>(this.resourceUrl, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
+  }
+
+  createOrderFromProducts(futurOrder: PostOrderDto): Observable<ITorder> {
+    return this.http.post<ITorder>(this.resourceUrl, futurOrder);
   }
 
   update(torder: ITorder): Observable<EntityResponseType> {
