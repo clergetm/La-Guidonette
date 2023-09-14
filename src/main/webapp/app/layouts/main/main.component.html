@@ -3,7 +3,15 @@
 <div>
   <router-outlet name="navbar"></router-outlet>
 </div>
-<div class="container-fluid" style="padding: 70px;">
+
+<!--<div class="container-fluid" [style.padding-left]="showSideBar() ? '22%' : '2%'" style="margin-top: 70px">-->
+<div class="container-fluid" style="margin-top: 70px">
+  <!-- note :
+    70px to avoid navbar,
+    30px for beauty right,
+    20px to leave space before footer,
+    70px on left to avoid sidebar
+  -->
   <div class="card jh-card">
     <router-outlet></router-outlet>
   </div>

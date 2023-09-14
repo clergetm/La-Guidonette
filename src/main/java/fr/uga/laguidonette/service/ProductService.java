@@ -4,10 +4,9 @@ import fr.uga.laguidonette.domain.Product;
 import fr.uga.laguidonette.domain.enumeration.Brand;
 import fr.uga.laguidonette.domain.enumeration.Color;
 import fr.uga.laguidonette.service.dto.GetProductsPageResponseDto;
-import org.springframework.data.domain.Pageable;
-
 import java.util.List;
 import java.util.Optional;
+import org.springframework.data.domain.Pageable;
 
 /**
  * Service Interface for managing {@link Product}.
@@ -43,8 +42,17 @@ public interface ProductService {
      * @return the list of entities.
      */
     List<Product> findAll();
-    GetProductsPageResponseDto search(String query, Integer page, Integer size);
+
+    GetProductsPageResponseDto filteredSearch(
+        String query,
+        List<String> categories,
+        List<Color> colors,
+        List<Brand> brands,
+        Integer page,
+        Integer size
+    );
     List<Product> getBestSellers();
+    GetProductsPageResponseDto search(String query, Pageable pageable);
 
     /**
      * Apply filters on a list of product.

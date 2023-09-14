@@ -18,4 +18,9 @@ export class SearchService {
   paginatedSearch(query: string, page: number, size: number): Observable<GetProductPageResponseDto> {
     return this.http.get<GetProductPageResponseDto>(`${this.resourceUrl}?query=${query}&page=${page}&size=${size}`);
   }
+  filteredSearch(query: string | null, categories: string[], colors: string[], brands: string[], page: number, size: number) {
+    return this.http.get<GetProductPageResponseDto>(
+      `${this.resourceUrl}?query=${query}&categories=${categories}&colors=${colors}&brands=${brands}&page=${page}&size=${size}`
+    );
+  }
 }
