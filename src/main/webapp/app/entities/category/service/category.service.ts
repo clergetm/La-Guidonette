@@ -33,6 +33,9 @@ export class CategoryService {
   find(id: number): Observable<EntityResponseType> {
     return this.http.get<ICategory>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
+  findCategories(): Observable<ICategory[]> {
+    return this.http.get<ICategory[]>(`${this.resourceUrl}`);
+  }
 
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
