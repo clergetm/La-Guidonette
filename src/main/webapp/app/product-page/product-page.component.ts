@@ -1,8 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {CartContentService} from '../cart-content.service';
+import {CartContentService} from '../services/cart-content.service';
 import {IProduct} from "../entities/product/product.model";
 import {ProductService} from "../entities/product/service/product.service";
+import {PageEvent} from "@angular/material/paginator";
 
 @Component({
   selector: 'jhi-product-page',
@@ -24,9 +25,15 @@ export class ProductPageComponent implements OnInit {
     }
   }
 
+  onPageChange(event: PageEvent) {
+    if (typeof this.productId === "string") {
+      this.getProductById(parseInt(this.productId));
+    }
+  }
+
   getProductById(productId: number): void {
     this.productService.find(productId).subscribe(data => {
-        this.product = data.body
+        this.product = data.body;
       }
     )
   }
