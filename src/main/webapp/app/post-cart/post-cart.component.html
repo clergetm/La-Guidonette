@@ -1,14 +1,14 @@
 <div class="ligne-arianne">
   <div class="ball-wrapper">
-    <div class="ball" [ngStyle]="(step >= 1)?{'background-color': '#26408B'} : {'background-color': '#8DE2D6'}"></div>
+    <div class="ball" [ngStyle]="step >= 1 ? { 'background-color': '#26408B' } : { 'background-color': '#8DE2D6' }"></div>
     <span>Recapitulatif</span>
   </div>
   <div class="ball-wrapper">
-    <div class="ball" [ngStyle]="(step >= 2)?{'background-color': '#26408B'} : {'background-color': '#8DE2D6'}"></div>
+    <div class="ball" [ngStyle]="step >= 2 ? { 'background-color': '#26408B' } : { 'background-color': '#8DE2D6' }"></div>
     <span>Paiement</span>
   </div>
   <div class="ball-wrapper">
-    <div class="ball" [ngStyle]="(step >= 3)?{'background-color': '#26408B'} : {'background-color': '#8DE2D6'}"></div>
+    <div class="ball" [ngStyle]="step >= 3 ? { 'background-color': '#26408B' } : { 'background-color': '#8DE2D6' }"></div>
     <span>Finalisation</span>
   </div>
 </div>
@@ -18,13 +18,17 @@
 </div>
 
 <div *ngIf="step === 2">
+  <jhi-alert-error></jhi-alert-error>
   <jhi-payment></jhi-payment>
 </div>
 
 <div *ngIf="step === 3">
-  <jhi-finalisation></jhi-finalisation>
+  <jhi-finalisation [order]="itorder"></jhi-finalisation>
 </div>
 
 <div class="bottom-button">
-  <button type="button" class="btn-continue" (click)="previousStep()" *ngIf="step!=1">Retour</button><button type="button" class="btn-continue" (click)="nextStep()" *ngIf="step!=3">Continuer</button><button type="button" class="btn-continue" (click)="goToHome()" *ngIf="step===3">Retour à l'accueil</button>
+  <button type="button" class="btn-continue" (click)="previousStep()" *ngIf="step != 3">Retour</button>
+  <button type="button" class="btn-continue" (click)="nextStep()" *ngIf="step == 1">Continuer</button>
+  <button type="button" class="btn-continue" (click)="validateOrder()" *ngIf="step === 2">Commander</button>
+  <button type="button" class="btn-continue" (click)="goToHome()" *ngIf="step === 3">Retour à l'accueil</button>
 </div>
