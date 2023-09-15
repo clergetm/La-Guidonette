@@ -1,6 +1,8 @@
 package fr.uga.laguidonette.web.rest;
 
 import fr.uga.laguidonette.domain.Product;
+import fr.uga.laguidonette.domain.enumeration.Brand;
+import fr.uga.laguidonette.domain.enumeration.Color;
 import fr.uga.laguidonette.repository.ProductRepository;
 import fr.uga.laguidonette.service.ProductService;
 import fr.uga.laguidonette.service.dto.GetProductsPageResponseDto;
@@ -160,6 +162,15 @@ public class ProductResource {
         getProductsPageResponseDto.setTotalPages(productsPage.getTotalPages());
         getProductsPageResponseDto.setTotalProducts(productsPage.getTotalElements());
         return getProductsPageResponseDto;
+    }
+
+    @GetMapping(value = "/products", params = { "categories", "colors", "brands" })
+    public List<Product> GetFilteredProducts(
+        @RequestParam("categories") List<String> categories,
+        @RequestParam("colors") List<Color> colors,
+        @RequestParam("brands") List<Brand> brands
+    ) {
+        return productService.filterProducts(categories, colors, brands);
     }
 
     /**

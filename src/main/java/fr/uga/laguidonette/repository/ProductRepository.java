@@ -1,7 +1,11 @@
 package fr.uga.laguidonette.repository;
 
 import fr.uga.laguidonette.domain.Product;
+import fr.uga.laguidonette.domain.enumeration.Brand;
+import fr.uga.laguidonette.domain.enumeration.Color;
+import java.util.List;
 import org.springframework.data.jpa.repository.*;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -9,4 +13,13 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Long> {}
+public interface ProductRepository extends JpaRepository<Product, Long> {
+    @Query(
+        "select distinct p from Product p left join p.categories c where c.name in :categories or p.color in :colors or p.brand in :brands"
+    )
+    List<Product> filterProducts(
+        @Param("categories") List<String> categories,
+        @Param("colors") List<Color> colors,
+        @Param("brands") List<Brand> brands
+    );
+}
