@@ -1,23 +1,25 @@
-import { Component, NgModule, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { SessionStorageService } from 'ngx-webstorage';
+import {Component, NgModule, OnInit, ViewChild} from '@angular/core';
+import {Router} from '@angular/router';
+import {TranslateService} from '@ngx-translate/core';
+import {SessionStorageService} from 'ngx-webstorage';
 
-import { VERSION } from 'app/app.constants';
-import { LANGUAGES } from 'app/config/language.constants';
-import { Account } from 'app/core/auth/account.model';
-import { AccountService } from 'app/core/auth/account.service';
-import { LoginService } from 'app/login/login.service';
-import { ProfileService } from 'app/layouts/profiles/profile.service';
-import { EntityNavbarItems } from 'app/entities/entity-navbar-items';
+import {VERSION} from 'app/app.constants';
+import {LANGUAGES} from 'app/config/language.constants';
+import {Account} from 'app/core/auth/account.model';
+import {AccountService} from 'app/core/auth/account.service';
+import {LoginService} from 'app/login/login.service';
+import {ProfileService} from 'app/layouts/profiles/profile.service';
+import {EntityNavbarItems} from 'app/entities/entity-navbar-items';
 
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {CartContentService} from "../../services/cart-content.service";
+import {NgbDropdown} from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
   imports: [MatSlideToggleModule],
 })
-class AppModule {}
+class AppModule {
+}
 
 @Component({
   selector: 'jhi-navbar',
@@ -32,6 +34,7 @@ export class NavbarComponent implements OnInit {
   version = '';
   account: Account | null = null;
   entitiesNavbarItems: any[] = [];
+  @ViewChild('accountMenu', {static: true}) accountMenu: NgbDropdown | undefined;
 
   constructor(
     private loginService: LoginService,
@@ -80,5 +83,18 @@ export class NavbarComponent implements OnInit {
 
   toggleNavbar(): void {
     this.isNavbarCollapsed = !this.isNavbarCollapsed;
+  }
+
+  onAccountHover(event: any) {
+    this.accountMenu?.toggle();
+  }
+
+  clickOnAccount() {
+    this.accountMenu?.toggle();
+    if (this.accountService.isAuthenticated()) {
+      this.router.navigate(['/account']);
+    } else {
+      this.router.navigate(['/login']);
+    }
   }
 }
