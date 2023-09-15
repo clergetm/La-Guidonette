@@ -21,6 +21,7 @@ Navbar
   z-index: 1000;
   width: 100%;
   top: 0;
+
   a.nav-link {
     font-weight: 400;
   }
@@ -42,6 +43,7 @@ Navbar
     text-align: center;
   }
 }
+
 /* ==========================================================================
 Logo styles
 ========================================================================== */
@@ -60,4 +62,11 @@ Logo styles
   display: inline-block;
   background: url('../../../content/images/basket-white.png') no-repeat center center;
   background-size: contain;
+}
+
+/* ==========================================================================
+Dropdown menu
+========================================================================== */
+.dropdown-menu {
+  transform: translateY(38px) !important;
 }
