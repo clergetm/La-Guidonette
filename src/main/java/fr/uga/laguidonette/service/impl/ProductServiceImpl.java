@@ -1,6 +1,8 @@
 package fr.uga.laguidonette.service.impl;
 
 import fr.uga.laguidonette.domain.Product;
+import fr.uga.laguidonette.domain.enumeration.Brand;
+import fr.uga.laguidonette.domain.enumeration.Color;
 import fr.uga.laguidonette.repository.ProductRepository;
 import fr.uga.laguidonette.service.ProductService;
 import java.util.List;
@@ -82,6 +84,12 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> findAll() {
         log.debug("Request to get all Products");
         return productRepository.findAll();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Product> filterProducts(List<String> categories, List<Color> colors, List<Brand> brands) {
+        return productRepository.filterProducts(categories, colors, brands);
     }
 
     @Override
