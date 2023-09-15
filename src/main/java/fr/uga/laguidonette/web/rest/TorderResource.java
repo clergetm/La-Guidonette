@@ -3,12 +3,15 @@ package fr.uga.laguidonette.web.rest;
 import fr.uga.laguidonette.domain.OrderLine;
 import fr.uga.laguidonette.domain.Product;
 import fr.uga.laguidonette.domain.Torder;
+import fr.uga.laguidonette.domain.User;
+import fr.uga.laguidonette.domain.enumeration.Status;
 import fr.uga.laguidonette.repository.ProductRepository;
 import fr.uga.laguidonette.repository.TorderRepository;
+import fr.uga.laguidonette.security.SecurityUtils;
 import fr.uga.laguidonette.service.OrderLineService;
 import fr.uga.laguidonette.service.ProductService;
 import fr.uga.laguidonette.service.TorderService;
-import fr.uga.laguidonette.service.dto.PostOrderDto;
+import fr.uga.laguidonette.service.UserService;
 import fr.uga.laguidonette.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -51,18 +54,22 @@ public class TorderResource {
 
     private final OrderLineService orderLineService;
 
+    private final UserService userService;
+
     public TorderResource(
         TorderService torderService,
         TorderRepository torderRepository,
         ProductRepository productRepository,
         ProductService productService,
-        OrderLineService orderLineService
+        OrderLineService orderLineService,
+        UserService userService
     ) {
         this.torderService = torderService;
         this.torderRepository = torderRepository;
         this.productRepository = productRepository;
         this.productService = productService;
         this.orderLineService = orderLineService;
+        this.userService = userService;
     }
 
     /**
@@ -87,16 +94,13 @@ public class TorderResource {
      * {@code POST  /torders} : Create a new torder using a list of orderlines and a user.
      */
     @PostMapping("/torders")
-    public ResponseEntity<Torder> createTorderFromProducts(@Valid @RequestBody PostOrderDto postOrderDto) throws URISyntaxException {
-        log.debug("REST request to save Torder from products : {}", postOrderDto);
-        if (postOrderDto.getOrderLines() == null) {
+    public ResponseEntity<Torder> createTorderFromProducts(@Valid @RequestBody List<OrderLine> orderLines) throws URISyntaxException {
+        log.debug("REST request to save Torder from products wrapped in orderlines : {}", orderLines);
+        if (orderLines == null) {
             throw new BadRequestAlertException("A new torder cannot have an empty orderlines list", "product", "noorderline");
         }
-        if (postOrderDto.getUser() == null) {
-            throw new BadRequestAlertException("A new torder must have an user", "user", "nouser");
-        }
         // Step 1: Verify that each product of each orderline has a stock >= orderline.quantity
-        for (OrderLine orderLine : postOrderDto.getOrderLines()) {
+        for (OrderLine orderLine : orderLines) {
             if (orderLine.getProduct() == null) {
                 throw new BadRequestAlertException("A new orderline must have a product", "product", "noproducts");
             }
@@ -104,19 +108,22 @@ public class TorderResource {
                 throw new BadRequestAlertException("Entity not found", "product", "idnotfound");
             }
 
-            Optional<Product> optionalProduct = productService.findOne(orderLine.getProduct().getId());
-            if (optionalProduct.get().getQuantity() < orderLine.getQuantity()) throw new BadRequestAlertException(
-                "Product " + optionalProduct.get().getId() + "has a quantity of " + optionalProduct.get().getQuantity(),
+            orderLine.setProduct(productService.findOne(orderLine.getProduct().getId()).orElseThrow());
+            if (orderLine.getProduct().getQuantity() < orderLine.getQuantity()) throw new BadRequestAlertException(
+                "Product " + orderLine.getProduct().getId() + "has a quantity of " + orderLine.getProduct().getQuantity(),
                 "product",
                 "badquantity"
             );
         }
         // Step 2: Decrement stock by quantity for each product
-        for (OrderLine orderLine : postOrderDto.getOrderLines()) {
-            orderLine.getProduct().setQuantity(orderLine.getQuantity());
+        Long total = 0L;
+        for (OrderLine orderLine : orderLines) {
+            orderLine.getProduct().setQuantity(orderLine.getProduct().getQuantity() - orderLine.getQuantity());
+            total += orderLine.getProduct().getPrice() * orderLine.getQuantity();
             try {
                 productService.update(orderLine.getProduct());
             } catch (OptimisticLockException e) {
+                log.debug("=========================Optimistic lock ! Retrying the update...");
                 Optional<Product> optionalProduct = productService.findOne(orderLine.getProduct().getId());
                 optionalProduct.get().setQuantity(orderLine.getQuantity());
                 productService.update(optionalProduct.get());
@@ -125,11 +132,16 @@ public class TorderResource {
         // Step 3: Create a new Torder
         Torder torder = new Torder();
         torder.id(null);
-        torder.userID(postOrderDto.getUser());
+        //      And add currently logged user
+        String login = SecurityUtils.getCurrentUserLogin().orElseThrow();
+        User user = userService.getUserWithAuthoritiesByLogin(login).orElseThrow();
+        torder.userID(user);
         torder.date(Instant.now());
+        torder.total(total);
+        torder.status(Status.IN_PROGRESS);
         Torder createdTorder = createTorder(torder).getBody();
         // Step 4: Create each Orderline linked with the torder and the user.
-        for (OrderLine orderLine : postOrderDto.getOrderLines()) {
+        for (OrderLine orderLine : orderLines) {
             orderLine.setTorder(createdTorder);
             orderLineService.save(orderLine);
         }
