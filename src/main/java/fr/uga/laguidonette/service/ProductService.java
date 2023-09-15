@@ -1,6 +1,8 @@
 package fr.uga.laguidonette.service;
 
 import fr.uga.laguidonette.domain.Product;
+import fr.uga.laguidonette.domain.enumeration.Brand;
+import fr.uga.laguidonette.domain.enumeration.Color;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,6 +40,7 @@ public interface ProductService {
      * @return the list of entities.
      */
     List<Product> findAll();
+    List<Product> filterProducts(List<String> categories, List<Color> colors, List<Brand> brands);
 
     /**
      * Get the "id" product.
