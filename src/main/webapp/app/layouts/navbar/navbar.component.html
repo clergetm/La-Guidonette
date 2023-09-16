@@ -184,7 +184,7 @@
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
         >
-          <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="account-menu"
+          <a class="nav-link dropdown-toggle" ngbDropdownToggle id="account-menu"
              data-cy="accountMenu"
              (mouseenter)="onAccountHover($event)"
              (mouseleave)="onAccountHover($event)"
@@ -204,7 +204,7 @@
             <li *ngSwitchCase="true">
               <a
                 class="dropdown-item"
-                routerLink="account/settings"
+                routerLink="account/user-page"
                 routerLinkActive="active"
                 (click)="collapseNavbar()"
                 data-cy="settings"
