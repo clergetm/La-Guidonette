@@ -1,0 +1,78 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Run Application",
+			"dependsOn": [
+				"Run Maven",
+				"Run Node"
+			],
+			"group":{
+                "kind": "none",
+                "isDefault": true
+            },
+			"dependsOrder": "parallel",
+			"problemMatcher": [],
+		},
+		{
+			"label": "Run Maven",
+			"type": "shell",
+			"linux": {
+				"command": "./mvnw",
+			},
+			"windows": {
+				"command": "./mvnw.cmd"
+			},
+			"group": "none",
+			"problemMatcher": [],
+			"presentation": {
+                "echo": true,
+                "reveal": "always",
+                "panel": "shared",
+                "group": "app",
+				"clear": true,
+				"close": true,
+            }
+		},
+		{
+			"label": "Run Node",
+			"type": "shell",
+			"command" : "npm",
+			"args": [
+				"start",
+			],
+			"group": "none",
+			"presentation": {
+                "echo": true,
+                "reveal": "always",
+                "panel": "shared",
+                "group": "app",
+				"clear": true,
+				"close": true,
+            },
+			"problemMatcher": [],
+		},
+		{
+			"label": "Set executable",
+			"type": "shell",
+			"linux": {
+				"command": "chmod +x mvnw npmw .husky/pre-commit",
+			}
+		},
+		{
+			"label": "Reset checkSums",
+			"type": "shell",
+			"linux": {
+				"command": "./mvnw",
+			},
+			"windows": {
+				"command": "./mvnw.cmd"
+			},
+			"args": [
+				"liquibase:clearCheckSums",
+				"liquibase:dropAll",
+			],
+			"problemMatcher": [],
+		},
+	],
+}
