@@ -17,15 +17,13 @@
     >
       <fa-icon icon="bars"></fa-icon>
     </a>
-    <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed"
-         [ngSwitch]="account !== null">
+    <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed" [ngSwitch]="account !== null">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
           <a class="nav-link" routerLink="/cart" (click)="collapseNavbar()">
             <div class="cart-icon-container">
               <span class="logo-cart"></span>
-              <span class="number-items-in-cart"
-                    *ngIf="cartContentService.getSize() > 0">{{ cartContentService.getSize() }}</span>
+              <span class="number-items-in-cart" *ngIf="cartContentService.getSize() > 0">{{ cartContentService.getSize() }}</span>
               <span>Panier</span>
             </div>
           </a>
@@ -47,8 +45,7 @@
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
         >
-          <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu"
-             data-cy="entity">
+          <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu" data-cy="entity">
             <span>
               <fa-icon icon="th-list"></fa-icon>
               <span jhiTranslate="global.menu.entities.main">Entities</span>
