@@ -17,13 +17,15 @@
     >
       <fa-icon icon="bars"></fa-icon>
     </a>
-    <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed" [ngSwitch]="account !== null">
+    <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed"
+         [ngSwitch]="account !== null">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
           <a class="nav-link" routerLink="/cart" (click)="collapseNavbar()">
             <div class="cart-icon-container">
               <span class="logo-cart"></span>
-              <span class="number-items-in-cart" *ngIf="cartContentService.getSize() > 0">{{ cartContentService.getSize() }}</span>
+              <span class="number-items-in-cart"
+                    *ngIf="cartContentService.getSize() > 0">{{ cartContentService.getSize() }}</span>
               <span>Panier</span>
             </div>
           </a>
@@ -45,7 +47,8 @@
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
         >
-          <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu" data-cy="entity">
+          <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu"
+             data-cy="entity">
             <span>
               <fa-icon icon="th-list"></fa-icon>
               <span jhiTranslate="global.menu.entities.main">Entities</span>
@@ -111,7 +114,8 @@
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
         >
-          <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="admin-menu" data-cy="adminMenu">
+          <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="admin-menu"
+             data-cy="adminMenu">
             <span>
               <fa-icon icon="users-cog"></fa-icon>
               <span jhiTranslate="global.menu.admin.main">Administration</span>
@@ -119,7 +123,8 @@
           </a>
           <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="admin-menu">
             <li>
-              <a class="dropdown-item" routerLink="admin/user-management" routerLinkActive="active" (click)="collapseNavbar()">
+              <a class="dropdown-item" routerLink="admin/user-management" routerLinkActive="active"
+                 (click)="collapseNavbar()">
                 <fa-icon icon="users" [fixedWidth]="true"></fa-icon>
                 <span jhiTranslate="global.menu.admin.userManagement">User management</span>
               </a>
@@ -137,7 +142,8 @@
               </a>
             </li>
             <li>
-              <a class="dropdown-item" routerLink="admin/configuration" routerLinkActive="active" (click)="collapseNavbar()">
+              <a class="dropdown-item" routerLink="admin/configuration" routerLinkActive="active"
+                 (click)="collapseNavbar()">
                 <fa-icon icon="cogs" [fixedWidth]="true"></fa-icon>
                 <span jhiTranslate="global.menu.admin.configuration">Configuration</span>
               </a>
@@ -177,28 +183,48 @@
                 [jhiActiveMenu]="language"
                 href="javascript:void(0);"
                 (click)="changeLanguage(language); collapseNavbar()"
-                >{{ language | findLanguageFromKey }}</a
+              >{{ language | findLanguageFromKey }}</a
               >
             </li>
           </ul>
         </li>
         <li
+          #accountMenu="ngbDropdown"
           ngbDropdown
           class="nav-item dropdown pointer"
           display="dynamic"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
         >
-          <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="account-menu" data-cy="accountMenu">
+          <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="account-menu"
+             data-cy="accountMenu"
+             (mouseenter)="onAccountHover($event)"
+             (mouseleave)="onAccountHover($event)"
+             (click)="clickOnAccount()">
             <span *ngIf="!account?.imageUrl">
               <fa-icon icon="user"></fa-icon>
               <span jhiTranslate="global.menu.account.main">Account</span>
             </span>
             <span *ngIf="account?.imageUrl">
-              <img [src]="account!.imageUrl" class="profile-image rounded-circle" alt="Avatar" />
+              <img [src]="account!.imageUrl" class="profile-image rounded-circle" alt="Avatar"/>
             </span>
           </a>
-          <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="account-menu">
+          <ul class="dropdown-menu" ngbDropdownMenu
+              aria-labelledby="account-menu"
+              (mouseenter)="onAccountHover($event)"
+              (mouseleave)="onAccountHover($event)">
+            <li *ngSwitchCase="true">
+              <a
+                class="dropdown-item"
+                routerLink="account/settings"
+                routerLinkActive="active"
+                (click)="collapseNavbar()"
+                data-cy="settings"
+              >
+                <fa-icon icon="user" [fixedWidth]="true"></fa-icon>
+                <span jhiTranslate="global.menu.account.main">Account</span>
+              </a>
+            </li>
             <li *ngSwitchCase="true">
               <a
                 class="dropdown-item"
