@@ -22,7 +22,6 @@ Navbar
   width: 100%;
   height: 70px;
   top: 0;
-
   a.nav-link {
     font-weight: 400;
   }
@@ -44,7 +43,6 @@ Navbar
     text-align: center;
   }
 }
-
 /* ==========================================================================
 Logo styles
 ========================================================================== */
@@ -58,8 +56,8 @@ Logo styles
 }
 
 .logo-cart {
-  height: 20px;
-  width: 20px;
+  height: 45px;
+  width: 45px;
   display: inline-block;
   background: url('../../../content/images/basket-white.png') no-repeat center center;
   background-size: contain;

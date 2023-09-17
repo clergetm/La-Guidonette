@@ -1,0 +1,113 @@
+@import 'variables';
+
+/* ==========================================================================
+Buttons
+========================================================================== */
+
+.button-74 {
+  background-color: $color-button-bg-normal;
+  border: 2px solid $color-button-contour;
+  border-radius: 30px;
+  box-shadow: $color-button-contour 4px 4px 0 0;
+  color: $color-button-contour;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 0 18px;
+  line-height: 50px;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-74:hover {
+  background-color: $color-button-bg-hover;
+}
+
+.button-74:active {
+  box-shadow: #422800 2px 2px 0 0;
+  transform: translate(2px, 2px);
+}
+
+@media (min-width: 768px) {
+  .button-74 {
+    min-width: 120px;
+    padding: 0 25px;
+  }
+}
+
+/* ==========================================================================
+Navbar
+========================================================================== */
+
+.navbar-version {
+  font-size: 0.65em;
+  color: $color-navbar-bg;
+}
+
+.profile-image {
+  height: 1.75em;
+  width: 1.75em;
+}
+
+.navbar {
+  padding: 0.2rem 1rem;
+  position: fixed;
+  z-index: 1000;
+  width: 100%;
+  top: 0;
+  a.nav-link {
+    font-weight: 400;
+  }
+}
+
+.navbar-category-text {
+  color: $color-navbar-tabs;
+}
+
+.navbar-title {
+  color: $color-navbar-title;
+}
+
+.navbar-version {
+  color: $color-navbar-version;
+}
+
+.cart-icon-container {
+  position: relative;
+
+  .number-items-in-cart {
+    position: absolute;
+    top: 0; /* Adjust as necessary */
+    right: 0; /* Adjust as necessary */
+    background-color: red; /* Bubble color */
+    border-radius: 50%; /* Makes it circular */
+    padding: 0.2rem 0.5rem; /* Adjust as necessary */
+    font-size: 0.8rem; /* Adjust as necessary */
+    color: white;
+    min-width: 20px; /* Ensures bubble is round and not oval with 1 digit numbers */
+    text-align: center;
+  }
+}
+/* ==========================================================================
+Logo styles
+========================================================================== */
+.logo-img {
+  height: 45px;
+  width: 45px;
+  display: inline-block;
+  vertical-align: middle;
+  background: url('../content/images/logo-jhipster.png') no-repeat center center;
+  background-size: contain;
+}
+
+.logo-cart {
+  height: 45px;
+  width: 45px;
+  display: inline-block;
+  background: url('../content/images/basket-white.png') no-repeat center center;
+  background-size: contain;
+}
