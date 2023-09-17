@@ -111,8 +111,7 @@
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
         >
-          <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="admin-menu"
-             data-cy="adminMenu">
+          <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="admin-menu" data-cy="adminMenu">
             <span>
               <fa-icon icon="users-cog"></fa-icon>
               <span jhiTranslate="global.menu.admin.main">Administration</span>
@@ -120,8 +119,7 @@
           </a>
           <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="admin-menu">
             <li>
-              <a class="dropdown-item" routerLink="admin/user-management" routerLinkActive="active"
-                 (click)="collapseNavbar()">
+              <a class="dropdown-item" routerLink="admin/user-management" routerLinkActive="active" (click)="collapseNavbar()">
                 <fa-icon icon="users" [fixedWidth]="true"></fa-icon>
                 <span jhiTranslate="global.menu.admin.userManagement">User management</span>
               </a>
@@ -139,8 +137,7 @@
               </a>
             </li>
             <li>
-              <a class="dropdown-item" routerLink="admin/configuration" routerLinkActive="active"
-                 (click)="collapseNavbar()">
+              <a class="dropdown-item" routerLink="admin/configuration" routerLinkActive="active" (click)="collapseNavbar()">
                 <fa-icon icon="cogs" [fixedWidth]="true"></fa-icon>
                 <span jhiTranslate="global.menu.admin.configuration">Configuration</span>
               </a>
@@ -180,7 +177,7 @@
                 [jhiActiveMenu]="language"
                 href="javascript:void(0);"
                 (click)="changeLanguage(language); collapseNavbar()"
-              >{{ language | findLanguageFromKey }}</a
+                >{{ language | findLanguageFromKey }}</a
               >
             </li>
           </ul>
@@ -193,23 +190,30 @@
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
         >
-          <a class="nav-link dropdown-toggle" ngbDropdownToggle id="account-menu"
-             data-cy="accountMenu"
-             (mouseenter)="onAccountIn($event)"
-             (mouseleave)="onAccountOut($event)"
-             (click)="clickOnAccount()">
+          <a
+            class="nav-link dropdown-toggle"
+            ngbDropdownToggle
+            id="account-menu"
+            data-cy="accountMenu"
+            (mouseenter)="onAccountIn($event)"
+            (mouseleave)="onAccountOut($event)"
+            (click)="clickOnAccount()"
+          >
             <span *ngIf="!account?.imageUrl">
               <fa-icon icon="user"></fa-icon>
               <span jhiTranslate="global.menu.account.main">Account</span>
             </span>
             <span *ngIf="account?.imageUrl">
-              <img [src]="account!.imageUrl" class="profile-image rounded-circle" alt="Avatar"/>
+              <img [src]="account!.imageUrl" class="profile-image rounded-circle" alt="Avatar" />
             </span>
           </a>
-          <ul class="dropdown-menu" ngbDropdownMenu
-              aria-labelledby="account-menu"
-              (mouseenter)="onAccountIn($event)"
-              (mouseleave)="onAccountOut($event)">
+          <ul
+            class="dropdown-menu"
+            ngbDropdownMenu
+            aria-labelledby="account-menu"
+            (mouseenter)="onAccountIn($event)"
+            (mouseleave)="onAccountOut($event)"
+          >
             <li *ngSwitchCase="true">
               <a
                 class="dropdown-item"
