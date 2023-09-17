@@ -1,0 +1,29 @@
+// Main theme
+$primary: #373737;
+$primary-darker: #232323;
+$secondary: #99ddcc;
+$light: #e5e7f1;
+$light-lighter: #f9faffff;
+
+// Buttons
+$color-button-bg-normal: $light;
+$color-button-bg-hover: $secondary;
+$color-button-contour: $primary;
+
+// NavBar
+$color-navbar-bg: $primary;
+$color-navbar-title: $light;
+$color-navbar-version: $secondary;
+$color-navbar-tabs: #b4dfd4ff;
+
+// Sidebar
+$color-sidebar-bg: $primary;
+$color-sidebar-element-bg: $light;
+$color-sidebar-element-text: $primary-darker;
+$color-sidebar-subelement-bg: $light-lighter;
+$color-sidebar-subelement-text: $primary-darker;
+$color-sidebar-subelement-hover-bg: $secondary;
+$color-sidebar-subelement-hover-text: $light-lighter;
+
+// Cart
+$cart-product-line: $light-lighter;

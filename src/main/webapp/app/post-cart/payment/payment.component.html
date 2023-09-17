@@ -1,18 +1,77 @@
-<div>
-  <h1 id="Arian-title">Paiement de la commande</h1>
-  <h5><i>Attention! Nos colis sont livrés dans notre magasin à Grenoble sous 3 jours ouvrés.</i></h5>
-
-  <h3>Montant à régler : {{ cartContentService.getPrice() }}€</h3>
-  <label
-    >Numéro de carte de crédit :<br /><input
+<div class="row">
+  <div class="col-25">
+    <label for="card-name">Nom sur la carte</label>
+  </div>
+  <div class="col-75">
+    <p class="upper-input-text" *ngIf="!validInputs[3]">Merci d'entrer le nom sur votre carte</p>
+    <input
+      [(ngModel)]="name"
+      [ngClass]="{ 'input-red': !validInputs[3], 'input-green': validInputs[3] }"
+      type="text"
+      id="card-name"
+      name="name"
+      placeholder="John Doe .."
+      (keyup)="formatName()"
+    />
+    <p class="lower-input-text" *ngIf="!validInputs[3]"><span *ngIf="error_name">Un nom ne peut pas être vide ! </span></p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-25">
+    <label for="card-number">Numéro de Carte</label>
+  </div>
+  <div class="col-75">
+    <p class="upper-input-text" *ngIf="!validInputs[0]">Merci d'entrer votre numéro de carte</p>
+    <input
+      [ngClass]="{ 'input-red': !validInputs[0], 'input-green': validInputs[0] }"
+      id="card-number"
       type="text"
       [(ngModel)]="cardNumber"
       (keyup)="formatCardNumber()"
       placeholder="xxxx xxxx xxxx xxxx"
-      maxlength="19"
-  /></label>
-  <label
-    >Date d'expiration : <br /><input type="text" [(ngModel)]="expiryDate" (keyup)="formatExpiryDate()" placeholder="MM/YY" maxlength="5"
-  /></label>
-  <label>CCV :<br /><input type="text" [(ngModel)]="cvv" placeholder="XXX" maxlength="3" (keyup)="formatCVV()" /></label>
+      maxlength="23"
+    />
+    <p class="lower-input-text" *ngIf="!validInputs[0]">
+      <span *ngIf="error_card_short">Numéro trop court ! </span><span *ngIf="error_card_long">Numéro trop long !</span>
+    </p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-25">
+    <label for="card-expiration">Date d'expiration</label>
+  </div>
+  <div class="col-75">
+    <p class="upper-input-text" *ngIf="!validInputs[1]">Merci d'entrer votre date d'expiration</p>
+    <input
+      [ngClass]="{ 'input-red': !validInputs[1], 'input-green': validInputs[1] }"
+      id="card-expiration"
+      type="text"
+      [(ngModel)]="expiryDate"
+      (keyup)="formatExpiryDate()"
+      placeholder="MM/YY"
+      maxlength="5"
+    />
+    <p class="lower-input-text" *ngIf="!validInputs[1]">
+      <span *ngIf="error_date_format">Une date est au format MM/YY, janvier 2023 est donc 01/23 ! </span
+      ><span *ngIf="error_date_incorrect">Cette date n'existe pas ! </span><span *ngIf="error_date_expired">Carte perimée !</span>
+    </p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-25">
+    <label for="card-cvv">CVV</label>
+  </div>
+  <div class="col-75">
+    <p class="upper-input-text" *ngIf="!validInputs[2]">Merci d'entrer votre CVV</p>
+    <input
+      [ngClass]="{ 'input-red': !validInputs[2], 'input-green': validInputs[3] }"
+      id="card-cvv"
+      type="text"
+      [(ngModel)]="cvv"
+      placeholder="XXX"
+      maxlength="3"
+      (keyup)="formatCVV()"
+    />
+    <p class="lower-input-text" *ngIf="!validInputs[2]"><span *ngIf="error_cvv">Un CVV est composé de 3 chiffres ! </span></p>
+  </div>
 </div>
