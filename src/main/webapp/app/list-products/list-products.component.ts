@@ -12,14 +12,14 @@ import { SearchService } from '../search/search-service';
 })
 export class ListProductsComponent {
   products: IProduct[] | null = null;
-  totalProducts: number = 0;
+  totalProducts = 0;
   size: number[] = [6, 9, 12];
-  currentPageSize: number = 6;
-  page: number = 0;
+  currentPageSize = 6;
+  page = 0;
   query: string | null = null;
-  searchMode: boolean = false;
+  searchMode = false;
 
-  answerFormState: boolean = false;
+  answerFormState = false;
   constructor(public productService: ProductService, public searchService: SearchService) {}
   ngOnInit(): void {
     this.fetchProducts(this.page, this.currentPageSize);
