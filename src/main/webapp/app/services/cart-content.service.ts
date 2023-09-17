@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import { IProduct } from '../entities/product/product.model';
 import { NewOrderLine } from '../entities/order-line/order-line.model';
+import { ProductService } from '../entities/product/service/product.service';
+import { CoupleProductQuantity } from '../entities/dto/CoupleProductQuantity';
 
 @Injectable({
   providedIn: 'root',
 })
-
 export class CartContentService {
   private cartItems: IProduct[] = [];
   private size = 0;
 
-  constructor() {
+  constructor(public productService: ProductService) {
     const localStorageCart: string | null = localStorage.getItem('user-cart');
     if (localStorageCart) {
       this.cartItems = JSON.parse(localStorageCart);
@@ -87,6 +88,41 @@ export class CartContentService {
       }
     }
     return newOrderlines;
+  }
+
+  getProductsAndQuantity() {
+    let coupleProductStocks: CoupleProductQuantity[] = [];
+    for (let product of this.getCartItems()) {
+      let added = false;
+      for (let index in coupleProductStocks) {
+        // @ts-ignore
+        if (product.id == coupleProductStocks[index].product.id) {
+          // @ts-ignore
+          coupleProductStocks[index].quantity++;
+          added = true;
+          break;
+        }
+      }
+      if (!added) {
+        let coupleProductStock: CoupleProductQuantity = {
+          product: product,
+          quantity: 1,
+        };
+        coupleProductStocks.push(coupleProductStock);
+      }
+    }
+    return coupleProductStocks;
+  }
+
+  refreshProducts() {
+    for (let p in this.cartItems) {
+      this.productService.find(this.cartItems[p].id).subscribe(data => {
+        if (data.body) {
+          this.cartItems[p] = data.body;
+        }
+      });
+    }
+    this.updatelocalStorageCart();
   }
 
   private updatelocalStorageCart(): void {

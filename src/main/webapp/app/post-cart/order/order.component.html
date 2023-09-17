@@ -1,8 +1,26 @@
 <div>
   <h1>Recapitulatif de commande :</h1>
   <h3>Articles contenus dans la commande :</h3>
-  <div *ngFor="let product of cartService.getCartItems()">
-    <p>{{ product.label }}, {{ product.brand }}, {{ product.color }} ({{ product.price }}€)</p>
-  </div>
-  <h3>Prix total : {{ cartService.getPrice() }}€</h3>
+  <table>
+    <thead>
+      <tr>
+        <td class="cols">Identifiant</td>
+        <td class="cols">Nom</td>
+        <td class="cols">Quantité</td>
+        <td class="cols">Quantité en stock</td>
+        <td class="cols">Prix unitaire</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let productQuantity of cartContentService?.getProductsAndQuantity()">
+        <td>{{ productQuantity.product.id }}</td>
+        <td>{{ productQuantity.product.label }}</td>
+        <td>{{ productQuantity.quantity }}</td>
+        <td>{{ productQuantity.product.quantity }}</td>
+        <td>{{ productQuantity.product.price }} €</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Prix total : {{ cartContentService?.getPrice() }}€</h3>
 </div>
