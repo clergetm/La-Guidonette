@@ -14,7 +14,7 @@
 </div>
 
 <div *ngIf="step === 1">
-  <jhi-order></jhi-order>
+  <jhi-order [cartContentService]="cartContentService"></jhi-order>
 </div>
 
 <div *ngIf="step === 2">
