@@ -198,8 +198,8 @@
         >
           <a class="nav-link dropdown-toggle" ngbDropdownToggle id="account-menu"
              data-cy="accountMenu"
-             (mouseenter)="onAccountHover($event)"
-             (mouseleave)="onAccountHover($event)"
+             (mouseenter)="onAccountIn($event)"
+             (mouseleave)="onAccountOut($event)"
              (click)="clickOnAccount()">
             <span *ngIf="!account?.imageUrl">
               <fa-icon icon="user"></fa-icon>
@@ -211,8 +211,8 @@
           </a>
           <ul class="dropdown-menu" ngbDropdownMenu
               aria-labelledby="account-menu"
-              (mouseenter)="onAccountHover($event)"
-              (mouseleave)="onAccountHover($event)">
+              (mouseenter)="onAccountIn($event)"
+              (mouseleave)="onAccountOut($event)">
             <li *ngSwitchCase="true">
               <a
                 class="dropdown-item"
@@ -256,22 +256,7 @@
               </a>
             </li>
             <li *ngSwitchCase="false">
-              <a class="dropdown-item" (click)="login()" id="login" data-cy="login">
-                <fa-icon icon="sign-in-alt" [fixedWidth]="true"></fa-icon>
-                <span jhiTranslate="global.menu.account.login">Sign in</span>
-              </a>
-            </li>
-            <li *ngSwitchCase="false">
-              <a
-                class="dropdown-item"
-                routerLink="account/register"
-                routerLinkActive="active"
-                (click)="collapseNavbar()"
-                data-cy="register"
-              >
-                <fa-icon icon="user-plus" [fixedWidth]="true"></fa-icon>
-                <span jhiTranslate="global.menu.account.register">Register</span>
-              </a>
+              <jhi-login></jhi-login>
             </li>
           </ul>
         </li>
