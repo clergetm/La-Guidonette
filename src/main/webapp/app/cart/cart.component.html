@@ -1,6 +1,6 @@
 <div class="top-container">
   <span>
-    <button type="button" id="btn-cart-delete-all" (click)="deleteCart()">Supprimer panier</button>
+    <button type="button" class="button-74" id="btn-cart-delete-all" (click)="deleteCart()">Supprimer panier</button>
   </span>
 </div>
 
@@ -10,11 +10,15 @@
       <p>{{ product.label }}</p>
       <p>{{ product.brand }}, {{ product.color }}</p>
     </div>
-    <button type="button" id="delete-one-from-cart" (click)="deleteItem(product)">Delete</button>
+    <button type="button" class="button-74" id="delete-one-from-cart" (click)="deleteItem(product)">Delete</button>
   </div>
 </div>
 
 <div class="bot-container" routerLinkActive="active">
-  <button type="button" id="btn-cart-login" routerLink="/order" *ngIf="account.isAuthenticated()">Commander panier</button>
-  <button type="button" id="btn-cart-continue" routerLink="/login" *ngIf="!account.isAuthenticated()">Commander panier</button>
+  <button type="button" class="button-74" id="btn-cart-login" routerLink="/order" *ngIf="account.isAuthenticated()">
+    Commander panier
+  </button>
+  <button type="button" class="button-74" id="btn-cart-continue" routerLink="/login" *ngIf="!account.isAuthenticated()">
+    Commander panier
+  </button>
 </div>

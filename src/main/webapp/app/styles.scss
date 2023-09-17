@@ -1,6 +1,14 @@
 @import 'variables';
 
 /* ==========================================================================
+Main page
+========================================================================== */
+.main-page {
+  background-color: $light;
+  color: $primary-darker;
+}
+
+/* ==========================================================================
 Buttons
 ========================================================================== */
 
@@ -110,4 +118,36 @@ Logo styles
   display: inline-block;
   background: url('../content/images/basket-white.png') no-repeat center center;
   background-size: contain;
+}
+
+/* ==========================================================================
+Side Bar
+========================================================================== */
+.sidebar {
+  background-color: $color-sidebar-bg;
+}
+.sidebar-category {
+  background-color: $color-sidebar-element-bg;
+  color: $color-sidebar-element-text;
+}
+.sidebar-element {
+  background-color: $color-sidebar-subelement-bg;
+  color: $color-sidebar-subelement-text;
+}
+.sidebar-element:hover {
+  background-color: $color-sidebar-subelement-hover-bg;
+  color: $color-sidebar-subelement-hover-text;
+}
+
+/* ==========================================================================
+Cart
+========================================================================== */
+.cart-product-container {
+  display: flex;
+  align-items: center;
+  .product-image {
+    width: 300px;
+    height: auto;
+    margin-right: 10px;
+  }
 }
