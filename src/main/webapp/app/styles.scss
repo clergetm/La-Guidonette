@@ -1,0 +1,399 @@
+@import 'variables';
+
+/* ==========================================================================
+Main page
+========================================================================== */
+.main-page {
+  background-color: $light;
+  color: $primary-darker;
+  flex: 1 0 auto;
+}
+
+/* ==========================================================================
+Buttons
+========================================================================== */
+
+.button-74 {
+  background-color: $light-lighter;
+  border: 2px solid $color-button-contour;
+  border-radius: 30px;
+  box-shadow: $color-button-contour 4px 4px 0 0;
+  color: $color-button-contour;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 0 18px;
+  line-height: 50px;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-74:hover {
+  background-color: $color-button-bg-hover;
+}
+
+.button-74:active {
+  box-shadow: #422800 2px 2px 0 0;
+  transform: translate(2px, 2px);
+}
+.button-74-small:active {
+  box-shadow: #422800 1px 1px 0 0;
+  transform: translate(1px, 1px);
+}
+
+@media (min-width: 768px) {
+  .button-74 {
+    min-width: 120px;
+    padding: 0 25px;
+  }
+}
+
+.button-74:disabled,
+.button-74[disabled],
+.button-74:disabled:hover,
+.button-74:disabled:active {
+  @extend .button-74;
+  background-color: lightgray;
+  cursor: default;
+  box-shadow: $color-button-contour 4px 4px 0 0;
+  transform: none;
+}
+
+.button-74-small {
+  background-color: $color-button-bg-normal;
+  border: 2px solid $color-button-contour;
+  color: $color-button-contour;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 18px;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  border-radius: 10px;
+  box-shadow: $color-button-contour 2px 2px 0 0;
+  padding: 0 6px;
+  line-height: 17px;
+}
+
+.button-74-small:hover {
+  background-color: $color-button-bg-hover;
+}
+.button-74-small:active {
+  box-shadow: #422800 1px 1px 0 0;
+  transform: translate(1px, 1px);
+}
+
+.button-delete {
+  background-image: url('../content/images/trash-delete-bin.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-color: $light;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  width: 35px;
+  height: 35px;
+}
+
+/* ==========================================================================
+Navbar
+========================================================================== */
+
+.navbar-version {
+  font-size: 0.65em;
+  color: $color-navbar-bg;
+}
+
+.profile-image {
+  height: 1.75em;
+  width: 1.75em;
+}
+
+.navbar {
+  padding: 0.2rem 1rem;
+  position: fixed;
+  z-index: 1000;
+  width: 100%;
+  top: 0;
+  a.nav-link {
+    font-weight: 400;
+  }
+}
+
+.navbar-category-text {
+  color: $color-navbar-tabs;
+}
+
+.navbar-title {
+  color: $color-navbar-title;
+}
+
+.navbar-version {
+  color: $color-navbar-version;
+}
+
+.cart-icon-container {
+  position: relative;
+
+  .number-items-in-cart {
+    position: absolute;
+    top: 0; /* Adjust as necessary */
+    right: 0; /* Adjust as necessary */
+    background-color: red; /* Bubble color */
+    border-radius: 50%; /* Makes it circular */
+    padding: 0.2rem 0.5rem; /* Adjust as necessary */
+    font-size: 0.8rem; /* Adjust as necessary */
+    color: white;
+    min-width: 20px; /* Ensures bubble is round and not oval with 1 digit numbers */
+    text-align: center;
+  }
+}
+/* ==========================================================================
+Logo styles
+========================================================================== */
+.logo-img {
+  height: 45px;
+  width: 45px;
+  display: inline-block;
+  vertical-align: middle;
+  background: url('../content/images/logo-jhipster.png') no-repeat center center;
+  background-size: contain;
+}
+
+.logo-cart {
+  height: 45px;
+  width: 45px;
+  display: inline-block;
+  background: url('../content/images/basket-white.png') no-repeat center center;
+  background-size: contain;
+}
+
+/* ==========================================================================
+Side Bar
+========================================================================== */
+.sidebar {
+  background-color: $color-sidebar-bg;
+}
+.sidebar-category {
+  background-color: $color-sidebar-element-bg;
+  color: $color-sidebar-element-text;
+}
+.sidebar-element {
+  background-color: $color-sidebar-subelement-bg;
+  color: $color-sidebar-subelement-text;
+}
+.sidebar-element:hover {
+  background-color: $color-sidebar-subelement-hover-bg;
+  color: $color-sidebar-subelement-hover-text;
+}
+
+/* ==========================================================================
+Cart
+========================================================================== */
+.cart-product-container {
+  display: flex;
+  align-items: center;
+  .product-image {
+    width: 300px;
+    height: auto;
+    margin-right: 10px;
+  }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
+
+//@import url('https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css');
+// Importing the whole file causes issues
+.font-weight-bold {
+  font-weight: 700 !important;
+}
+.mt-1,
+.my-1 {
+  margin-top: 0.25rem !important;
+}
+.mr-1,
+.mx-1 {
+  margin-right: 0.25rem !important;
+}
+.ml-1,
+.mx-1 {
+  margin-left: 0.25rem !important;
+}
+.col-md-8 {
+  -ms-flex: 0 0 66.666667%;
+  flex: 0 0 66.666667%;
+  max-width: 66.666667%;
+  position: relative;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+body {
+  font-family: 'Manrope', sans-serif;
+  background: #eee;
+}
+
+.size span {
+  font-size: 11px;
+}
+
+.color span {
+  font-size: 11px;
+}
+
+.product-deta {
+  margin-right: 70px;
+}
+
+.gift-card:focus {
+  box-shadow: none;
+}
+
+.pay-button {
+  color: #fff;
+}
+
+.pay-button:hover {
+  color: #fff;
+}
+
+.pay-button:focus {
+  color: #fff;
+  box-shadow: none;
+}
+
+.text-grey {
+  color: #a39f9f;
+}
+
+.qty i {
+  font-size: 11px;
+}
+
+.cart-line {
+  background-color: $light;
+  color: $primary-darker;
+  border: $primary-darker 1px solid;
+  box-shadow: $primary 3px;
+}
+
+/* ==========================================================================
+POST CART
+========================================================================== */
+/* =============================== ORDER ================================ */
+
+// Nice ball from https://cssanimation.rocks/spheres/
+.ball {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  border-radius: 50%;
+  position: relative;
+  background: radial-gradient(circle at 50% 120%, #81e8f6, #76deef 10%, #055194 80%, #062745 100%);
+}
+
+.ball-passed {
+  @extend .ball;
+  background: radial-gradient(circle at 50% 120%, #abf88a, #88ef76 10%, #05940a 80%, #064507 100%);
+}
+
+.ball:before {
+  content: '';
+  position: absolute;
+  top: 1%;
+  left: 5%;
+  width: 90%;
+  height: 90%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 0px, #ffffff, rgba(255, 255, 255, 0) 58%);
+  -webkit-filter: blur(5px);
+  z-index: 2;
+}
+
+.ball .shadow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1) 40%, rgba(0, 0, 0, 0) 50%);
+  -webkit-transform: rotateX(90deg) translateZ(-150px);
+  -moz-transform: rotateX(90deg) translateZ(-150px);
+  -ms-transform: rotateX(90deg) translateZ(-150px);
+  -o-transform: rotateX(90deg) translateZ(-150px);
+  transform: rotateX(90deg) translateZ(-150px);
+  z-index: -1;
+}
+.stage {
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  margin: 20px;
+  -webkit-perspective: 1200px;
+  -moz-perspective: 1200px;
+  -ms-perspective: 1200px;
+  -o-perspective: 1200px;
+  perspective: 1200px;
+  -webkit-perspective-origin: 50% 50%;
+  -moz-perspective-origin: 50% 50%;
+  -ms-perspective-origin: 50% 50%;
+  -o-perspective-origin: 50% 50%;
+  perspective-origin: 50% 50%;
+}
+
+.ligne-arianne {
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+  align-items: center;
+  align-content: center;
+  position: relative;
+  margin: 20px auto;
+}
+
+.bottom-button {
+  width: 50%;
+  display: inline;
+  margin: 20px auto;
+}
+
+/* ================= PAYMENT ================== */
+.payment-container {
+  border-radius: 5px;
+  padding: 20px;
+}
+
+/* ==========================================================================
+Warning messages
+========================================================================== */
+
+// https://www.w3schools.com/howto/howto_js_alert.asp
+.alert {
+  padding: 20px;
+  background-color: #6f0c05;
+  color: white;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}
