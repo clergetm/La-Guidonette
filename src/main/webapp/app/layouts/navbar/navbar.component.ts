@@ -34,7 +34,7 @@ export class NavbarComponent implements OnInit {
   version = '';
   account: Account | null = null;
   entitiesNavbarItems: any[] = [];
-  @ViewChild('accountMenu', {static: true}) accountMenu: NgbDropdown | undefined;
+  @ViewChild('accountMenu') accountMenu: NgbDropdown | undefined;
 
   constructor(
     private loginService: LoginService,
@@ -85,14 +85,18 @@ export class NavbarComponent implements OnInit {
     this.isNavbarCollapsed = !this.isNavbarCollapsed;
   }
 
-  onAccountHover(event: any) {
-    this.accountMenu?.toggle();
+  onAccountIn(event: any) {
+    this.accountMenu?.open();
+  }
+
+  onAccountOut(event: any) {
+    this.accountMenu?.close();
   }
 
   clickOnAccount() {
     this.accountMenu?.toggle();
     if (this.accountService.isAuthenticated()) {
-      this.router.navigate(['/account']);
+      this.router.navigate(['/account/user-page']);
     } else {
       this.router.navigate(['/login']);
     }
