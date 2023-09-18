@@ -78,6 +78,19 @@ Buttons
   transform: translate(1px, 1px);
 }
 
+.button-delete {
+  background-image: url('../content/images/trash-delete-bin.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-color: $cart-product-line;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  width: 35px;
+  height: 35px;
+}
+
 /* ==========================================================================
 Navbar
 ========================================================================== */
@@ -227,4 +240,9 @@ body {
 
 .qty i {
   font-size: 11px;
+}
+
+.cart-line {
+  background-color: $cart-product-line;
+  color: $primary-darker;
 }
