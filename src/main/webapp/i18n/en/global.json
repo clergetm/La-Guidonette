@@ -15,6 +15,7 @@
       },
       "account": {
         "main": "Account",
+        "user-page": "Profil",
         "settings": "Settings",
         "password": "Password",
         "sessions": "Sessions",

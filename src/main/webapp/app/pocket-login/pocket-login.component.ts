@@ -10,7 +10,7 @@ import { AccountService } from 'app/core/auth/account.service';
   templateUrl: './pocket-login.component.html',
   styleUrls: ['./pocket-login.component.scss'],
 })
-export class PocketLoginComponent implements OnInit, AfterViewInit {
+export class PocketLoginComponent implements AfterViewInit {
   @ViewChild('username', { static: false })
   username!: ElementRef;
 
@@ -23,15 +23,6 @@ export class PocketLoginComponent implements OnInit, AfterViewInit {
   });
 
   constructor(private accountService: AccountService, private loginService: LoginService, private router: Router) {}
-
-  ngOnInit(): void {
-    // if already authenticated then navigate to home page
-    this.accountService.identity().subscribe(() => {
-      if (this.accountService.isAuthenticated()) {
-        this.router.navigate(['']);
-      }
-    });
-  }
 
   ngAfterViewInit(): void {
     this.username.nativeElement.focus();

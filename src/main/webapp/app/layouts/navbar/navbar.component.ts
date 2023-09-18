@@ -84,15 +84,15 @@ export class NavbarComponent implements OnInit {
     this.isNavbarCollapsed = !this.isNavbarCollapsed;
   }
 
-  onAccountIn(event: any) {
+  onAccountIn(): void {
     this.accountMenu?.open();
   }
 
-  onAccountOut(event: any) {
+  onAccountOut(): void {
     this.accountMenu?.close();
   }
 
-  clickOnAccount() {
+  clickOnAccount(): void {
     this.accountMenu?.toggle();
     if (this.accountService.isAuthenticated()) {
       this.router.navigate(['/account/user-page']);

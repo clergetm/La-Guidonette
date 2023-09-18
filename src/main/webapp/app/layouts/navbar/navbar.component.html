@@ -195,8 +195,8 @@
             ngbDropdownToggle
             id="account-menu"
             data-cy="accountMenu"
-            (mouseenter)="onAccountIn($event)"
-            (mouseleave)="onAccountOut($event)"
+            (mouseenter)="onAccountIn()"
+            (mouseleave)="onAccountOut()"
             (click)="clickOnAccount()"
           >
             <span *ngIf="!account?.imageUrl">
@@ -211,8 +211,8 @@
             class="dropdown-menu"
             ngbDropdownMenu
             aria-labelledby="account-menu"
-            (mouseenter)="onAccountIn($event)"
-            (mouseleave)="onAccountOut($event)"
+            (mouseenter)="onAccountIn()"
+            (mouseleave)="onAccountOut()"
           >
             <li *ngSwitchCase="true">
               <a
