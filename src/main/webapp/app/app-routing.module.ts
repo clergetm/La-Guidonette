@@ -29,6 +29,10 @@ import { UserRouteAccessService } from 'app/core/auth/user-route-access.service'
           loadChildren: () => import('./login/login.module').then(m => m.LoginModule),
         },
         {
+          path: 'pocket-login',
+          loadChildren: () => import('./pocket-login/pocket-login.module').then(m => m.PocketLoginModule),
+        },
+        {
           path: '',
           loadChildren: () => import('./home/home.module').then(m => m.HomeModule),
         },

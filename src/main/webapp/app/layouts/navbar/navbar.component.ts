@@ -1,4 +1,4 @@
-import { Component, NgModule, OnInit } from '@angular/core';
+import { Component, NgModule, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { SessionStorageService } from 'ngx-webstorage';
@@ -12,7 +12,8 @@ import { ProfileService } from 'app/layouts/profiles/profile.service';
 import { EntityNavbarItems } from 'app/entities/entity-navbar-items';
 
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import {CartContentService} from "../../services/cart-content.service";
+import { CartContentService } from '../../services/cart-content.service';
+import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [MatSlideToggleModule],
@@ -32,6 +33,7 @@ export class NavbarComponent implements OnInit {
   version = '';
   account: Account | null = null;
   entitiesNavbarItems: any[] = [];
+  @ViewChild('accountMenu') accountMenu: NgbDropdown | undefined;
 
   constructor(
     private loginService: LoginService,
@@ -80,5 +82,22 @@ export class NavbarComponent implements OnInit {
 
   toggleNavbar(): void {
     this.isNavbarCollapsed = !this.isNavbarCollapsed;
+  }
+
+  onAccountIn(): void {
+    this.accountMenu?.open();
+  }
+
+  onAccountOut(): void {
+    this.accountMenu?.close();
+  }
+
+  clickOnAccount(): void {
+    this.accountMenu?.toggle();
+    if (this.accountService.isAuthenticated()) {
+      this.router.navigate(['/account/user-page']);
+    } else {
+      this.router.navigate(['/login']);
+    }
   }
 }
