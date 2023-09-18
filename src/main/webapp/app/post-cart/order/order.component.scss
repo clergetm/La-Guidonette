@@ -1,0 +1,17 @@
+table {
+  width: 100%; /* Makes the table stick to the edges */
+  border-collapse: collapse; /* Removes the double borders */
+  font-size: 18px; /* Sets the font size */
+  background-color: #edeef4;
+}
+
+th,
+td {
+  border: 1px solid #4d4d4d; /* Sets the border */
+  padding: 8px; /* Adds some padding for better appearance */
+}
+
+th {
+  background-color: #4d4d4d; /* Sets the background color for categories */
+  color: #d6d6d6;
+}
