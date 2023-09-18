@@ -10,7 +10,7 @@ INSERT INTO product VALUES (3, 'Vélo de route RCR PRO RED ETAP AXS POWER', 'Vé
 INSERT INTO product VALUES (4, 'VTT All Mountain SPECIALIZED pro', 'Descendez aussi vite que vous montez grâce à ce VTT tout suspendu de qualité supérieure.', 7200, 'SPECIALIZED', 'Stumpjumper Pro', 'BLUE', 3, 'stump.png', 1);
 INSERT INTO product VALUES (5, 'Vélo de route Allez Alu CC', 'Vélo de route milieu de gamme qui convient à une activité régulière.', 1200, 'SPECIALIZED', 'Allez', 'RED', 5, 'allez.png', 1);
 INSERT INTO product VALUES (6, 'VTT Trail Orbea Gloss Alu', 'Vélo Tout Terrain milieu de gamme de la célèbre marque Orbea.', 3500, 'ORBEA', 'Occam H20', 'YELLOW', 3, 'occam.png', 1);
-INSERT INTO product VALUES (7, 'Velo de route Endurance Avant Orbea', 'Vélo de route destiné aux cyclistes réguliers exigeant un vélo robuste et rigide', 2000, 'ORBEA', 'Avant H60', 'BLUE', 3, 'avant.png', 1);
+INSERT INTO product VALUES (7, 'Velo de route Endurance Avant Orbea', 'Vélo de route destiné aux cyclistes réguliers exigeant un vélo robuste et rigide.', 2000, 'ORBEA', 'Avant H60', 'BLUE', 3, 'avant.png', 1);
 
 -- Add categories
 INSERT INTO category VALUES (1, 'Tout-suspendu');
