@@ -29,10 +29,18 @@
           </a>
         </li>
         <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-          <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
+          <a class="nav-link" routerLink="" (click)="collapseNavbar()">
             <span>
               <fa-icon icon="home"></fa-icon>
               <span jhiTranslate="global.menu.home">Home</span>
+            </span>
+          </a>
+        </li>
+        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <a class="nav-link" routerLink="/search" (click)="collapseNavbar()">
+            <span>
+              <fa-icon icon="search"></fa-icon>
+              <span>Search</span>
             </span>
           </a>
         </li>
@@ -55,7 +63,7 @@
             <li>
               <a
                 class="dropdown-item"
-                routerLink="product"
+                routerLink="entity/product"
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }"
                 (click)="collapseNavbar()"
@@ -67,7 +75,7 @@
             <li>
               <a
                 class="dropdown-item"
-                routerLink="category"
+                routerLink="entity/category"
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }"
                 (click)="collapseNavbar()"
@@ -79,7 +87,7 @@
             <li>
               <a
                 class="dropdown-item"
-                routerLink="torder"
+                routerLink="entity/torder"
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }"
                 (click)="collapseNavbar()"
@@ -91,7 +99,7 @@
             <li>
               <a
                 class="dropdown-item"
-                routerLink="order-line"
+                routerLink="entity/order-line"
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }"
                 (click)="collapseNavbar()"

@@ -33,8 +33,12 @@ import { UserRouteAccessService } from 'app/core/auth/user-route-access.service'
           loadChildren: () => import('./pocket-login/pocket-login.module').then(m => m.PocketLoginModule),
         },
         {
-          path: 'products',
-          loadChildren: () => import('./list-products/list-products.module').then(m => m.ListProductsModule),
+          path: '',
+          loadChildren: () => import('./home/home.module').then(m => m.HomeModule),
+        },
+        {
+          path: 'search',
+          loadChildren: () => import('./search/search/search.module').then(m => m.SearchModule),
         },
         {
           path: 'cart',
@@ -49,7 +53,7 @@ import { UserRouteAccessService } from 'app/core/auth/user-route-access.service'
           loadChildren: () => import('./product-page/product-page.module').then(m => m.ProductPageModule),
         },
         {
-          path: '',
+          path: 'entity',
           loadChildren: () => import(`./entities/entity-routing.module`).then(m => m.EntityRoutingModule),
         },
         navbarRoute,

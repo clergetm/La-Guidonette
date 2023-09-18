@@ -26,12 +26,12 @@ import { ActiveMenuDirective } from './layouts/navbar/active-menu.directive';
 import { ErrorComponent } from './layouts/error/error.component';
 import { HeaderComponent } from './layouts/header/header.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { ProductPageComponent } from './product-page/product-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginModule } from './login/login.module';
 import { PocketLoginComponent } from './pocket-login/pocket-login.component';
 import { PocketLoginModule } from './pocket-login/pocket-login.module';
 import { ProductPageModule } from './product-page/product-page.module';
+import { SearchModule } from './search/search/search.module';
 
 @NgModule({
   imports: [
@@ -50,6 +50,7 @@ import { ProductPageModule } from './product-page/product-page.module';
     LoginModule,
     PocketLoginModule,
     ProductPageModule,
+    SearchModule,
   ],
   providers: [
     Title,

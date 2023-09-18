@@ -21,7 +21,7 @@
         <dt><span jhiTranslate="laGuidonetteApp.category.product">Product</span></dt>
         <dd>
           <span *ngFor="let product of category.products; let last = last">
-            <a [routerLink]="['/product', product.id, 'view']">{{ product.id }}</a
+            <a [routerLink]="['/entity/product', product.id, 'view']">{{ product.id }}</a
             >{{ last ? '' : ', ' }}
           </span>
         </dd>
@@ -31,7 +31,7 @@
         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
       </button>
 
-      <button type="button" [routerLink]="['/category', category.id, 'edit']" class="btn btn-primary">
+      <button type="button" [routerLink]="['/entity/category', category.id, 'edit']" class="btn btn-primary">
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
       </button>
     </div>

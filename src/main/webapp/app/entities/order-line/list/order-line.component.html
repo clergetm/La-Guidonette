@@ -12,7 +12,7 @@
         id="jh-create-entity"
         data-cy="entityCreateButton"
         class="btn btn-primary jh-create-entity create-order-line"
-        [routerLink]="['/order-line/new']"
+        [routerLink]="['/entity/order-line/new']"
       >
         <fa-icon icon="plus"></fa-icon>
         <span jhiTranslate="laGuidonetteApp.orderLine.home.createLabel"> Create a new Order Line </span>
@@ -62,24 +62,24 @@
       <tbody>
         <tr *ngFor="let orderLine of orderLines; trackBy: trackId" data-cy="entityTable">
           <td>
-            <a [routerLink]="['/order-line', orderLine.id, 'view']">{{ orderLine.id }}</a>
+            <a [routerLink]="['/entity/order-line', orderLine.id, 'view']">{{ orderLine.id }}</a>
           </td>
           <td>{{ orderLine.quantity }}</td>
           <td>
             <div *ngIf="orderLine.product">
-              <a [routerLink]="['/product', orderLine.product.id, 'view']">{{ orderLine.product.id }}</a>
+              <a [routerLink]="['/entity/product', orderLine.product.id, 'view']">{{ orderLine.product.id }}</a>
             </div>
           </td>
           <td>
             <div *ngIf="orderLine.torder">
-              <a [routerLink]="['/torder', orderLine.torder.id, 'view']">{{ orderLine.torder.id }}</a>
+              <a [routerLink]="['/entity/torder', orderLine.torder.id, 'view']">{{ orderLine.torder.id }}</a>
             </div>
           </td>
           <td class="text-end">
             <div class="btn-group">
               <button
                 type="submit"
-                [routerLink]="['/order-line', orderLine.id, 'view']"
+                [routerLink]="['/entity/order-line', orderLine.id, 'view']"
                 class="btn btn-info btn-sm"
                 data-cy="entityDetailsButton"
               >
@@ -89,7 +89,7 @@
 
               <button
                 type="submit"
-                [routerLink]="['/order-line', orderLine.id, 'edit']"
+                [routerLink]="['/entity/order-line', orderLine.id, 'edit']"
                 class="btn btn-primary btn-sm"
                 data-cy="entityEditButton"
               >
