@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../core/auth/account.service';
 import { Router } from '@angular/router';
 import { TorderService } from '../entities/torder/service/torder.service';
-import { IOrderLine, NewOrderLine } from '../entities/order-line/order-line.model';
+import { NewOrderLine } from '../entities/order-line/order-line.model';
 import { ITorder } from '../entities/torder/torder.model';
 import { CartContentService } from '../services/cart-content.service';
 
@@ -40,6 +40,7 @@ export class PostCartComponent implements OnInit {
     this.postOrder = this.createOrderlines();
     this.torderService.createOrderFromProducts(this.postOrder).subscribe(data => {
       this.itorder = data;
+      this.cartContentService.removeAll();
       this.nextStep();
     });
   }
