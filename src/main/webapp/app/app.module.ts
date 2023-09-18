@@ -29,6 +29,9 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ProductPageComponent } from './product-page/product-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginModule } from './login/login.module';
+import { PocketLoginComponent } from './pocket-login/pocket-login.component';
+import { PocketLoginModule } from './pocket-login/pocket-login.module';
+import { ProductPageModule } from './product-page/product-page.module';
 
 @NgModule({
   imports: [
@@ -45,6 +48,8 @@ import { LoginModule } from './login/login.module';
     MatSlideToggleModule,
     BrowserAnimationsModule,
     LoginModule,
+    PocketLoginModule,
+    ProductPageModule,
   ],
   providers: [
     Title,
