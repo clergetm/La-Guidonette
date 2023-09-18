@@ -12,13 +12,11 @@ import { SearchService } from '../search/service/search-service';
 export class ListProductsComponent {
   @Input() products: IProduct[] | null = null;
   query: string | null = null;
+  protected readonly onsubmit = onsubmit;
 
   constructor(public productService: ProductService, public searchService: SearchService) {}
 
-  ngOnInit(): void {
-    console.log(this.products);
-  }
-  onSubmit() {
+  onSubmit(): void {
     if (this.query) {
       this.searchService.search(this.query).subscribe(data => {
         this.products = data;
@@ -26,5 +24,4 @@ export class ListProductsComponent {
     }
   }
 
-  protected readonly onsubmit = onsubmit;
 }

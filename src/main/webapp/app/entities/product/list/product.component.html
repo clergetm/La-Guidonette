@@ -1,11 +1,11 @@
 <div>
   <h2 id="page-heading" data-cy="ProductHeading">
-    <span jhiTranslate="laGuidonetteApp.product.home.title">Products</span>
+    <span>Gestion des velos</span>
 
     <div class="d-flex justify-content-end">
       <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
-        <span jhiTranslate="laGuidonetteApp.product.home.refreshListLabel">Refresh list</span>
+        <span>Refresh list</span>
       </button>
 
       <button
@@ -15,7 +15,7 @@
         [routerLink]="['/entity/product/new']"
       >
         <fa-icon icon="plus"></fa-icon>
-        <span jhiTranslate="laGuidonetteApp.product.home.createLabel"> Create a new Product </span>
+        <span> Create a new Product </span>
       </button>
     </div>
   </h2>
@@ -25,7 +25,7 @@
   <jhi-alert></jhi-alert>
 
   <div class="alert alert-warning" id="no-result" *ngIf="products?.length === 0">
-    <span jhiTranslate="laGuidonetteApp.product.home.notFound">No Products found</span>
+    <span>No Products found</span>
   </div>
 
   <div class="table-responsive table-entities" id="entities" *ngIf="products && products.length > 0">
@@ -34,61 +34,61 @@
         <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
           <th scope="col" jhiSortBy="id">
             <div class="d-flex">
-              <span jhiTranslate="global.field.id">ID</span>
+              <span>ID</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
           <th scope="col" jhiSortBy="label">
             <div class="d-flex">
-              <span jhiTranslate="laGuidonetteApp.product.label">Label</span>
+              <span>Label</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
           <th scope="col" jhiSortBy="description">
             <div class="d-flex">
-              <span jhiTranslate="laGuidonetteApp.product.description">Description</span>
+              <span>Description</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
           <th scope="col" jhiSortBy="price">
             <div class="d-flex">
-              <span jhiTranslate="laGuidonetteApp.product.price">Price</span>
+              <span>Price</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
           <th scope="col" jhiSortBy="brand">
             <div class="d-flex">
-              <span jhiTranslate="laGuidonetteApp.product.brand">Brand</span>
+              <span>Brand</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
           <th scope="col" jhiSortBy="model">
             <div class="d-flex">
-              <span jhiTranslate="laGuidonetteApp.product.model">Model</span>
+              <span>Model</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
           <th scope="col" jhiSortBy="color">
             <div class="d-flex">
-              <span jhiTranslate="laGuidonetteApp.product.color">Color</span>
+              <span>Color</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
           <th scope="col" jhiSortBy="quantity">
             <div class="d-flex">
-              <span jhiTranslate="laGuidonetteApp.product.quantity">Quantity</span>
+              <span>Quantity</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
           <th scope="col" jhiSortBy="imageName">
             <div class="d-flex">
-              <span jhiTranslate="laGuidonetteApp.product.imageName">Image Name</span>
+              <span>Image Name</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
           <th scope="col" jhiSortBy="version">
             <div class="d-flex">
-              <span jhiTranslate="laGuidonetteApp.product.version">Version</span>
+              <span>Version</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
@@ -103,9 +103,9 @@
           <td>{{ product.label }}</td>
           <td>{{ product.description }}</td>
           <td>{{ product.price }}</td>
-          <td jhiTranslate="{{ 'laGuidonetteApp.Brand.' + product.brand }}">{{ product.brand }}</td>
+          <td>{{ product.brand }}</td>
           <td>{{ product.model }}</td>
-          <td jhiTranslate="{{ 'laGuidonetteApp.Color.' + product.color }}">{{ product.color }}</td>
+          <td>{{ product.color }}</td>
           <td>{{ product.quantity }}</td>
           <td>{{ product.imageName }}</td>
           <td>{{ product.version }}</td>
@@ -118,7 +118,7 @@
                 data-cy="entityDetailsButton"
               >
                 <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                <span class="d-none d-md-inline">View</span>
               </button>
 
               <button
@@ -128,12 +128,12 @@
                 data-cy="entityEditButton"
               >
                 <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                <span class="d-none d-md-inline">Edit</span>
               </button>
 
               <button type="submit" (click)="delete(product)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
                 <fa-icon icon="times"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                <span class="d-none d-md-inline">Delete</span>
               </button>
             </div>
           </td>

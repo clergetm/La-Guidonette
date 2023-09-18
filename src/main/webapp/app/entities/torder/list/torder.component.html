@@ -1,10 +1,11 @@
 <div>
   <h2 id="page-heading" data-cy="TorderHeading">
-    <span jhiTranslate="laGuidonetteApp.torder.home.title">Torders</span>
+    <span>Torders</span>
+
     <div class="d-flex justify-content-end">
       <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
-        <span jhiTranslate="laGuidonetteApp.torder.home.refreshListLabel">Refresh list</span>
+        <span>Refresh list</span>
       </button>
       <button
         id="jh-create-entity"
@@ -13,7 +14,7 @@
         [routerLink]="['/entity/torder/new']"
       >
         <fa-icon icon="plus"></fa-icon>
-        <span jhiTranslate="laGuidonetteApp.torder.home.createLabel"> Create a new Torder </span>
+        <span> Create a new Torder </span>
       </button>
     </div>
   </h2>
@@ -23,7 +24,7 @@
   <jhi-alert></jhi-alert>
 
   <div class="alert alert-warning" id="no-result" *ngIf="torders?.length === 0">
-    <span jhiTranslate="laGuidonetteApp.torder.home.notFound">No Torders found</span>
+    <span>No Torders found</span>
   </div>
 
   <div class="table-responsive table-entities" id="entities" *ngIf="torders && torders.length > 0">
@@ -32,31 +33,31 @@
         <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
           <th scope="col" jhiSortBy="id">
             <div class="d-flex">
-              <span jhiTranslate="global.field.id">ID</span>
+              <span>ID</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
           <th scope="col" jhiSortBy="date">
             <div class="d-flex">
-              <span jhiTranslate="laGuidonetteApp.torder.date">Date</span>
+              <span>Date</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
           <th scope="col" jhiSortBy="total">
             <div class="d-flex">
-              <span jhiTranslate="laGuidonetteApp.torder.total">Total</span>
+              <span>Total</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
           <th scope="col" jhiSortBy="status">
             <div class="d-flex">
-              <span jhiTranslate="laGuidonetteApp.torder.status">Status</span>
+              <span>Status</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
           <th scope="col" jhiSortBy="userID.id">
             <div class="d-flex">
-              <span jhiTranslate="laGuidonetteApp.torder.userID">User ID</span>
+              <span>User ID</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
@@ -70,7 +71,7 @@
           </td>
           <td>{{ torder.date | formatMediumDatetime }}</td>
           <td>{{ torder.total }}</td>
-          <td jhiTranslate="{{ 'laGuidonetteApp.Status.' + torder.status }}">{{ torder.status }}</td>
+          <td>{{ torder.status }}</td>
           <td>
             {{ torder.userID?.id }}
           </td>
@@ -83,7 +84,7 @@
                 data-cy="entityDetailsButton"
               >
                 <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                <span class="d-none d-md-inline">View</span>
               </button>
 
               <button
@@ -93,12 +94,12 @@
                 data-cy="entityEditButton"
               >
                 <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                <span class="d-none d-md-inline">Edit</span>
               </button>
 
               <button type="submit" (click)="delete(torder)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
                 <fa-icon icon="times"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                <span class="d-none d-md-inline">Delete</span>
               </button>
             </div>
           </td>

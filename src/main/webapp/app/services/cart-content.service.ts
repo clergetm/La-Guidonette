@@ -19,6 +19,10 @@ export class CartContentService {
     }
   }
 
+  isEmpty(): boolean {
+    return this.size === 0;
+  }
+
   addToCart(product: IProduct): void {
     this.cartItems.push(product);
     this.size += 1;
@@ -55,7 +59,9 @@ export class CartContentService {
   getPrice(): string {
     let sum = 0;
     this.cartItems.forEach(product => {
-      if (product.price) sum += product.price;
+      if (product.price) {
+        sum += product.price;
+      }
     });
     return sum.toString();
   }
@@ -64,23 +70,22 @@ export class CartContentService {
     return this.size;
   }
 
-  getNewOrderlines() {
-    let newOrderlines: NewOrderLine[] = [];
-    for (let product of this.getCartItems()) {
+  getNewOrderlines(): NewOrderLine[] {
+    const newOrderlines: NewOrderLine[] = [];
+    for (const product of this.getCartItems()) {
       let added = false;
-      for (let index in newOrderlines) {
-        // @ts-ignore
-        if (product.id == newOrderlines[index].product.id) {
-          // @ts-ignore
-          newOrderlines[index].quantity++;
+
+      for (const index in newOrderlines) {
+        if (product.id === newOrderlines[index].product!.id) {
+          newOrderlines[index].quantity!++;
           added = true;
           break;
         }
       }
       if (!added) {
-        let anNewOrderLine: NewOrderLine = {
+        const anNewOrderLine: NewOrderLine = {
           id: null,
-          product: product,
+          product,
           quantity: 1,
           torder: null,
         };
@@ -91,10 +96,10 @@ export class CartContentService {
   }
 
   getProductsAndQuantity() {
-    let coupleProductStocks: CoupleProductQuantity[] = [];
-    for (let product of this.getCartItems()) {
+    const coupleProductStocks: CoupleProductQuantity[] = [];
+    for (const product of this.getCartItems()) {
       let added = false;
-      for (let index in coupleProductStocks) {
+      for (const index in coupleProductStocks) {
         // @ts-ignore
         if (product.id == coupleProductStocks[index].product.id) {
           // @ts-ignore
@@ -104,8 +109,8 @@ export class CartContentService {
         }
       }
       if (!added) {
-        let coupleProductStock: CoupleProductQuantity = {
-          product: product,
+        const coupleProductStock: CoupleProductQuantity = {
+          product,
           quantity: 1,
         };
         coupleProductStocks.push(coupleProductStock);
@@ -114,8 +119,8 @@ export class CartContentService {
     return coupleProductStocks;
   }
 
-  refreshProducts() {
-    for (let p in this.cartItems) {
+  refreshProducts(): void {
+    for (const p in this.cartItems) {
       this.productService.find(this.cartItems[p].id).subscribe(data => {
         if (data.body) {
           this.cartItems[p] = data.body;

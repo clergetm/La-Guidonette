@@ -34,7 +34,7 @@ export class ProductService {
   find(id: number): Observable<EntityResponseType> {
     return this.http.get<IProduct>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
-  findProductsPage(page: number, size: number) {
+  findProductsPage(page: number, size: number): Observable<GetProductPageResponseDto> {
     return this.http.get<GetProductPageResponseDto>(`${this.resourceUrl}?page=${page}&size=${size}`);
   }
   findBestSellers(): Observable<IProduct[]> {
