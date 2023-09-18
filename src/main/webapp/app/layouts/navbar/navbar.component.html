@@ -191,13 +191,22 @@
           </ul>
         </li>
         <li
+          #accountMenu="ngbDropdown"
           ngbDropdown
           class="nav-item dropdown pointer"
           display="dynamic"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
         >
-          <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="account-menu" data-cy="accountMenu">
+          <a
+            class="nav-link dropdown-toggle"
+            ngbDropdownToggle
+            id="account-menu"
+            data-cy="accountMenu"
+            (mouseenter)="onAccountIn()"
+            (mouseleave)="onAccountOut()"
+            (click)="clickOnAccount()"
+          >
             <span *ngIf="!account?.imageUrl">
               <fa-icon icon="user"></fa-icon>
               <span jhiTranslate="global.menu.account.main">Account</span>
@@ -206,29 +215,23 @@
               <img [src]="account!.imageUrl" class="profile-image rounded-circle" alt="Avatar" />
             </span>
           </a>
-          <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="account-menu">
+          <ul
+            class="dropdown-menu"
+            ngbDropdownMenu
+            aria-labelledby="account-menu"
+            (mouseenter)="onAccountIn()"
+            (mouseleave)="onAccountOut()"
+          >
             <li *ngSwitchCase="true">
               <a
                 class="dropdown-item"
-                routerLink="account/settings"
+                routerLink="account/user-page"
                 routerLinkActive="active"
                 (click)="collapseNavbar()"
                 data-cy="settings"
               >
-                <fa-icon icon="wrench" [fixedWidth]="true"></fa-icon>
-                <span jhiTranslate="global.menu.account.settings">Settings</span>
-              </a>
-            </li>
-            <li *ngSwitchCase="true">
-              <a
-                class="dropdown-item"
-                routerLink="account/password"
-                routerLinkActive="active"
-                (click)="collapseNavbar()"
-                data-cy="passwordItem"
-              >
-                <fa-icon icon="lock" [fixedWidth]="true"></fa-icon>
-                <span jhiTranslate="global.menu.account.password">Password</span>
+                <fa-icon icon="user" [fixedWidth]="true"></fa-icon>
+                <span jhiTranslate="global.menu.account.main">Account</span>
               </a>
             </li>
             <li *ngSwitchCase="true">
@@ -238,22 +241,7 @@
               </a>
             </li>
             <li *ngSwitchCase="false">
-              <a class="dropdown-item" (click)="login()" id="login" data-cy="login">
-                <fa-icon icon="sign-in-alt" [fixedWidth]="true"></fa-icon>
-                <span jhiTranslate="global.menu.account.login">Sign in</span>
-              </a>
-            </li>
-            <li *ngSwitchCase="false">
-              <a
-                class="dropdown-item"
-                routerLink="account/register"
-                routerLinkActive="active"
-                (click)="collapseNavbar()"
-                data-cy="register"
-              >
-                <fa-icon icon="user-plus" [fixedWidth]="true"></fa-icon>
-                <span jhiTranslate="global.menu.account.register">Register</span>
-              </a>
+              <jhi-pocket-login></jhi-pocket-login>
             </li>
           </ul>
         </li>
