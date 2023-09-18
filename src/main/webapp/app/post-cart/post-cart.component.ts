@@ -40,6 +40,7 @@ export class PostCartComponent implements OnInit {
     this.postOrder = this.createOrderlines();
     this.torderService.createOrderFromProducts(this.postOrder).subscribe(data => {
       this.itorder = data;
+      this.cartContentService.removeAll();
       this.nextStep();
     });
   }
