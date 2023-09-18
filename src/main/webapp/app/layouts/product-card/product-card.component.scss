@@ -25,3 +25,24 @@
   font-weight: bold;
   color: #f06100;
 }
+
+.btn-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+}
+
+.btns {
+  border: groove;
+}
+
+.stock-state-OK {
+  text-align: center;
+  background-color: #25d24b;
+}
+
+.stock-state-KO {
+  text-align: center;
+  background-color: #ec2929;
+}
