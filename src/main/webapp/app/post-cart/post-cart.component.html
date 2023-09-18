@@ -12,26 +12,32 @@
     <span>Finalisation</span>
   </div>
 </div>
+<div class="d-flex justify-content-center row">
+  <div class="col-md-8">
+    <div *ngIf="step === 1">
+      <jhi-order [cartContentService]="cartContentService"></jhi-order>
+    </div>
 
-<div *ngIf="step === 1">
-  <jhi-order [cartContentService]="cartContentService"></jhi-order>
-  <button type="button" class="btn-continue" (click)="goToCart()">Retour au panier</button>
-  <button type="button" class="btn-continue" (click)="nextStep()" *ngIf="!cartContentService.isEmpty(); else notEmpty">
-    Valider la commande
-  </button>
-  <ng-template #notEmpty>
-    <button type="button" class="btn-continue" (click)="nextStep()" disabled>Valider la commande</button>
-  </ng-template>
-</div>
+    <div *ngIf="step === 2">
+      <jhi-alert-error></jhi-alert-error>
+      <jhi-payment></jhi-payment>
+    </div>
 
-<div *ngIf="step === 2">
-  <jhi-alert-error></jhi-alert-error>
-  <jhi-payment></jhi-payment>
-  <button type="button" class="btn-continue" (click)="previousStep()">Annuler</button>
-  <button type="button" class="btn-continue" (click)="validateOrder()">Payer</button>
-</div>
+    <div *ngIf="step === 3">
+      <jhi-finalisation [order]="itorder"></jhi-finalisation>
+    </div>
 
-<div *ngIf="step === 3">
-  <jhi-finalisation [order]="itorder"></jhi-finalisation>
-  <button type="button" class="btn-continue" (click)="goToHome()">Retour à l'accueil</button>
+    <div class="d-flex flex-row align-items-center mt-3 p-2 rounded">
+      <button class="button-74" style="width: 100%; margin-left: 10px" type="button" (click)="previousStep()">Retour</button>
+      <button class="button-74" style="width: 100%; margin-left: 10px" type="button" (click)="nextStep()" *ngIf="step == 1">
+        Continuer
+      </button>
+      <button class="button-74" style="width: 100%; margin-left: 10px" type="button" (click)="nextStep()" *ngIf="step === 2">
+        Commander
+      </button>
+      <button class="button-74" style="width: 100%; margin-left: 10px" type="button" (click)="nextStep()" *ngIf="step === 3">
+        Retour à l'accueil
+      </button>
+    </div>
+  </div>
 </div>

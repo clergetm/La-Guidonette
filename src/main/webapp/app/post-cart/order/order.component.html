@@ -6,11 +6,12 @@
   <table *ngIf="!cartContentService?.isEmpty(); else cartEmpty">
     <thead>
       <tr>
-        <td class="cols">Identifiant</td>
-        <td class="cols">Nom</td>
-        <td class="cols">Quantité</td>
-        <td class="cols">Quantité en stock</td>
-        <td class="cols">Prix unitaire</td>
+        <th class="cols">Identifiant</th>
+        <th class="cols">Nom</th>
+        <th class="cols">Quantité</th>
+        <th class="cols">Quantité en stock</th>
+        <th class="cols">Prix unitaire</th>
+        <th class="cols">Prix Total</th>
       </tr>
     </thead>
     <tbody>
@@ -20,6 +21,7 @@
         <td>{{ productQuantity.quantity }}</td>
         <td>{{ productQuantity.product.quantity }}</td>
         <td>{{ productQuantity.product.price }} €</td>
+        <td>{{ totalPrice(productQuantity.product, productQuantity.quantity) }} €</td>
       </tr>
     </tbody>
   </table>

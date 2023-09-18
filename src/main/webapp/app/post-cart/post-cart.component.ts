@@ -9,7 +9,7 @@ import { CartContentService } from '../services/cart-content.service';
 @Component({
   selector: 'jhi-post-cart',
   templateUrl: './post-cart.component.html',
-  styleUrls: ['./post-cart.component.scss'],
+  styleUrls: ['../styles.scss'],
 })
 export class PostCartComponent implements OnInit {
   postOrder: NewOrderLine[] | null = null;
@@ -34,6 +34,9 @@ export class PostCartComponent implements OnInit {
 
   previousStep(): void {
     this.step--;
+    if (this.step === 0) {
+      this.router.navigate(['/cart']);
+    }
   }
 
   validateOrder(): void {
