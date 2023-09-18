@@ -15,6 +15,7 @@ export class PostCartComponent implements OnInit {
   postOrder: NewOrderLine[] | null = null;
   itorder: ITorder | null = null;
   step = 1;
+  canValidate = false;
   constructor(
     public torderService: TorderService,
     public accountService: AccountService,
@@ -28,7 +29,18 @@ export class PostCartComponent implements OnInit {
     }
   }
 
+  handlePaymentValidation(status: boolean) {
+    this.canValidate = status;
+  }
+
   nextStep(): void {
+    if (this.step + 1 === 3) {
+      if (this.canValidate) {
+        this.validateOrder();
+      } else {
+        return;
+      }
+    }
     this.step++;
   }
 

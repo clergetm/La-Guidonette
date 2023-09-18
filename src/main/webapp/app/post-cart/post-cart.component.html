@@ -20,7 +20,7 @@
 
     <div *ngIf="step === 2">
       <jhi-alert-error></jhi-alert-error>
-      <jhi-payment></jhi-payment>
+      <jhi-payment (canGoNext)="handlePaymentValidation($event)"></jhi-payment>
     </div>
 
     <div *ngIf="step === 3">
