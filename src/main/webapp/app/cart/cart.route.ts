@@ -6,6 +6,6 @@ export const CART_ROUTE: Route = {
   path: '',
   component: CartComponent,
   data: {
-    pageTitle: 'Panier',
+    pageTitle: 'cart.title',
   },
 };
