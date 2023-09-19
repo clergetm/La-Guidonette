@@ -21,10 +21,10 @@
     <div *ngIf="step === 2">
       <jhi-alert-error></jhi-alert-error>
       <h3>Reglement</h3>
-      <h4>Attention tout colis sera livré dans notre magasin à Grenoble !</h4>
+      <h4>Attention toute commande sera livré dans notre magasin à Grenoble !</h4>
       <div class="payment-container">
         <form>
-          <jhi-payment (canGoNext)="handlePaymentValidation($event)" [hasTriedToGoNext]="this.failedToCommand"></jhi-payment>
+          <jhi-payment (canGoNext)="handlePaymentValidation($event)" [hasTriedToGoNext]="this.failedToCommand"> </jhi-payment>
         </form>
       </div>
     </div>
@@ -45,7 +45,14 @@
       >
         Continuer
       </button>
-      <button class="button-74" style="width: 100%; margin-left: 10px" type="button" (click)="nextStep()" *ngIf="step === 2">
+      <button
+        class="button-74"
+        style="width: 100%; margin-left: 10px"
+        type="button"
+        (click)="nextStep()"
+        *ngIf="step === 2"
+        [disabled]="!canValidate"
+      >
         Commander
       </button>
       <button class="button-74" style="width: 100%; margin-left: 10px" type="button" (click)="nextStep()" *ngIf="step === 3">
