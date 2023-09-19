@@ -5,7 +5,7 @@ import { CartContentService } from '../../services/cart-content.service';
 @Component({
   selector: 'jhi-payment',
   templateUrl: './payment.component.html',
-  styleUrls: ['./payment.component.scss', '../post-cart.component.scss'],
+  styleUrls: ['./payment.component.scss', '../../styles.scss'],
 })
 export class PaymentComponent {
   @Input() hasTriedToGoNext?: boolean = false;

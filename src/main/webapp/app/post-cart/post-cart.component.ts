@@ -17,6 +17,7 @@ export class PostCartComponent implements OnInit {
   failedToCommand: boolean = false;
   step = 1;
   canValidate = false;
+  canOrder = true;
   constructor(
     public torderService: TorderService,
     public accountService: AccountService,
@@ -30,14 +31,18 @@ export class PostCartComponent implements OnInit {
     }
   }
 
-  handlePaymentValidation(status: boolean) {
+  handlePaymentValidation(status: boolean): void {
     this.canValidate = status;
+  }
+
+  handleCanOrder(status: boolean): void {
+    this.canOrder = status;
   }
 
   nextStep(hasBeenValidated = false): void {
     if (hasBeenValidated || this.step != 2) {
       this.step++;
-    } else if (this.step + 1 === 3) {
+    } else if (this.step === 2) {
       if (this.canValidate) {
         this.failedToCommand = false;
         this.validateOrder();
@@ -51,6 +56,9 @@ export class PostCartComponent implements OnInit {
   }
 
   previousStep(): void {
+    if (this.step === 2) {
+      this.failedToCommand = false;
+    }
     this.step--;
     if (this.step === 0) {
       this.router.navigate(['/cart']);
