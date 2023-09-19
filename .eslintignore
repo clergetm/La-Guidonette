@@ -6,3 +6,4 @@ target/
 build/
 node/
 postcss.config.js
+src/main/webapp/app/services/cart-content.service.ts

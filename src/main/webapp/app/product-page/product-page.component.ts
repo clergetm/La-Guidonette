@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { CartContentService } from '../services/cart-content.service';
 import { IProduct } from '../entities/product/product.model';
 import { ProductService } from '../entities/product/service/product.service';
-import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'jhi-product-page',
@@ -19,13 +18,13 @@ export class ProductPageComponent implements OnInit {
   ngOnInit(): void {
     this.productId = this.route.snapshot.paramMap.get('id');
     if (typeof this.productId === 'string') {
-      this.getProductById(parseInt(this.productId));
+      this.getProductById(Number(this.productId));
     }
   }
 
   onPageChange(): void {
     if (typeof this.productId === 'string') {
-      this.getProductById(parseInt(this.productId));
+      this.getProductById(Number(this.productId));
     }
   }
 
@@ -37,10 +36,9 @@ export class ProductPageComponent implements OnInit {
 
   addToCart(): void {
     if (this.product != null) {
-      var numberSelector: any;
-      numberSelector = document.getElementById('numberOfItem');
+      const numberSelector = document.getElementById('numberOfItem');
       if (numberSelector != null) {
-        this.cartService.addMultipleToCart(this.product, numberSelector.value);
+        this.cartService.addMultipleToCart(this.product, +numberSelector);
       }
     }
   }

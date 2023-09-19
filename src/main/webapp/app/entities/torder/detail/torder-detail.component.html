@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
     <div *ngIf="torder">
-      <h2 data-cy="torderDetailsHeading"><span jhiTranslate="laGuidonetteApp.torder.detail.title">Torder</span></h2>
+      <h2 data-cy="torderDetailsHeading"><span>Torder</span></h2>
 
       <hr />
 
@@ -10,34 +10,34 @@
       <jhi-alert></jhi-alert>
 
       <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dt><span>ID</span></dt>
         <dd>
           <span>{{ torder.id }}</span>
         </dd>
-        <dt><span jhiTranslate="laGuidonetteApp.torder.date">Date</span></dt>
+        <dt><span>Date</span></dt>
         <dd>
           <span>{{ torder.date | formatMediumDatetime }}</span>
         </dd>
-        <dt><span jhiTranslate="laGuidonetteApp.torder.total">Total</span></dt>
+        <dt><span>Total</span></dt>
         <dd>
           <span>{{ torder.total }}</span>
         </dd>
-        <dt><span jhiTranslate="laGuidonetteApp.torder.status">Status</span></dt>
+        <dt><span>Status</span></dt>
         <dd>
-          <span jhiTranslate="{{ 'laGuidonetteApp.Status.' + torder.status }}">{{ torder.status }}</span>
+          <span>{{ torder.status }}</span>
         </dd>
-        <dt><span jhiTranslate="laGuidonetteApp.torder.userID">User ID</span></dt>
+        <dt><span>User ID</span></dt>
         <dd>
           <span>{{ torder.userID?.id }}</span>
         </dd>
       </dl>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
-        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
       </button>
 
       <button type="button" [routerLink]="['/entity/torder', torder.id, 'edit']" class="btn btn-primary">
-        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
       </button>
     </div>
   </div>

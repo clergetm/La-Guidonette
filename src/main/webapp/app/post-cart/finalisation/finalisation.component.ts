@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ITorder } from '../../entities/torder/torder.model';
 
 @Component({
@@ -6,10 +6,6 @@ import { ITorder } from '../../entities/torder/torder.model';
   templateUrl: './finalisation.component.html',
   styleUrls: ['./finalisation.component.scss'],
 })
-export class FinalisationComponent implements OnInit {
+export class FinalisationComponent {
   @Input() order: ITorder | null | undefined;
-
-  constructor() {}
-
-  ngOnInit(): void {}
 }

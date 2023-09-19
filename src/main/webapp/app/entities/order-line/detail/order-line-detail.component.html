@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
     <div *ngIf="orderLine">
-      <h2 data-cy="orderLineDetailsHeading"><span jhiTranslate="laGuidonetteApp.orderLine.detail.title">Order Line</span></h2>
+      <h2 data-cy="orderLineDetailsHeading"><span>Order Line</span></h2>
 
       <hr />
 
@@ -10,21 +10,21 @@
       <jhi-alert></jhi-alert>
 
       <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dt><span>ID</span></dt>
         <dd>
           <span>{{ orderLine.id }}</span>
         </dd>
-        <dt><span jhiTranslate="laGuidonetteApp.orderLine.quantity">Quantity</span></dt>
+        <dt><span>Quantity</span></dt>
         <dd>
           <span>{{ orderLine.quantity }}</span>
         </dd>
-        <dt><span jhiTranslate="laGuidonetteApp.orderLine.product">Product</span></dt>
+        <dt><span>Product</span></dt>
         <dd>
           <div *ngIf="orderLine.product">
             <a [routerLink]="['/entity/product', orderLine.product.id, 'view']">{{ orderLine.product.id }}</a>
           </div>
         </dd>
-        <dt><span jhiTranslate="laGuidonetteApp.orderLine.torder">Torder</span></dt>
+        <dt><span>Torder</span></dt>
         <dd>
           <div *ngIf="orderLine.torder">
             <a [routerLink]="['/entity/torder', orderLine.torder.id, 'view']">{{ orderLine.torder.id }}</a>
@@ -33,11 +33,11 @@
       </dl>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
-        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
       </button>
 
       <button type="button" [routerLink]="['/entity/order-line', orderLine.id, 'edit']" class="btn btn-primary">
-        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
       </button>
     </div>
   </div>

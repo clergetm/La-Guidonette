@@ -14,7 +14,7 @@ export class ProductImageComponent implements OnInit {
   /**
    * Get the image from S3.
    */
-  public async ngOnInit() {
+  public async ngOnInit(): Promise<void> {
     this.image = await this.s3Service.getImage(this.name);
   }
 }

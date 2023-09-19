@@ -1,45 +1,29 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2
-        id="jhi-order-line-heading"
-        data-cy="OrderLineCreateUpdateHeading"
-        jhiTranslate="laGuidonetteApp.orderLine.home.createOrEditLabel"
-      >
-        Create or edit a Order Line
-      </h2>
+      <h2 id="jhi-order-line-heading" data-cy="OrderLineCreateUpdateHeading">Create or edit a Order Line</h2>
 
       <div>
         <jhi-alert-error></jhi-alert-error>
 
         <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
-          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <label class="form-label">ID</label>
           <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" jhiTranslate="laGuidonetteApp.orderLine.quantity" for="field_quantity">Quantity</label>
+          <label class="form-label">Quantity</label>
           <input type="number" class="form-control" name="quantity" id="field_quantity" data-cy="quantity" formControlName="quantity" />
           <div *ngIf="editForm.get('quantity')!.invalid && (editForm.get('quantity')!.dirty || editForm.get('quantity')!.touched)">
-            <small
-              class="form-text text-danger"
-              *ngIf="editForm.get('quantity')?.errors?.required"
-              jhiTranslate="entity.validation.required"
-            >
-              This field is required.
-            </small>
-            <small
-              class="form-text text-danger"
-              [hidden]="!editForm.get('quantity')?.errors?.number"
-              jhiTranslate="entity.validation.number"
-            >
+            <small class="form-text text-danger" *ngIf="editForm.get('quantity')?.errors?.required"> This field is required. </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('quantity')?.errors?.number">
               This field should be a number.
             </small>
           </div>
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" jhiTranslate="laGuidonetteApp.orderLine.product" for="field_product">Product</label>
+          <label class="form-label">Product</label>
           <select
             class="form-control"
             id="field_product"
@@ -54,7 +38,7 @@
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" jhiTranslate="laGuidonetteApp.orderLine.torder" for="field_torder">Torder</label>
+          <label class="form-label">Torder</label>
           <select
             class="form-control"
             id="field_torder"
@@ -71,7 +55,7 @@
 
       <div>
         <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
-          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
         </button>
 
         <button
@@ -81,7 +65,7 @@
           [disabled]="editForm.invalid || isSaving"
           class="btn btn-primary"
         >
-          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
         </button>
       </div>
     </form>

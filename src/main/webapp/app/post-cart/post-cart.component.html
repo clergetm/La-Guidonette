@@ -15,20 +15,23 @@
 
 <div *ngIf="step === 1">
   <jhi-order [cartContentService]="cartContentService"></jhi-order>
+  <button type="button" class="btn-continue" (click)="goToCart()">Retour au panier</button>
+  <button type="button" class="btn-continue" (click)="nextStep()" *ngIf="!cartContentService.isEmpty(); else notEmpty">
+    Valider la commande
+  </button>
+  <ng-template #notEmpty>
+    <button type="button" class="btn-continue" (click)="nextStep()" disabled>Valider la commande</button>
+  </ng-template>
 </div>
 
 <div *ngIf="step === 2">
   <jhi-alert-error></jhi-alert-error>
   <jhi-payment></jhi-payment>
+  <button type="button" class="btn-continue" (click)="previousStep()">Annuler</button>
+  <button type="button" class="btn-continue" (click)="validateOrder()">Payer</button>
 </div>
 
 <div *ngIf="step === 3">
   <jhi-finalisation [order]="itorder"></jhi-finalisation>
-</div>
-
-<div class="bottom-button">
-  <button type="button" class="btn-continue" (click)="previousStep()" *ngIf="step != 3">Retour</button>
-  <button type="button" class="btn-continue" (click)="nextStep()" *ngIf="step == 1">Continuer</button>
-  <button type="button" class="btn-continue" (click)="validateOrder()" *ngIf="step === 2">Commander</button>
-  <button type="button" class="btn-continue" (click)="goToHome()" *ngIf="step === 3">Retour à l'accueil</button>
+  <button type="button" class="btn-continue" (click)="goToHome()">Retour à l'accueil</button>
 </div>
