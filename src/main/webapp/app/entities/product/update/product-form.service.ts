@@ -71,9 +71,7 @@ export class ProductFormService {
       imageName: new FormControl(productRawValue.imageName, {
         validators: [Validators.required],
       }),
-      version: new FormControl(productRawValue.version, {
-        validators: [Validators.required],
-      }),
+      version: new FormControl(productRawValue.version),
       categories: new FormControl(productRawValue.categories ?? []),
     });
   }
@@ -92,10 +90,11 @@ export class ProductFormService {
     );
   }
 
-  private getFormDefaults(): ProductFormDefaults {
+  private getFormDefaults(): { id: null; categories: any[]; version: number } {
     return {
       id: null,
       categories: [],
+      version: 1,
     };
   }
 }
