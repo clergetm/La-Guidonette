@@ -64,6 +64,12 @@ input[type='submit']:hover {
   outline: none;
 }
 
+.upper-input-text {
+  margin: 0 0 5px;
+  font-style: italic;
+  color: #880707;
+}
+
 /* Clear floats after the columns */
 .row::after {
   content: '';

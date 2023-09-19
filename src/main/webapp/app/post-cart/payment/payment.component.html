@@ -1,8 +1,17 @@
+<div class="alert" [style.display]="hasTriedToGoNext ? 'block' : 'none'">
+  <strong>Attention!</strong> Les informations suivantes n'ont pas été entrés correctement :<br />
+  <span *ngIf="!validInputs[3]"> * Nom<br /></span>
+  <span *ngIf="!validInputs[0]"> * Numéro de carte<br /></span>
+  <span *ngIf="!validInputs[1]"> * Date d'expiration<br /></span>
+  <span *ngIf="!validInputs[2]"> * CVV<br /></span>
+</div>
+
 <div class="row">
   <div class="col-25">
     <label for="card-name">Nom sur la carte</label>
   </div>
   <div class="col-75">
+    <p class="upper-input-text" *ngIf="!validInputs[3]">Merci d'entrer le nom sur votre carte</p>
     <input
       [(ngModel)]="name"
       [ngClass]="{ 'input-red': !validInputs[3], 'input-green': validInputs[3] }"
@@ -20,6 +29,7 @@
     <label for="card-number">Numéro de Carte</label>
   </div>
   <div class="col-75">
+    <p class="upper-input-text" *ngIf="!validInputs[0]">Merci d'entrer votre numéro de carte</p>
     <input
       [ngClass]="{ 'input-red': !validInputs[0], 'input-green': validInputs[0] }"
       id="card-number"
@@ -37,6 +47,7 @@
     <label for="card-expiration">Date d'expiration</label>
   </div>
   <div class="col-75">
+    <p class="upper-input-text" *ngIf="!validInputs[1]">Merci d'entrer votre date d'expiration</p>
     <input
       [ngClass]="{ 'input-red': !validInputs[1], 'input-green': validInputs[1] }"
       id="card-expiration"
@@ -54,6 +65,7 @@
     <label for="card-cvv">CVV</label>
   </div>
   <div class="col-75">
+    <p class="upper-input-text" *ngIf="!validInputs[2]">Merci d'entrer votre CVV</p>
     <input
       [ngClass]="{ 'input-red': !validInputs[2], 'input-green': validInputs[3] }"
       id="card-cvv"

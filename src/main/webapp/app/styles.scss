@@ -52,6 +52,17 @@ Buttons
   }
 }
 
+.button-74:disabled,
+.button-74[disabled],
+.button-74:disabled:hover,
+.button-74:disabled:active {
+  @extend .button-74;
+  background-color: lightgray;
+  cursor: default;
+  box-shadow: $color-button-contour 4px 4px 0 0;
+  transform: none;
+}
+
 .button-74-small {
   background-color: $color-button-bg-normal;
   border: 2px solid $color-button-contour;
@@ -359,4 +370,30 @@ POST CART
 .payment-container {
   border-radius: 5px;
   padding: 20px;
+}
+
+/* ==========================================================================
+Warning messages
+========================================================================== */
+
+// https://www.w3schools.com/howto/howto_js_alert.asp
+.alert {
+  padding: 20px;
+  background-color: #6f0c05;
+  color: white;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
 }

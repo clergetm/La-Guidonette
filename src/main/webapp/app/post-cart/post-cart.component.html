@@ -15,7 +15,7 @@
 <div class="d-flex justify-content-center row">
   <div class="col-md-8">
     <div *ngIf="step === 1">
-      <jhi-order [cartContentService]="cartContentService"></jhi-order>
+      <jhi-order (canOrder)="handleCanOrder($event)" [cartContentService]="cartContentService"></jhi-order>
     </div>
 
     <div *ngIf="step === 2">
@@ -35,7 +35,14 @@
 
     <div class="d-flex flex-row align-items-center mt-3 p-2 rounded">
       <button class="button-74" style="width: 100%; margin-left: 10px" type="button" (click)="previousStep()">Retour</button>
-      <button class="button-74" style="width: 100%; margin-left: 10px" type="button" (click)="nextStep()" *ngIf="step == 1">
+      <button
+        class="button-74"
+        style="width: 100%; margin-left: 10px"
+        type="button"
+        (click)="nextStep()"
+        *ngIf="step == 1"
+        [disabled]="this.cartContentService.isEmpty() || !this.canOrder"
+      >
         Continuer
       </button>
       <button class="button-74" style="width: 100%; margin-left: 10px" type="button" (click)="nextStep()" *ngIf="step === 2">
