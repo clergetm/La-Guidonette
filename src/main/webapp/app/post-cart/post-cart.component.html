@@ -20,7 +20,13 @@
 
     <div *ngIf="step === 2">
       <jhi-alert-error></jhi-alert-error>
-      <jhi-payment (canGoNext)="handlePaymentValidation($event)"></jhi-payment>
+      <h3>Reglement</h3>
+      <h4>Attention tout colis sera livré dans notre magasin à Grenoble !</h4>
+      <div class="payment-container">
+        <form>
+          <jhi-payment (canGoNext)="handlePaymentValidation($event)" [hasTriedToGoNext]="this.failedToCommand"></jhi-payment>
+        </form>
+      </div>
     </div>
 
     <div *ngIf="step === 3">
