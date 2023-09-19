@@ -10,20 +10,8 @@ import { ProductImageComponent } from '../product-image/product-image.component'
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
-  declarations: [
-    ProductCardComponent,
-    ProductImageComponent,
-  ],
-  exports: [
-    ProductCardComponent
-  ],
-  imports: [
-    CommonModule,
-    MatCardModule,
-    MatButtonModule,
-    MatToolbarModule,
-    RouterLink,
-    RouterLinkActive,
-  ],
+  declarations: [ProductCardComponent, ProductImageComponent],
+  exports: [ProductCardComponent, ProductImageComponent],
+  imports: [CommonModule, MatCardModule, MatButtonModule, MatToolbarModule, RouterLink, RouterLinkActive],
 })
 export class ProductCardModule {}
