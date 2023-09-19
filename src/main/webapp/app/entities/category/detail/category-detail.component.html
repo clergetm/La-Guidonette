@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
     <div *ngIf="category">
-      <h2 data-cy="categoryDetailsHeading"><span jhiTranslate="laGuidonetteApp.category.detail.title">Category</span></h2>
+      <h2 data-cy="categoryDetailsHeading"><span>Category</span></h2>
 
       <hr />
 
@@ -10,15 +10,15 @@
       <jhi-alert></jhi-alert>
 
       <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dt><span>ID</span></dt>
         <dd>
           <span>{{ category.id }}</span>
         </dd>
-        <dt><span jhiTranslate="laGuidonetteApp.category.name">Name</span></dt>
+        <dt><span>Name</span></dt>
         <dd>
           <span>{{ category.name }}</span>
         </dd>
-        <dt><span jhiTranslate="laGuidonetteApp.category.product">Product</span></dt>
+        <dt><span>Product</span></dt>
         <dd>
           <span *ngFor="let product of category.products; let last = last">
             <a [routerLink]="['/entity/product', product.id, 'view']">{{ product.id }}</a
@@ -28,11 +28,11 @@
       </dl>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
-        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
       </button>
 
       <button type="button" [routerLink]="['/entity/category', category.id, 'edit']" class="btn btn-primary">
-        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
       </button>
     </div>
   </div>

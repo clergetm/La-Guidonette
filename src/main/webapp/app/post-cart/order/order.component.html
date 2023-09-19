@@ -1,7 +1,9 @@
+<script src="order.component.ts"></script>
+<script src="../payment/payment.component.ts"></script>
 <div>
-  <h1>Recapitulatif de commande :</h1>
+  <h1 id="Arian-title">Récapitulatif de commande</h1>
   <h3>Articles contenus dans la commande :</h3>
-  <table>
+  <table *ngIf="!cartContentService?.isEmpty(); else cartEmpty">
     <thead>
       <tr>
         <td class="cols">Identifiant</td>
@@ -21,6 +23,10 @@
       </tr>
     </tbody>
   </table>
+
+  <ng-template #cartEmpty>
+    <i> Votre panier est vide ! </i>
+  </ng-template>
 
   <h3>Prix total : {{ cartContentService?.getPrice() }}€</h3>
 </div>

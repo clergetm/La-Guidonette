@@ -1,30 +1,26 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2 id="jhi-product-heading" data-cy="ProductCreateUpdateHeading" jhiTranslate="laGuidonetteApp.product.home.createOrEditLabel">
-        Create or edit a Product
-      </h2>
+      <h2 id="jhi-product-heading" data-cy="ProductCreateUpdateHeading">Create or edit a Product</h2>
 
       <div>
         <jhi-alert-error></jhi-alert-error>
 
         <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
-          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <label class="form-label">ID</label>
           <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" jhiTranslate="laGuidonetteApp.product.label" for="field_label">Label</label>
+          <label class="form-label">Label</label>
           <input type="text" class="form-control" name="label" id="field_label" data-cy="label" formControlName="label" />
           <div *ngIf="editForm.get('label')!.invalid && (editForm.get('label')!.dirty || editForm.get('label')!.touched)">
-            <small class="form-text text-danger" *ngIf="editForm.get('label')?.errors?.required" jhiTranslate="entity.validation.required">
-              This field is required.
-            </small>
+            <small class="form-text text-danger" *ngIf="editForm.get('label')?.errors?.required"> This field is required. </small>
           </div>
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" jhiTranslate="laGuidonetteApp.product.description" for="field_description">Description</label>
+          <label class="form-label">Description</label>
           <input
             type="text"
             class="form-control"
@@ -34,116 +30,74 @@
             formControlName="description"
           />
           <div *ngIf="editForm.get('description')!.invalid && (editForm.get('description')!.dirty || editForm.get('description')!.touched)">
-            <small
-              class="form-text text-danger"
-              *ngIf="editForm.get('description')?.errors?.required"
-              jhiTranslate="entity.validation.required"
-            >
-              This field is required.
-            </small>
+            <small class="form-text text-danger" *ngIf="editForm.get('description')?.errors?.required"> This field is required. </small>
           </div>
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" jhiTranslate="laGuidonetteApp.product.price" for="field_price">Price</label>
+          <label class="form-label">Price</label>
           <input type="number" class="form-control" name="price" id="field_price" data-cy="price" formControlName="price" />
           <div *ngIf="editForm.get('price')!.invalid && (editForm.get('price')!.dirty || editForm.get('price')!.touched)">
-            <small class="form-text text-danger" *ngIf="editForm.get('price')?.errors?.required" jhiTranslate="entity.validation.required">
-              This field is required.
-            </small>
-            <small class="form-text text-danger" [hidden]="!editForm.get('price')?.errors?.number" jhiTranslate="entity.validation.number">
-              This field should be a number.
-            </small>
+            <small class="form-text text-danger" *ngIf="editForm.get('price')?.errors?.required"> This field is required. </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('price')?.errors?.number"> This field should be a number. </small>
           </div>
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" jhiTranslate="laGuidonetteApp.product.brand" for="field_brand">Brand</label>
+          <label class="form-label">Brand</label>
           <select class="form-control" name="brand" formControlName="brand" id="field_brand" data-cy="brand">
             <option [ngValue]="null">{{ 'laGuidonetteApp.Brand.null' | translate }}</option>
             <option *ngFor="let brand of brandValues" [value]="brand">{{ 'laGuidonetteApp.Brand.' + brand | translate }}</option>
           </select>
           <div *ngIf="editForm.get('brand')!.invalid && (editForm.get('brand')!.dirty || editForm.get('brand')!.touched)">
-            <small class="form-text text-danger" *ngIf="editForm.get('brand')?.errors?.required" jhiTranslate="entity.validation.required">
-              This field is required.
-            </small>
+            <small class="form-text text-danger" *ngIf="editForm.get('brand')?.errors?.required"> This field is required. </small>
           </div>
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" jhiTranslate="laGuidonetteApp.product.model" for="field_model">Model</label>
+          <label class="form-label">Model</label>
           <input type="text" class="form-control" name="model" id="field_model" data-cy="model" formControlName="model" />
           <div *ngIf="editForm.get('model')!.invalid && (editForm.get('model')!.dirty || editForm.get('model')!.touched)">
-            <small class="form-text text-danger" *ngIf="editForm.get('model')?.errors?.required" jhiTranslate="entity.validation.required">
-              This field is required.
-            </small>
+            <small class="form-text text-danger" *ngIf="editForm.get('model')?.errors?.required"> This field is required. </small>
           </div>
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" jhiTranslate="laGuidonetteApp.product.color" for="field_color">Color</label>
+          <label class="form-label">Color</label>
           <select class="form-control" name="color" formControlName="color" id="field_color" data-cy="color">
             <option [ngValue]="null">{{ 'laGuidonetteApp.Color.null' | translate }}</option>
             <option *ngFor="let color of colorValues" [value]="color">{{ 'laGuidonetteApp.Color.' + color | translate }}</option>
           </select>
           <div *ngIf="editForm.get('color')!.invalid && (editForm.get('color')!.dirty || editForm.get('color')!.touched)">
-            <small class="form-text text-danger" *ngIf="editForm.get('color')?.errors?.required" jhiTranslate="entity.validation.required">
-              This field is required.
-            </small>
+            <small class="form-text text-danger" *ngIf="editForm.get('color')?.errors?.required"> This field is required. </small>
           </div>
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" jhiTranslate="laGuidonetteApp.product.quantity" for="field_quantity">Quantity</label>
+          <label class="form-label">Quantity</label>
           <input type="number" class="form-control" name="quantity" id="field_quantity" data-cy="quantity" formControlName="quantity" />
           <div *ngIf="editForm.get('quantity')!.invalid && (editForm.get('quantity')!.dirty || editForm.get('quantity')!.touched)">
-            <small
-              class="form-text text-danger"
-              *ngIf="editForm.get('quantity')?.errors?.required"
-              jhiTranslate="entity.validation.required"
-            >
-              This field is required.
-            </small>
-            <small
-              class="form-text text-danger"
-              [hidden]="!editForm.get('quantity')?.errors?.number"
-              jhiTranslate="entity.validation.number"
-            >
+            <small class="form-text text-danger" *ngIf="editForm.get('quantity')?.errors?.required"> This field is required. </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('quantity')?.errors?.number">
               This field should be a number.
             </small>
           </div>
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" jhiTranslate="laGuidonetteApp.product.imageName" for="field_imageName">Image Name</label>
+          <label class="form-label">Image Name</label>
           <input type="text" class="form-control" name="imageName" id="field_imageName" data-cy="imageName" formControlName="imageName" />
           <div *ngIf="editForm.get('imageName')!.invalid && (editForm.get('imageName')!.dirty || editForm.get('imageName')!.touched)">
-            <small
-              class="form-text text-danger"
-              *ngIf="editForm.get('imageName')?.errors?.required"
-              jhiTranslate="entity.validation.required"
-            >
-              This field is required.
-            </small>
+            <small class="form-text text-danger" *ngIf="editForm.get('imageName')?.errors?.required"> This field is required. </small>
           </div>
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" jhiTranslate="laGuidonetteApp.product.version" for="field_version">Version</label>
+          <label class="form-label">Version</label>
           <input type="number" class="form-control" name="version" id="field_version" data-cy="version" formControlName="version" />
           <div *ngIf="editForm.get('version')!.invalid && (editForm.get('version')!.dirty || editForm.get('version')!.touched)">
-            <small
-              class="form-text text-danger"
-              *ngIf="editForm.get('version')?.errors?.required"
-              jhiTranslate="entity.validation.required"
-            >
-              This field is required.
-            </small>
-            <small
-              class="form-text text-danger"
-              [hidden]="!editForm.get('version')?.errors?.number"
-              jhiTranslate="entity.validation.number"
-            >
+            <small class="form-text text-danger" *ngIf="editForm.get('version')?.errors?.required"> This field is required. </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('version')?.errors?.number">
               This field should be a number.
             </small>
           </div>
@@ -152,7 +106,7 @@
 
       <div>
         <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
-          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
         </button>
 
         <button
@@ -162,7 +116,7 @@
           [disabled]="editForm.invalid || isSaving"
           class="btn btn-primary"
         >
-          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
         </button>
       </div>
     </form>

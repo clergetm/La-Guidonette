@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../core/auth/account.service';
 import { Router } from '@angular/router';
 import { TorderService } from '../entities/torder/service/torder.service';
-import { IOrderLine, NewOrderLine } from '../entities/order-line/order-line.model';
+import { NewOrderLine } from '../entities/order-line/order-line.model';
 import { ITorder } from '../entities/torder/torder.model';
 import { CartContentService } from '../services/cart-content.service';
 
@@ -14,7 +14,7 @@ import { CartContentService } from '../services/cart-content.service';
 export class PostCartComponent implements OnInit {
   postOrder: NewOrderLine[] | null = null;
   itorder: ITorder | null = null;
-  step: number = 1;
+  step = 1;
   constructor(
     public torderService: TorderService,
     public accountService: AccountService,
@@ -36,7 +36,7 @@ export class PostCartComponent implements OnInit {
     this.step--;
   }
 
-  validateOrder() {
+  validateOrder(): void {
     this.postOrder = this.createOrderlines();
     this.torderService.createOrderFromProducts(this.postOrder).subscribe(data => {
       this.itorder = data;
@@ -44,11 +44,15 @@ export class PostCartComponent implements OnInit {
     });
   }
 
-  private createOrderlines(): NewOrderLine[] {
-    return this.cartContentService.getNewOrderlines();
-  }
-
   goToHome(): void {
     this.router.navigate(['']);
+  }
+
+  goToCart(): void {
+    this.router.navigate(['/cart']);
+  }
+
+  private createOrderlines(): NewOrderLine[] {
+    return this.cartContentService.getNewOrderlines();
   }
 }
