@@ -9,7 +9,7 @@ import { AccountService } from 'app/core/auth/account.service';
 @Component({
   selector: 'jhi-main',
   templateUrl: './main.component.html',
-  styleUrls: ['../..//styles.scss'],
+  styleUrls: ['../../styles.scss'],
 })
 export class MainComponent implements OnInit {
   private renderer: Renderer2;

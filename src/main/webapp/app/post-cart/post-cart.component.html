@@ -1,14 +1,14 @@
 <div class="ligne-arianne">
-  <div class="ball-wrapper">
-    <div class="ball" [ngStyle]="step >= 1 ? { 'background-color': '#26408B' } : { 'background-color': '#8DE2D6' }"></div>
+  <div class="stage ball-wrapper">
+    <figure class="ball-passed"><span class="shadow"></span></figure>
     <span>Recapitulatif</span>
   </div>
-  <div class="ball-wrapper">
-    <div class="ball" [ngStyle]="step >= 2 ? { 'background-color': '#26408B' } : { 'background-color': '#8DE2D6' }"></div>
+  <div class="stage ball-wrapper">
+    <figure [ngClass]="step >= 2 ? 'ball-passed' : 'ball'"><span class="shadow"></span></figure>
     <span>Paiement</span>
   </div>
-  <div class="ball-wrapper">
-    <div class="ball" [ngStyle]="step >= 3 ? { 'background-color': '#26408B' } : { 'background-color': '#8DE2D6' }"></div>
+  <div class="stage ball-wrapper">
+    <figure [ngClass]="step >= 3 ? 'ball-passed' : 'ball'"><span class="shadow"></span></figure>
     <span>Finalisation</span>
   </div>
 </div>

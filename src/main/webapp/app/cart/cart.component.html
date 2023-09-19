@@ -51,6 +51,7 @@
           style="width: 100%; margin-left: 10px"
           type="button"
           [routerLink]="account.isAuthenticated() ? '/order' : '/login'"
+          [disabled]="cartService.getSize() === 0 ? true : null"
         >
           Récapitulatif de ma commande
         </button>
