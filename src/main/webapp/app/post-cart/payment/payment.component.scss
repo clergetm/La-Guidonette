@@ -70,6 +70,13 @@ input[type='submit']:hover {
   color: #880707;
 }
 
+.lower-input-text {
+  margin: 0 0 5px;
+  font-style: italic;
+  color: #ffb7b7;
+  background-color: #4b4853;
+}
+
 /* Clear floats after the columns */
 .row::after {
   content: '';
