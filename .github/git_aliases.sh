@@ -21,3 +21,4 @@ git config --local alias.pl 'pull --rebase --autostash'         # Lazy pull
 git config --local alias.f 'fetch origin --prune'               # Lazy fetch
 git config --local alias.s 'switch'                             # Lazy switch
 git config --local alias.rbs 'rebase -i'                        # Lazy interactive rebase
+git config --local alias.cancel 'git reset --soft HEAD~1'       # Cancel last commit

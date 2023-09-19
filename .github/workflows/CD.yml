@@ -62,20 +62,31 @@ jobs:
       - name: Install node.js packages
         run: npm ci
 
+      - name: Create environment.ts
+        run: |
+          cd src/main/webapp/environments
+          echo "export const environment = {" > environment.ts
+          echo "    DEFAULT_IMAGE_NAME: 'no-image-available.png'," >> environment.ts
+          echo "    BUCKET_NAME: 'laguidonette-images'," >> environment.ts
+          echo "    BUCKET_REGION: 'eu-west-3'," >> environment.ts
+          echo "    ACCESS_KEY: '${{ secrets.S3_ACCESS_KEY }}'," >> environment.ts
+          echo "    SECRET_ACCESS_KEY: '${{ secrets.S3_PRIVATE_ACCESS_KEY }}'," >> environment.ts
+          echo "};" >> environment.ts
+          cd -
+
       - name: Package application
         run: |
           chmod +x mvnw
           npm run java:jar:prod 
 
-      # TODO: make this part available when the project is ready to be used
-      # - name: Deploy to Heroku
-      #   run: |
-      #     chmod +x mvnw
-      #     if [ ! -z "$HEROKU_API_KEY" ]; then
-      #         ./mvnw -ntp com.heroku.sdk:heroku-maven-plugin:2.0.5:deploy -DskipTests -Pprod -Dheroku.buildpacks=heroku/jvm -Dheroku.appName=la-guidonette
-      #     else
-      #         echo No HEROKU_API_KEY, skipping...
-      #     fi
+      - name: Deploy to Heroku
+        run: |
+          chmod +x mvnw
+          if [ ! -z "$HEROKU_API_KEY" ]; then
+              ./mvnw -ntp com.heroku.sdk:heroku-maven-plugin:2.0.5:deploy -DskipTests -Pprod -Dheroku.buildpacks=heroku/jvm -Dheroku.appName=la-guidonette
+          else
+              echo No HEROKU_API_KEY, skipping...
+          fi
 
       - name: Login to Docker Hub
         uses: docker/login-action@v2
