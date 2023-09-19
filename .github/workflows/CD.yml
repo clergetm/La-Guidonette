@@ -26,6 +26,19 @@ jobs:
       - name: Install node.js packages
         run: npm ci
 
+      
+      - name: Create environment.ts
+        run: |
+          cd src/main/webapp/environments
+          echo "export const environment = {" > environment.ts
+          echo "    DEFAULT_IMAGE_NAME: 'no-image-available.png'," >> environment.ts
+          echo "    BUCKET_NAME: 'laguidonette-images'," >> environment.ts
+          echo "    BUCKET_REGION: 'eu-west-3'," >> environment.ts
+          echo "    ACCESS_KEY: '${{ secrets.S3_ACCESS_KEY }}'," >> environment.ts
+          echo "    SECRET_ACCESS_KEY: '${{ secrets.S3_PRIVATE_ACCESS_KEY }}'," >> environment.ts
+          echo "};" >> environment.ts
+          cd -
+
       - name: Run backend test
         run: |
           chmod +x mvnw
