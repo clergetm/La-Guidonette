@@ -6,6 +6,7 @@ Main page
 .main-page {
   background-color: $light;
   color: $primary-darker;
+  flex: 1 0 auto;
 }
 
 /* ==========================================================================
@@ -197,8 +198,34 @@ Cart
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200&display=swap');
-@import url('https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
+
+//@import url('https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css');
+// Importing the whole file causes issues
+.font-weight-bold {
+  font-weight: 700 !important;
+}
+.mt-1,
+.my-1 {
+  margin-top: 0.25rem !important;
+}
+.mr-1,
+.mx-1 {
+  margin-right: 0.25rem !important;
+}
+.ml-1,
+.mx-1 {
+  margin-left: 0.25rem !important;
+}
+.col-md-8 {
+  -ms-flex: 0 0 66.666667%;
+  flex: 0 0 66.666667%;
+  max-width: 66.666667%;
+  position: relative;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+}
 
 body {
   font-family: 'Manrope', sans-serif;
