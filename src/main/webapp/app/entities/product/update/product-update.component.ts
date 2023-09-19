@@ -9,6 +9,7 @@ import { IProduct } from '../product.model';
 import { ProductService } from '../service/product.service';
 import { Brand } from 'app/entities/enumerations/brand.model';
 import { Color } from 'app/entities/enumerations/color.model';
+import { S3Service } from 'app/services/aws/s3.service';
 
 @Component({
   selector: 'jhi-product-update',
@@ -22,10 +23,13 @@ export class ProductUpdateComponent implements OnInit {
 
   editForm: ProductFormGroup = this.productFormService.createProductFormGroup();
 
+  private file: File | null = null;
+
   constructor(
     protected productService: ProductService,
     protected productFormService: ProductFormService,
-    protected activatedRoute: ActivatedRoute
+    protected activatedRoute: ActivatedRoute,
+    protected s3Service: S3Service
   ) {}
 
   ngOnInit(): void {
@@ -49,6 +53,28 @@ export class ProductUpdateComponent implements OnInit {
     } else {
       this.subscribeToSaveResponse(this.productService.create(product));
     }
+  }
+
+  /**
+   * Save the information about the file.
+   * @param event the current event.
+   */
+  public saveFileInfo(event: Event): void {
+    const element = event.currentTarget as HTMLInputElement;
+    let fileList: FileList | null = element.files;
+
+    if (fileList) {
+      this.file = fileList[0];
+    } else {
+      this.file = null;
+    }
+  }
+
+  /**
+   * Upload the file in S3.
+   */
+  public uploadImage() {
+    if (this.file) this.s3Service.uploadImage(this.file);
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IProduct>>): void {

@@ -91,6 +91,18 @@
             <small class="form-text text-danger" *ngIf="editForm.get('imageName')?.errors?.required"> This field is required. </small>
           </div>
         </div>
+        <div class="row mb-3">
+          <label class="form-label">Image</label>
+          <input
+            type="file"
+            accept="image/png"
+            class="form-control"
+            id="field_imageUpload"
+            (change)="saveFileInfo($event)"
+            name="imageUpload"
+          />
+        </div>
+
         <!---    VERSION
         <div class="row mb-3">
           <label class="form-label">Version</label>
@@ -116,6 +128,7 @@
           data-cy="entityCreateSaveButton"
           [disabled]="editForm.invalid || isSaving"
           class="btn btn-primary"
+          (click)="uploadImage()"
         >
           <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
         </button>
