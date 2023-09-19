@@ -34,12 +34,7 @@ export class ProductPageComponent implements OnInit {
     });
   }
 
-  addToCart(): void {
-    if (this.product != null) {
-      const numberSelector = document.getElementById('numberOfItem');
-      if (numberSelector != null) {
-        this.cartService.addMultipleToCart(this.product, +numberSelector);
-      }
-    }
+  addToCart(product: IProduct): void {
+    this.cartService.addToCart(product);
   }
 }

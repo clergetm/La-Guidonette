@@ -11,19 +11,17 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
-    ProductCardComponent,
-    ProductImageComponent,
-  ],
+      ProductCardComponent,
+    ProductImageComponent],
   exports: [
-    ProductCardComponent
-  ],
+      ProductCardComponent,
+    ProductImageComponent],
   imports: [
-    CommonModule,
+      CommonModule,
     MatCardModule,
     MatButtonModule,
     MatToolbarModule,
     RouterLink,
-    RouterLinkActive,
-  ],
+    RouterLinkActive],
 })
 export class ProductCardModule {}
