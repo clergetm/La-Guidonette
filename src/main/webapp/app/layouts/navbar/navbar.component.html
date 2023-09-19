@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
       <span class="logo-img"></span>
-      <span jhiTranslate="global.title" class="navbar-title">LaGuidonette</span>
+      <span class="navbar-title">LaGuidonette</span>
       <span class="navbar-version">{{ version }}</span>
     </a>
     <a
@@ -32,7 +32,7 @@
           <a class="nav-link" routerLink="" (click)="collapseNavbar()">
             <span>
               <fa-icon icon="home"></fa-icon>
-              <span jhiTranslate="global.menu.home">Home</span>
+              <span>Home</span>
             </span>
           </a>
         </li>
@@ -56,7 +56,7 @@
           <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu" data-cy="entity">
             <span>
               <fa-icon icon="th-list"></fa-icon>
-              <span jhiTranslate="global.menu.entities.main">Entities</span>
+              <span>Entities</span>
             </span>
           </a>
           <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu">
@@ -69,7 +69,7 @@
                 (click)="collapseNavbar()"
               >
                 <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                <span jhiTranslate="global.menu.entities.product">Product</span>
+                <span>Product</span>
               </a>
             </li>
             <li>
@@ -81,7 +81,7 @@
                 (click)="collapseNavbar()"
               >
                 <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                <span jhiTranslate="global.menu.entities.category">Category</span>
+                <span>Category</span>
               </a>
             </li>
             <li>
@@ -93,7 +93,7 @@
                 (click)="collapseNavbar()"
               >
                 <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                <span jhiTranslate="global.menu.entities.torder">Torder</span>
+                <span>Torder</span>
               </a>
             </li>
             <li>
@@ -105,7 +105,7 @@
                 (click)="collapseNavbar()"
               >
                 <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                <span jhiTranslate="global.menu.entities.orderLine">Order Line</span>
+                <span>Order Line</span>
               </a>
             </li>
             <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
@@ -122,51 +122,51 @@
           <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="admin-menu" data-cy="adminMenu">
             <span>
               <fa-icon icon="users-cog"></fa-icon>
-              <span jhiTranslate="global.menu.admin.main">Administration</span>
+              <span>Administration</span>
             </span>
           </a>
           <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="admin-menu">
             <li>
               <a class="dropdown-item" routerLink="admin/user-management" routerLinkActive="active" (click)="collapseNavbar()">
                 <fa-icon icon="users" [fixedWidth]="true"></fa-icon>
-                <span jhiTranslate="global.menu.admin.userManagement">User management</span>
+                <span>User management</span>
               </a>
             </li>
             <li>
               <a class="dropdown-item" routerLink="admin/metrics" routerLinkActive="active" (click)="collapseNavbar()">
                 <fa-icon icon="tachometer-alt" [fixedWidth]="true"></fa-icon>
-                <span jhiTranslate="global.menu.admin.metrics">Metrics</span>
+                <span>Metrics</span>
               </a>
             </li>
             <li>
               <a class="dropdown-item" routerLink="admin/health" routerLinkActive="active" (click)="collapseNavbar()">
                 <fa-icon icon="heart" [fixedWidth]="true"></fa-icon>
-                <span jhiTranslate="global.menu.admin.health">Health</span>
+                <span>Health</span>
               </a>
             </li>
             <li>
               <a class="dropdown-item" routerLink="admin/configuration" routerLinkActive="active" (click)="collapseNavbar()">
                 <fa-icon icon="cogs" [fixedWidth]="true"></fa-icon>
-                <span jhiTranslate="global.menu.admin.configuration">Configuration</span>
+                <span>Configuration</span>
               </a>
             </li>
             <li>
               <a class="dropdown-item" routerLink="admin/logs" routerLinkActive="active" (click)="collapseNavbar()">
                 <fa-icon icon="tasks" [fixedWidth]="true"></fa-icon>
-                <span jhiTranslate="global.menu.admin.logs">Logs</span>
+                <span>Logs</span>
               </a>
             </li>
             <li *ngIf="openAPIEnabled">
               <a class="dropdown-item" routerLink="admin/docs" routerLinkActive="active" (click)="collapseNavbar()">
                 <fa-icon icon="book" [fixedWidth]="true"></fa-icon>
-                <span jhiTranslate="global.menu.admin.apidocs">API</span>
+                <span>API</span>
               </a>
             </li>
             <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
             <li *ngIf="!inProduction">
               <a class="dropdown-item" href="./h2-console/" target="_tab" (click)="collapseNavbar()">
                 <fa-icon icon="database" [fixedWidth]="true"></fa-icon>
-                <span jhiTranslate="global.menu.admin.database">Database</span>
+                <span>Database</span>
               </a>
             </li>
           </ul>
@@ -175,7 +175,7 @@
           <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="languagesnavBarDropdown">
             <span>
               <fa-icon icon="flag"></fa-icon>
-              <span jhiTranslate="global.menu.language">Language</span>
+              <span>Language</span>
             </span>
           </a>
           <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="languagesnavBarDropdown">
@@ -209,7 +209,7 @@
           >
             <span *ngIf="!account?.imageUrl">
               <fa-icon icon="user"></fa-icon>
-              <span jhiTranslate="global.menu.account.main">Account</span>
+              <span>Account</span>
             </span>
             <span *ngIf="account?.imageUrl">
               <img [src]="account!.imageUrl" class="profile-image rounded-circle" alt="Avatar" />
@@ -237,7 +237,7 @@
             <li *ngSwitchCase="true">
               <a class="dropdown-item" (click)="logout()" id="logout" data-cy="logout">
                 <fa-icon icon="sign-out-alt" [fixedWidth]="true"></fa-icon>
-                <span jhiTranslate="global.menu.account.logout">Sign out</span>
+                <span>Sign out</span>
               </a>
             </li>
             <li *ngSwitchCase="false">

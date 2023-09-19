@@ -146,7 +146,7 @@
     "noorderline": "A new torder cannot have an empty orderlines list",
     "nouser": "A new torder must have an user",
     "noproducts": "All new orderlines must have a product",
-    "badquantity": "A product is out of stock",
+    "badquantity": "Un produit de la commande n'est plus en stock, merci de le retirer du panier ou de diminuer la quantité",
     "file": {
       "could.not.extract": "Could not extract file",
       "not.image": "File was expected to be an image but was found to be \"{{ fileType }}\""

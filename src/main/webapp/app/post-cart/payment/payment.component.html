@@ -1,9 +1,18 @@
 <div>
-  <h3>Reglement</h3>
-  <h4>Attention tout colis sera livré dans notre magasin à Grenoble !</h4>
+  <h1 id="Arian-title">Paiement de la commande</h1>
+  <h5><i>Attention! Nos colis sont livrés dans notre magasin à Grenoble sous 3 jours ouvrés.</i></h5>
 
-  <h4>Montant à régler : {{cartContentService.getPrice()}}</h4>
-  <label>Numéro de carte de crédit :<br><input type="text" [(ngModel)]="cardNumber" (keyup)="formatCardNumber()" placeholder="xxxx xxxx xxxx xxxx" maxlength="19"/></label>
-  <label>Expiration : <br><input type="text" [(ngModel)]="expiryDate" (keyup)="formatExpiryDate()" placeholder="MM/YY" maxlength="5"/></label>
-  <label>CCV :<br><input type="text" [(ngModel)]="cvv" placeholder="XXX" maxlength="3" (keyup)="formatCVV()"/></label>
+  <h3>Montant à régler : {{ cartContentService.getPrice() }}€</h3>
+  <label
+    >Numéro de carte de crédit :<br /><input
+      type="text"
+      [(ngModel)]="cardNumber"
+      (keyup)="formatCardNumber()"
+      placeholder="xxxx xxxx xxxx xxxx"
+      maxlength="19"
+  /></label>
+  <label
+    >Date d'expiration : <br /><input type="text" [(ngModel)]="expiryDate" (keyup)="formatExpiryDate()" placeholder="MM/YY" maxlength="5"
+  /></label>
+  <label>CCV :<br /><input type="text" [(ngModel)]="cvv" placeholder="XXX" maxlength="3" (keyup)="formatCVV()" /></label>
 </div>
