@@ -16,10 +16,10 @@ import { PageEvent } from '@angular/material/paginator';
 export class HomeComponent implements OnInit, OnDestroy {
   account: Account | null = null;
   products: IProduct[] | null = null;
-  totalProducts: number = 0;
+  totalProducts = 0;
   size: number[] = [6, 9, 12];
-  currentPageSize: number = 6;
-  page: number = 0;
+  currentPageSize = 6;
+  page = 0;
   private readonly destroy$ = new Subject<void>();
   constructor(private accountService: AccountService, private router: Router, public productService: ProductService) {}
 
@@ -38,16 +38,15 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.destroy$.next();
     this.destroy$.complete();
   }
-  fetchProducts(page: number, size: number) {
+  fetchProducts(page: number, size: number): void {
     this.productService.findProductsPage(page, size).subscribe(data => {
       this.products = data.products;
       this.totalProducts = data.totalProducts;
       this.currentPageSize = data.size;
       this.page = data.page;
-      console.log(this.products);
     });
   }
-  onPageChange(event: PageEvent) {
+  onPageChange(event: PageEvent): void {
     this.fetchProducts(event.pageIndex, event.pageSize);
   }
 }
