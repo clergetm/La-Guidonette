@@ -1,4 +1,4 @@
-import { Component, NgModule, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { SessionStorageService } from 'ngx-webstorage';
@@ -11,14 +11,8 @@ import { LoginService } from 'app/login/login.service';
 import { ProfileService } from 'app/layouts/profiles/profile.service';
 import { EntityNavbarItems } from 'app/entities/entity-navbar-items';
 
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { CartContentService } from '../../services/cart-content.service';
 import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
-
-@NgModule({
-  imports: [MatSlideToggleModule],
-})
-class AppModule {}
 
 @Component({
   selector: 'jhi-navbar',
