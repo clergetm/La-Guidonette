@@ -13,7 +13,7 @@ Buttons
 ========================================================================== */
 
 .button-74 {
-  background-color: $color-button-bg-normal;
+  background-color: $light-lighter;
   border: 2px solid $color-button-contour;
   border-radius: 30px;
   box-shadow: $color-button-contour 4px 4px 0 0;
@@ -83,7 +83,7 @@ Buttons
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
-  background-color: $cart-product-line;
+  background-color: $light;
   border: none;
   padding: 10px;
   cursor: pointer;
@@ -243,8 +243,10 @@ body {
 }
 
 .cart-line {
-  background-color: $cart-product-line;
+  background-color: $light;
   color: $primary-darker;
+  border: $primary-darker 1px solid;
+  box-shadow: $primary 3px;
 }
 
 /* ==========================================================================
@@ -324,4 +326,10 @@ POST CART
   width: 50%;
   display: inline;
   margin: 20px auto;
+}
+
+/* ================= PAYMENT ================== */
+.payment-container {
+  border-radius: 5px;
+  padding: 20px;
 }

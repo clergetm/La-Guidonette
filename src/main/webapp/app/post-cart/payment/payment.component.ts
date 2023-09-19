@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AccountService } from '../../core/auth/account.service';
 import { CartContentService } from '../../services/cart-content.service';
 
@@ -8,14 +8,15 @@ import { CartContentService } from '../../services/cart-content.service';
   styleUrls: ['./payment.component.scss', '../post-cart.component.scss'],
 })
 export class PaymentComponent {
+  @Input() hasTriedToGoNext?: boolean = false;
+  @Output() canGoNext = new EventEmitter<boolean>();
+
   cardNumber = '';
   expiryDate = '';
   cvv: string = '';
+  name: string = '';
 
-  validInputs = [false, false, false];
-
-  @Output() canGoNext = new EventEmitter<boolean>();
-
+  validInputs: boolean[] = [false, false, false, false]; // cc, date, cvv, name
   constructor(public accountService: AccountService, public cartContentService: CartContentService) {}
 
   formatCardNumber(): void {
@@ -38,10 +39,15 @@ export class PaymentComponent {
     this.checkContains();
   }
 
+  formatName(): void {
+    this.checkContains();
+  }
+
   checkContains() {
-    this.luhncheck();
+    this.isValidCCNumber();
     this.isValidDate();
     this.validInputs[2] = this.cvv.length === 3;
+    this.validInputs[3] = this.name.length > 0;
     const isValid = this.validInputs[0] && this.validInputs[1] && this.validInputs[2];
     this.canGoNext.emit(isValid);
   }
@@ -50,16 +56,9 @@ export class PaymentComponent {
    * Use Luhn algorithm to find if the credit card number is valid
    * Algo from https://decipher.dev/30-seconds-of-typescript/docs/luhnCheck/
    */
-  luhncheck(): boolean {
-    let arr = this.cardNumber
-      .replace(/\s/g, '')
-      .split('')
-      .reverse()
-      .map(x => parseInt(x));
-    let lastDigit = arr.splice(0, 1)[0];
-    let sum = arr.reduce((acc, val, i) => (i % 2 !== 0 ? acc + val : acc + ((val * 2) % 9) || 9), 0);
-    sum += lastDigit;
-    let retour = sum % 10 === 0;
+  isValidCCNumber(): boolean {
+    let noSpace = this.cardNumber.replace(/\s/g, '');
+    let retour = noSpace.length >= 13 && noSpace.length <= 19;
     this.validInputs[0] = retour;
     return retour;
   }
