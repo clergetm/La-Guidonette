@@ -22,6 +22,7 @@
       (keyup)="formatName()"
       [style.background-color]="hasTriedToGoNext && !validInputs[3] ? 'indianred' : 'white'"
     />
+    <p class="lower-input-text" *ngIf="!validInputs[3]"><span *ngIf="error_name">Un nom ne peut pas être vide ! </span></p>
   </div>
 </div>
 <div class="row">
@@ -40,6 +41,9 @@
       maxlength="23"
       [style.background-color]="hasTriedToGoNext && !validInputs[0] ? 'indianred' : 'white'"
     />
+    <p class="lower-input-text" *ngIf="!validInputs[0]">
+      <span *ngIf="error_card_short">Numéro trop court ! </span><span *ngIf="error_card_long">Numéro trop long !</span>
+    </p>
   </div>
 </div>
 <div class="row">
@@ -58,6 +62,10 @@
       maxlength="5"
       [style.background-color]="hasTriedToGoNext && !validInputs[1] ? 'indianred' : 'white'"
     />
+    <p class="lower-input-text" *ngIf="!validInputs[1]">
+      <span *ngIf="error_date_format">Une date est au format MM/YY, janvier 2023 est donc 01/23 ! </span
+      ><span *ngIf="error_date_incorrect">Cette date n'existe pas ! </span><span *ngIf="error_date_expired">Carte perimée !</span>
+    </p>
   </div>
 </div>
 <div class="row">
@@ -76,5 +84,6 @@
       (keyup)="formatCVV()"
       [style.background-color]="hasTriedToGoNext && !validInputs[2] ? 'indianred' : 'white'"
     />
+    <p class="lower-input-text" *ngIf="!validInputs[2]"><span *ngIf="error_cvv">Un CVV est composé de 3 chiffres ! </span></p>
   </div>
 </div>
