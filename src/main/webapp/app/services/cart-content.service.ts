@@ -10,6 +10,7 @@ import { CoupleProductQuantity } from '../entities/dto/CoupleProductQuantity';
 export class CartContentService {
   private cartItems: IProduct[] = [];
   private size = 0;
+  private MAX_SIZE = 10;
 
   constructor(public productService: ProductService) {
     const localStorageCart: string | null = localStorage.getItem('user-cart');
@@ -35,17 +36,13 @@ export class CartContentService {
   }
 
   addToCart(product: IProduct): void {
-    this.cartItems.push(product);
-    this.size += 1;
-    this.updatelocalStorageCart();
-  }
-
-  addMultipleToCart(product: IProduct, number: number): void {
-    for (let i = 0; i < number; i++) {
+    if (this.size < this.MAX_SIZE) {
       this.cartItems.push(product);
       this.size += 1;
+      this.updatelocalStorageCart();
+    } else if (this.size > this.MAX_SIZE) {
+      this.removeAll(); // in case some bug happen, empty the cart.
     }
-    this.updatelocalStorageCart();
   }
 
   removeFromCart(product: IProduct): void {
