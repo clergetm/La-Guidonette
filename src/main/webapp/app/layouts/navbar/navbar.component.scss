@@ -22,7 +22,6 @@ Navbar
   width: 100%;
   height: 70px;
   top: 0;
-
   a.nav-link {
     font-weight: 400;
   }
@@ -34,7 +33,7 @@ Navbar
   .number-items-in-cart {
     position: absolute;
     top: 0;
-    right: 0;
+    right: 75px;
     background-color: #e92f00;
     border-radius: 50%;
     padding: 0.2rem 0.5rem;
@@ -44,7 +43,6 @@ Navbar
     text-align: center;
   }
 }
-
 /* ==========================================================================
 Logo styles
 ========================================================================== */

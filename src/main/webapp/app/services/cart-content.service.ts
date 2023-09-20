@@ -19,6 +19,17 @@ export class CartContentService {
     }
   }
 
+  cartItemsIndexOf(prod: IProduct): number {
+    let retour = -1;
+    for (let index = 0; index < this.cartItems.length; index++) {
+      if (this.cartItems[index].id === prod.id) {
+        retour = index;
+        break;
+      }
+    }
+    return retour;
+  }
+
   isEmpty(): boolean {
     return this.size === 0;
   }
@@ -38,12 +49,22 @@ export class CartContentService {
   }
 
   removeFromCart(product: IProduct): void {
-    const index: number = this.cartItems.indexOf(product);
+    const index: number = this.cartItemsIndexOf(product);
     if (index > -1) {
       this.cartItems.splice(index, 1);
       this.size -= 1;
       this.updatelocalStorageCart();
     }
+  }
+
+  removeAllFromCart(product: IProduct): void {
+    var index: number = this.cartItemsIndexOf(product);
+    while (index > -1) {
+      this.cartItems.splice(index, 1);
+      this.size -= 1;
+      index = this.cartItemsIndexOf(product);
+    }
+    this.updatelocalStorageCart();
   }
 
   removeAll(): void {

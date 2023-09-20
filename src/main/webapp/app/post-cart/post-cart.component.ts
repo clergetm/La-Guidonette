@@ -9,12 +9,14 @@ import { CartContentService } from '../services/cart-content.service';
 @Component({
   selector: 'jhi-post-cart',
   templateUrl: './post-cart.component.html',
-  styleUrls: ['./post-cart.component.scss'],
+  styleUrls: ['../styles.scss'],
 })
 export class PostCartComponent implements OnInit {
   postOrder: NewOrderLine[] | null = null;
   itorder: ITorder | null = null;
   step = 1;
+  canValidate = false;
+  canOrder = true;
   constructor(
     public torderService: TorderService,
     public accountService: AccountService,
@@ -28,20 +30,40 @@ export class PostCartComponent implements OnInit {
     }
   }
 
-  nextStep(): void {
-    this.step++;
+  handlePaymentValidation(status: boolean): void {
+    this.canValidate = status;
+  }
+
+  handleCanOrder(status: boolean): void {
+    this.canOrder = status;
+  }
+
+  nextStep(hasBeenValidated = false): void {
+    if (hasBeenValidated || this.step != 2) {
+      this.step++;
+    } else if (this.step === 2) {
+      if (this.canValidate) {
+        this.validateOrder();
+      }
+    }
+    if (this.step === 4) {
+      this.router.navigate(['/']);
+    }
   }
 
   previousStep(): void {
     this.step--;
+    if (this.step === 0) {
+      this.router.navigate(['/cart']);
+    }
   }
 
   validateOrder(): void {
     this.postOrder = this.createOrderlines();
     this.torderService.createOrderFromProducts(this.postOrder).subscribe(data => {
       this.itorder = data;
+      this.nextStep(true);
       this.cartContentService.removeAll();
-      this.nextStep();
     });
   }
 

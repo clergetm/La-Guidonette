@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { GetObjectCommand, S3Client } from '@aws-sdk/client-s3';
+import { GetObjectCommand, PutObjectCommand, PutObjectCommandOutput, S3Client } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import { environment } from 'environments/environment';
 
@@ -39,6 +39,21 @@ export class S3Service {
       new GetObjectCommand({
         Bucket: environment.BUCKET_NAME,
         Key: name ?? environment.DEFAULT_IMAGE_NAME,
+      })
+    );
+  }
+
+  /**
+   * Upload the given image into S3.
+   * @param file the file to upload.
+   * @returns The output of the command with all the informations about the request.
+   */
+  public async uploadImage(file: File): Promise<PutObjectCommandOutput> {
+    return await this.s3.send(
+      new PutObjectCommand({
+        Body: file,
+        Bucket: environment.BUCKET_NAME,
+        Key: file.name,
       })
     );
   }

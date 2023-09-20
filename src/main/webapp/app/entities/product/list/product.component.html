@@ -1,6 +1,6 @@
 <div>
   <h2 id="page-heading" data-cy="ProductHeading">
-    <span>Gestion des velos</span>
+    <span>Gestion des vélos</span>
 
     <div class="d-flex justify-content-end">
       <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
@@ -86,12 +86,6 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="version">
-            <div class="d-flex">
-              <span>Version</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -108,7 +102,6 @@
           <td>{{ product.color }}</td>
           <td>{{ product.quantity }}</td>
           <td>{{ product.imageName }}</td>
-          <td>{{ product.version }}</td>
           <td class="text-end">
             <div class="btn-group">
               <button
