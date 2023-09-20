@@ -18,9 +18,9 @@ export class SidebarComponent implements OnInit {
   selectedCategories: string[] = [];
   selectedBrands: string[] = [];
   selectedColors: string[] = [];
-  couleurMenu: boolean = false;
-  categoryMenu: boolean = false;
-  brandMenu: boolean = false;
+  couleurMenu = false;
+  categoryMenu = false;
+  brandMenu = false;
   @Input() query: string | null = null;
   @Output() selectedCategoriesEvent = new EventEmitter<string[]>();
   @Output() selectedColorsEvent = new EventEmitter<string[]>();

@@ -11,12 +11,12 @@ import { SearchService } from '../search-service';
 })
 export class SearchComponent {
   products: IProduct[] | null = null;
-  totalProducts: number = 0;
+  totalProducts = 0;
   size: number[] = [6, 9, 12];
-  currentPageSize: number = 6;
-  page: number = 0;
-  noProductMode: boolean = false;
-  query: string = '';
+  currentPageSize = 6;
+  page = 0;
+  noProductMode = false;
+  query = '';
   selectedCategories: string[] = [];
   selectedBrands: string[] = [];
   selectedColors: string[] = [];
@@ -43,7 +43,7 @@ export class SearchComponent {
         this.totalProducts = data.totalProducts;
         this.currentPageSize = data.size;
         this.page = data.page;
-        if (this.products?.length == 0) {
+        if (this.products.length == 0) {
           this.noProductMode = true;
           this.productService.findBestSellers().subscribe(data => (this.products = data));
         } else {
