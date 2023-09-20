@@ -47,7 +47,7 @@
           class="button-74"
           style="width: 100%; margin-left: 10px"
           type="button"
-          [routerLink]="account.isAuthenticated() ? '/order' : '/login'"
+          (click)="redirectToLogin()"
           [disabled]="cartService.getSize() === 0 ? true : null"
         >
           Récapitulatif de ma commande
