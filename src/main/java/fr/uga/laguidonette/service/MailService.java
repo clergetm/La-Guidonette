@@ -1,5 +1,6 @@
 package fr.uga.laguidonette.service;
 
+import fr.uga.laguidonette.domain.ConfirmOrder;
 import fr.uga.laguidonette.domain.User;
 import java.nio.charset.StandardCharsets;
 import java.util.Locale;
@@ -30,6 +31,12 @@ public class MailService {
     private static final String USER = "user";
 
     private static final String BASE_URL = "baseUrl";
+
+    private static final String USERNAME = "username";
+
+    private static final String ORDER_NUMBER = "orderNumber";
+
+    private static final String ORDER_NAME = "orderName";
 
     private final JHipsterProperties jHipsterProperties;
 
@@ -96,6 +103,20 @@ public class MailService {
     public void sendActivationEmail(User user) {
         log.debug("Sending activation email to '{}'", user.getEmail());
         sendEmailFromTemplate(user, "mail/activationEmail", "email.activation.title");
+    }
+
+    @Async
+    public void sendOrderConfirmationEmail(ConfirmOrder orderDetails) {
+        log.debug("Sending Order confirmation email to '{}'", orderDetails.getMail());
+        Locale locale = new Locale(orderDetails.getLocale());
+        Context context = new Context(locale);
+        context.setVariable(USERNAME, orderDetails.getUsername());
+        context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
+        context.setVariable(ORDER_NUMBER, orderDetails.getCommandId());
+        context.setVariable(ORDER_NAME, orderDetails.getName());
+        String content = this.templateEngine.process("mail/confirmationOrderEmail", context);
+        String subject = this.messageSource.getMessage("email.order.title", new Object[] { orderDetails.getCommandId() }, locale);
+        sendEmail(orderDetails.getMail(), subject, content, false, true);
     }
 
     @Async

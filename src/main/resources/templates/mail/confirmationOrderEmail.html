@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}" lang="en">
+  <head>
+    <title th:text="#{email.order.title(${orderNumber})}">Confirm order</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="icon" th:href="@{|${baseUrl}/favicon.ico|}" />
+  </head>
+  <body>
+    <p th:text="#{email.order.greeting(${username})}">Dear</p>
+    <p th:text="#{email.order.text1}">Thank you very much for your order placed on LaGuidonnette!</p>
+    <p th:text="#{email.order.text2(${orderNumber})}">Your order number is,</p>
+    <p th:text="#{email.order.text3}">You will be asked to present this email when collecting your package</p>
+    <p th:text="#{email.order.text4(${orderName})}">As well as the identity document of the person appearing on the credit card:</p>
+    <p>
+      <span th:text="#{email.order.text5}">Regards, </span>
+      <br />
+      <em th:text="#{email.signature}">LaGuidonnette.</em>
+    </p>
+  </body>
+</html>
