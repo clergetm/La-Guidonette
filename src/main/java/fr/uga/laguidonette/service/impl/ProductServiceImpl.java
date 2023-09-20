@@ -44,8 +44,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public GetProductsPageResponseDto search(String query, Integer page, Integer size) {
-        Pageable pageable = PageRequest.of(page, size);
+    public GetProductsPageResponseDto search(String query, Pageable pageable) {
         Page<Product> productsPage = productRepository.search(query, pageable);
         List<Product> products = productsPage.getContent();
         GetProductsPageResponseDto getProductsPageResponseDto = new GetProductsPageResponseDto();
@@ -56,6 +55,32 @@ public class ProductServiceImpl implements ProductService {
         getProductsPageResponseDto.setTotalPages(productsPage.getTotalPages());
         getProductsPageResponseDto.setTotalProducts(productsPage.getTotalElements());
         return getProductsPageResponseDto;
+    }
+
+    @Override
+    public GetProductsPageResponseDto filteredSearch(
+        String query,
+        List<String> categories,
+        List<Color> colors,
+        List<Brand> brands,
+        Integer page,
+        Integer size
+    ) {
+        Pageable pageable = PageRequest.of(page, size);
+        if (categories.isEmpty() && colors.isEmpty() && brands.isEmpty()) {
+            return this.search(query, pageable);
+        } else {
+            Page<Product> productsPage = productRepository.filteredSearch(query, categories, colors, brands, pageable);
+            List<Product> products = productsPage.getContent();
+            GetProductsPageResponseDto getProductsPageResponseDto = new GetProductsPageResponseDto();
+            getProductsPageResponseDto.setProducts(products);
+            getProductsPageResponseDto.setPage(productsPage.getNumber());
+            getProductsPageResponseDto.setSize(productsPage.getSize());
+            getProductsPageResponseDto.setLast(productsPage.isLast());
+            getProductsPageResponseDto.setTotalPages(productsPage.getTotalPages());
+            getProductsPageResponseDto.setTotalProducts(productsPage.getTotalElements());
+            return getProductsPageResponseDto;
+        }
     }
 
     @Override
@@ -106,6 +131,7 @@ public class ProductServiceImpl implements ProductService {
         log.debug("Request to get all Products");
         return productRepository.findAll();
     }
+
     @Override
     @Transactional(readOnly = true)
     public List<Product> filterProducts(List<String> categories, List<Color> colors, List<Brand> brands) {

@@ -9,6 +9,10 @@ import { RouterModule } from '@angular/router';
 import { SEARCH_ROUTE } from './search.route';
 import { SharedModule } from '../../shared/shared.module';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { SidebarComponent } from '../../layouts/sidebar/sidebar.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatButtonModule } from '@angular/material/button';
+import { MatListModule } from '@angular/material/list';
 @NgModule({
   imports: [
     SharedModule,
@@ -19,8 +23,11 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatInputModule,
     ListProductsModule,
     MatPaginatorModule,
+    MatCheckboxModule,
+    MatButtonModule,
+    MatListModule,
   ],
   exports: [SearchComponent],
-  declarations: [SearchComponent],
+  declarations: [SearchComponent, SidebarComponent],
 })
 export class SearchModule {}
