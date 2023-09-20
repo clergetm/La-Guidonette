@@ -51,6 +51,7 @@ export class PaymentComponent {
   }
 
   formatName(): void {
+    this.name = this.name.replace(/[0-9]/g, '');
     this.error_name = !(this.name.length > 0);
     this.validInputs[3] = !this.error_name;
     this.checkCanGoNext();
