@@ -33,7 +33,7 @@ Navbar
   .number-items-in-cart {
     position: absolute;
     top: 0;
-    right: 0;
+    right: 75px;
     background-color: #e92f00;
     border-radius: 50%;
     padding: 0.2rem 0.5rem;
@@ -56,8 +56,8 @@ Logo styles
 }
 
 .logo-cart {
-  height: 45px;
-  width: 45px;
+  height: 20px;
+  width: 20px;
   display: inline-block;
   background: url('../../../content/images/basket-white.png') no-repeat center center;
   background-size: contain;

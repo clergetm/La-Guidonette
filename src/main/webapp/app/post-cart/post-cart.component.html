@@ -20,7 +20,7 @@
 
     <div *ngIf="step === 2">
       <jhi-alert-error></jhi-alert-error>
-      <h3>Reglement</h3>
+      <h1>Reglement</h1>
       <h4>Attention toute commande sera livré dans notre magasin à Grenoble !</h4>
       <div class="payment-container">
         <form>
@@ -34,7 +34,9 @@
     </div>
 
     <div class="d-flex flex-row align-items-center mt-3 p-2 rounded">
-      <button class="button-74" style="width: 100%; margin-left: 10px" type="button" (click)="previousStep()">Retour</button>
+      <button class="button-74" style="width: 100%; margin-left: 10px" type="button" (click)="previousStep()" *ngIf="step != 3">
+        Retour
+      </button>
       <button
         class="button-74"
         style="width: 100%; margin-left: 10px"
