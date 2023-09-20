@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IProduct } from '../../entities/product/product.model';
 import { PageEvent } from '@angular/material/paginator';
 import { ProductService } from '../../entities/product/service/product.service';
@@ -9,14 +9,14 @@ import { SearchService } from '../search-service';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
 })
-export class SearchComponent {
+export class SearchComponent implements OnInit {
   products: IProduct[] | null = null;
-  totalProducts: number = 0;
+  totalProducts = 0;
   size: number[] = [6, 9, 12];
-  currentPageSize: number = 6;
-  page: number = 0;
-  noProductMode: boolean = false;
-  query: string = '';
+  currentPageSize = 6;
+  page = 0;
+  noProductMode = false;
+  query = '';
   selectedCategories: string[] = [];
   selectedBrands: string[] = [];
   selectedColors: string[] = [];
@@ -25,17 +25,17 @@ export class SearchComponent {
   ngOnInit(): void {
     this.fetchProducts(this.page, this.currentPageSize);
   }
-  onSubmit(e: Event) {
+  onSubmit(e: Event): void {
     e.preventDefault();
     this.fetchProducts(this.page, this.currentPageSize);
   }
-  submitFilters() {
+  submitFilters(): void {
     this.fetchProducts(this.page, this.currentPageSize);
   }
-  onPageChange(event: PageEvent) {
+  onPageChange(event: PageEvent): void {
     this.fetchProducts(event.pageIndex, event.pageSize);
   }
-  fetchProducts(page: number, size: number) {
+  fetchProducts(page: number, size: number): void {
     this.searchService
       .filteredSearch(this.query, this.selectedCategories, this.selectedColors, this.selectedBrands, page, size)
       .subscribe(data => {
@@ -43,21 +43,21 @@ export class SearchComponent {
         this.totalProducts = data.totalProducts;
         this.currentPageSize = data.size;
         this.page = data.page;
-        if (this.products?.length == 0) {
+        if (this.products.length === 0) {
           this.noProductMode = true;
-          this.productService.findBestSellers().subscribe(data => (this.products = data));
+          this.productService.findBestSellers().subscribe(found => (this.products = found));
         } else {
           this.noProductMode = false;
         }
       });
   }
-  getSelectedCategories(selectedCategories: string[]) {
+  getSelectedCategories(selectedCategories: string[]): void {
     this.selectedCategories = selectedCategories;
   }
-  getSelectedColors(selectedColors: string[]) {
+  getSelectedColors(selectedColors: string[]): void {
     this.selectedColors = selectedColors;
   }
-  getSelectedBrands(selectedBrands: string[]) {
+  getSelectedBrands(selectedBrands: string[]): void {
     this.selectedBrands = selectedBrands;
   }
 }

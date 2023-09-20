@@ -56,7 +56,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   redirection(): void {
     const redirect = this.stateStorageService.getUrl() ?? '';
-    console.log('Redirection : ' + redirect);
     this.stateStorageService.clearUrl();
     this.router.navigate([redirect]);
   }

@@ -5,7 +5,6 @@ import { IProduct } from '../entities/product/product.model';
 import { AccountService } from '../core/auth/account.service';
 import { StateStorageService } from '../core/auth/state-storage.service';
 import { Router } from '@angular/router';
-import { CoupleProductQuantity } from '../entities/dto/CoupleProductQuantity';
 
 @Component({
   selector: 'jhi-cart',
@@ -29,7 +28,7 @@ export class CartComponent {
   }
 
   redirectToLogin(): void {
-    if (this.account.isAuthenticated()){
+    if (this.account.isAuthenticated()) {
       this.router.navigate(['order']);
     } else {
       this.stateStorageService.storeUrl('order');
