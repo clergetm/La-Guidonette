@@ -21,7 +21,7 @@ export class PostCartComponent implements OnInit {
     public torderService: TorderService,
     public accountService: AccountService,
     public cartContentService: CartContentService,
-    private router: Router
+    public router: Router
   ) {}
 
   ngOnInit(): void {
@@ -38,16 +38,13 @@ export class PostCartComponent implements OnInit {
     this.canOrder = status;
   }
 
-  nextStep(hasBeenValidated = false): void {
-    if (hasBeenValidated || this.step != 2) {
+  nextStep(): void {
+    if (this.step === 1) {
       this.step++;
     } else if (this.step === 2) {
       if (this.canValidate) {
         this.validateOrder();
       }
-    }
-    if (this.step === 4) {
-      this.router.navigate(['/']);
     }
   }
 
@@ -62,7 +59,7 @@ export class PostCartComponent implements OnInit {
     this.postOrder = this.createOrderlines();
     this.torderService.createOrderFromProducts(this.postOrder).subscribe(data => {
       this.itorder = data;
-      this.nextStep(true);
+      this.step = 3;
       this.cartContentService.removeAll();
     });
   }
