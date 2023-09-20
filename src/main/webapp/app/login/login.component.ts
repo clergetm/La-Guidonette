@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { LoginService } from 'app/login/login.service';
 import { AccountService } from 'app/core/auth/account.service';
+import { StateStorageService } from '../core/auth/state-storage.service';
 
 @Component({
   selector: 'jhi-login',
@@ -24,13 +25,14 @@ export class LoginComponent implements OnInit, AfterViewInit {
   constructor(
     private accountService: AccountService,
     private loginService: LoginService,
-    private router: Router
+    private router: Router,
+    private stateStorageService: StateStorageService
   ) {}
   ngOnInit(): void {
     // if already authenticated then navigate to home page
     this.accountService.identity().subscribe(() => {
       if (this.accountService.isAuthenticated()) {
-        this.router.navigate(['']);
+        this.redirection();
       }
     });
   }
@@ -45,10 +47,17 @@ export class LoginComponent implements OnInit, AfterViewInit {
         this.authenticationError = false;
         if (!this.router.getCurrentNavigation()) {
           // There were no routing during login (eg from navigationToStoredUrl)
-          this.router.navigate(['']);
+          this.redirection();
         }
       },
       error: () => (this.authenticationError = true),
     });
+  }
+
+  redirection(): void {
+    const redirect = this.stateStorageService.getUrl() ?? '';
+    console.log('Redirection : ' + redirect);
+    this.stateStorageService.clearUrl();
+    this.router.navigate([redirect]);
   }
 }

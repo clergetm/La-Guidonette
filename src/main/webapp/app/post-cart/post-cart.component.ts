@@ -5,6 +5,7 @@ import { TorderService } from '../entities/torder/service/torder.service';
 import { NewOrderLine } from '../entities/order-line/order-line.model';
 import { ITorder } from '../entities/torder/torder.model';
 import { CartContentService } from '../services/cart-content.service';
+import { StateStorageService } from '../core/auth/state-storage.service';
 
 @Component({
   selector: 'jhi-post-cart',
@@ -21,11 +22,13 @@ export class PostCartComponent implements OnInit {
     public torderService: TorderService,
     public accountService: AccountService,
     public cartContentService: CartContentService,
-    public router: Router
+    private router: Router,
+    private stateStorageService: StateStorageService
   ) {}
 
   ngOnInit(): void {
     if (!this.accountService.isAuthenticated()) {
+      this.stateStorageService.storeUrl('order');
       this.router.navigate(['login']);
     }
   }
