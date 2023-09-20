@@ -14,7 +14,6 @@ import { CartContentService } from '../services/cart-content.service';
 export class PostCartComponent implements OnInit {
   postOrder: NewOrderLine[] | null = null;
   itorder: ITorder | null = null;
-  failedToCommand: boolean = false;
   step = 1;
   canValidate = false;
   canOrder = true;
@@ -44,10 +43,7 @@ export class PostCartComponent implements OnInit {
       this.step++;
     } else if (this.step === 2) {
       if (this.canValidate) {
-        this.failedToCommand = false;
         this.validateOrder();
-      } else {
-        this.failedToCommand = true;
       }
     }
     if (this.step === 4) {
@@ -56,9 +52,6 @@ export class PostCartComponent implements OnInit {
   }
 
   previousStep(): void {
-    if (this.step === 2) {
-      this.failedToCommand = false;
-    }
     this.step--;
     if (this.step === 0) {
       this.router.navigate(['/cart']);

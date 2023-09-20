@@ -8,7 +8,6 @@ import { CartContentService } from '../../services/cart-content.service';
   styleUrls: ['./payment.component.scss', '../../styles.scss'],
 })
 export class PaymentComponent {
-  @Input() hasTriedToGoNext?: boolean = false;
   @Output() canGoNext = new EventEmitter<boolean>();
 
   cardNumber = '';
@@ -30,7 +29,8 @@ export class PaymentComponent {
   formatCardNumber(): void {
     const formatted = this.cardNumber.replace(/\D/g, '').match(/.{1,4}/g);
     this.cardNumber = formatted ? formatted.join(' ') : '';
-    this.checkContains();
+    this.isValidCCNumber();
+    this.checkCanGoNext();
   }
 
   formatExpiryDate(): void {
@@ -39,25 +39,24 @@ export class PaymentComponent {
     if (this.expiryDate.length > 5) {
       this.expiryDate = this.expiryDate.substr(0, 5);
     }
-    this.checkContains();
+    this.isValidDate();
+    this.checkCanGoNext();
   }
 
   formatCVV(): void {
     this.cvv = this.cvv.replace(/\D/g, '');
-    this.checkContains();
+    this.error_cvv = !(this.cvv.length === 3);
+    this.validInputs[2] = !this.error_cvv;
+    this.checkCanGoNext();
   }
 
   formatName(): void {
-    this.checkContains();
-  }
-
-  checkContains() {
-    this.isValidCCNumber();
-    this.isValidDate();
-    this.error_cvv = !(this.cvv.length === 3);
-    this.validInputs[2] = !this.error_cvv;
     this.error_name = !(this.name.length > 0);
     this.validInputs[3] = !this.error_name;
+    this.checkCanGoNext();
+  }
+
+  checkCanGoNext() {
     const isValid = this.validInputs[0] && this.validInputs[1] && this.validInputs[2] && this.validInputs[3];
     this.canGoNext.emit(isValid);
   }
