@@ -5,6 +5,6 @@ export const SEARCH_ROUTE: Route = {
   path: 'search',
   component: SearchComponent,
   data: {
-    pageTitle: 'search',
+    pageTitle: 'search.title',
   },
 };

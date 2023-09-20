@@ -1,16 +1,16 @@
 {
   "login": {
-    "title": "Sign in | LaGuidonette",
+    "title": "Authentification | LaGuidonette",
     "pageTitle": "Authentification",
     "form": {
       "password": "Mot de passe",
       "password.placeholder": "Votre mot de passe",
-      "rememberme": "Se souvenir de moi",
-      "button": "Se connecter"
+      "rememberme": "Garder la session ouverte",
+      "button": "Connexion"
     },
     "messages": {
       "error": {
-        "authentication": "<strong>Échec de la connexion !</strong> Veuillez vérifier vos informations d'identification et réessayer."
+        "authentication": "<strong>Erreur d'authentification !</strong> Veuillez vérifier vos identifiants de connexion."
       }
     },
     "password": {
@@ -18,7 +18,7 @@
     },
     "registration": {
       "statement": "Vous n'avez pas encore de compte ?",
-      "button": "Créer un nouveau compte"
+      "button": "Inscrivez-vous pour créer un nouveau compte."
     }
   }
 }

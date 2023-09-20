@@ -2,7 +2,7 @@
   "laGuidonetteApp": {
     "torder": {
       "home": {
-        "title": "Torders",
+        "title": "Orders | LaGuidonette",
         "refreshListLabel": "Refresh list",
         "createLabel": "Create a new Torder",
         "createOrEditLabel": "Create or edit a Torder",
@@ -15,7 +15,7 @@
         "question": "Are you sure you want to delete Torder {{ id }}?"
       },
       "detail": {
-        "title": "Torder"
+        "title": "Order | LaGuidonette"
       },
       "id": "ID",
       "date": "Date",
