@@ -12,13 +12,13 @@
     <div class="right-part">
       <form class="example-form searchForm" (submit)="onSubmit($event)">
         <mat-form-field class="example-full-width" style="width: 100%">
-          <mat-label>Search For Your bike </mat-label>
+          <mat-label>Recherchez votre vélo </mat-label>
           <input matInput [(ngModel)]="query" name="query" />
           <mat-icon matSuffix fontIcon="search">search</mat-icon>
         </mat-form-field>
       </form>
-      <h1 *ngIf="noProductMode">No results for your search</h1>
-      <h1 *ngIf="noProductMode">Best-Selling Bikes: Discover Our Customer Favorites!</h1>
+      <h1 *ngIf="noProductMode">Aucun résultat pour votre recherche.</h1>
+      <h1 *ngIf="noProductMode">Les vélos les plus vendus : Découvrez les favoris de nos clients !</h1>
       <jhi-list-products [products]="products"></jhi-list-products>
     </div>
   </div>
