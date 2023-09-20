@@ -22,7 +22,7 @@ export class PostCartComponent implements OnInit {
     public torderService: TorderService,
     public accountService: AccountService,
     public cartContentService: CartContentService,
-    private router: Router,
+    public router: Router,
     private stateStorageService: StateStorageService
   ) {}
 
