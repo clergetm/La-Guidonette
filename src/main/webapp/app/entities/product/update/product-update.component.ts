@@ -48,6 +48,10 @@ export class ProductUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const product = this.productFormService.getProduct(this.editForm);
+    if (this.file) {
+      product.imageName = this.file.name;
+      this.s3Service.uploadImage(this.file);
+    }
     if (product.id !== null) {
       this.subscribeToSaveResponse(this.productService.update(product));
     } else {
@@ -61,7 +65,7 @@ export class ProductUpdateComponent implements OnInit {
    */
   public saveFileInfo(event: Event): void {
     const element = event.currentTarget as HTMLInputElement;
-    let fileList: FileList | null = element.files;
+    const fileList: FileList | null = element.files;
 
     if (fileList) {
       this.file = fileList[0];
@@ -73,10 +77,6 @@ export class ProductUpdateComponent implements OnInit {
   /**
    * Upload the file in S3.
    */
-  public uploadImage() {
-    if (this.file) this.s3Service.uploadImage(this.file);
-  }
-
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IProduct>>): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
       next: () => this.onSaveSuccess(),

@@ -21,6 +21,7 @@ export class SearchComponent {
   selectedBrands: string[] = [];
   selectedColors: string[] = [];
   constructor(public searchService: SearchService, public productService: ProductService) {}
+
   ngOnInit(): void {
     this.fetchProducts(this.page, this.currentPageSize);
   }

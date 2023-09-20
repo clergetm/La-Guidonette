@@ -86,7 +86,15 @@
 
         <div class="row mb-3">
           <label class="form-label">Image Name</label>
-          <input type="text" class="form-control" name="imageName" id="field_imageName" data-cy="imageName" formControlName="imageName" />
+          <input
+            type="text"
+            class="form-control"
+            name="imageName"
+            id="field_imageName"
+            data-cy="imageName"
+            formControlName="imageName"
+            [readonly]="true"
+          />
           <div *ngIf="editForm.get('imageName')!.invalid && (editForm.get('imageName')!.dirty || editForm.get('imageName')!.touched)">
             <small class="form-text text-danger" *ngIf="editForm.get('imageName')?.errors?.required"> This field is required. </small>
           </div>
@@ -100,6 +108,8 @@
             id="field_imageUpload"
             (change)="saveFileInfo($event)"
             name="imageUpload"
+            data-cy="imageFile"
+            formControlName="imageFile"
           />
         </div>
 
@@ -128,7 +138,6 @@
           data-cy="entityCreateSaveButton"
           [disabled]="editForm.invalid || isSaving"
           class="btn btn-primary"
-          (click)="uploadImage()"
         >
           <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
         </button>

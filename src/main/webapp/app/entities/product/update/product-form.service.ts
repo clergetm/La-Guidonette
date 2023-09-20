@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { IProduct, NewProduct } from '../product.model';
 
@@ -14,7 +14,7 @@ type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>
  */
 type ProductFormGroupInput = IProduct | PartialWithRequiredKeyOf<NewProduct>;
 
-type ProductFormDefaults = Pick<NewProduct, 'id' | 'categories'>;
+// type ProductFormDefaults = Pick<NewProduct, 'id' | 'categories'>;
 
 type ProductFormGroupContent = {
   id: FormControl<IProduct['id'] | NewProduct['id']>;
@@ -68,9 +68,12 @@ export class ProductFormService {
       quantity: new FormControl(productRawValue.quantity, {
         validators: [Validators.required],
       }),
-      imageName: new FormControl(productRawValue.imageName, {
-        validators: [Validators.required],
-      }),
+      imageName: new FormControl(
+        { value: productRawValue.imageName, disabled: true },
+        {
+          validators: [Validators.required],
+        }
+      ),
       version: new FormControl(productRawValue.version),
       categories: new FormControl(productRawValue.categories ?? []),
     });
