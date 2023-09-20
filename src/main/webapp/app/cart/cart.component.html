@@ -10,15 +10,6 @@
           class="d-flex flex-row justify-content-between align-items-center p-2 mt-4 px-3 rounded cart-line"
           *ngFor="let productQuantity of this.cartService?.getProductsAndQuantity()"
         >
-          <div class="mr-1">
-            <!--<jhi-product-image *ngIf="product.imageName" [name]="product.imageName" class="rounded"></jhi-product-image>-->
-            <img
-              src="https://contents.mediadecathlon.com/p2488397/k$0be8cf4ae3624421a8069564615b265b/sq/velo-de-ville-elops-520-cadre-bas-bleu.jpg?format=auto&f=800x0"
-              class="rounded"
-              width="70"
-            />
-          </div>
-
           <div class="d-flex flex-column align-items-center product-details">
             <span class="font-weight-bold">{{ productQuantity.product.label }}</span>
           </div>
