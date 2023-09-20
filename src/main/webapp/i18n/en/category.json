@@ -2,7 +2,7 @@
   "laGuidonetteApp": {
     "category": {
       "home": {
-        "title": "Categories",
+        "title": "Categories | LaGuidonette",
         "refreshListLabel": "Refresh list",
         "createLabel": "Create a new Category",
         "createOrEditLabel": "Create or edit a Category",

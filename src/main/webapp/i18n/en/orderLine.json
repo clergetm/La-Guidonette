@@ -2,7 +2,7 @@
   "laGuidonetteApp": {
     "orderLine": {
       "home": {
-        "title": "Order Lines",
+        "title": "Order Lines | LaGuidonette",
         "refreshListLabel": "Refresh list",
         "createLabel": "Create a new Order Line",
         "createOrEditLabel": "Create or edit a Order Line",
@@ -15,7 +15,7 @@
         "question": "Are you sure you want to delete Order Line {{ id }}?"
       },
       "detail": {
-        "title": "Order Line"
+        "title": "Order Line | LaGuidonette"
       },
       "id": "ID",
       "quantity": "Quantity",

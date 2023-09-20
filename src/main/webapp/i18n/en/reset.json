@@ -1,7 +1,7 @@
 {
   "reset": {
     "request": {
-      "title": "Reset your password",
+      "title": "Reset your password | LaGuidonette",
       "form": {
         "button": "Reset password"
       },
