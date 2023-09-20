@@ -21,9 +21,9 @@ import { SessionStorageService } from 'ngx-webstorage';
 })
 export class TranslationModule {
   constructor(private translateService: TranslateService, sessionStorageService: SessionStorageService) {
-    translateService.setDefaultLang('en');
+    translateService.setDefaultLang('fr');
     // if user have changed language and navigates away from the application and back to the application then use previously choosed language
-    const langKey = sessionStorageService.retrieve('locale') ?? 'en';
+    const langKey = 'fr';
     translateService.use(langKey);
   }
 }
