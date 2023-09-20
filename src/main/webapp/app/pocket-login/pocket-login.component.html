@@ -1,18 +1,18 @@
 <div class="pocket-login">
   <div class="d-flex justify-content-center">
     <div class="col-lg-10 col-md-8 col-sm-10">
-      <div class="alert alert-danger" *ngIf="authenticationError" jhiTranslate="login.messages.error.authentication" data-cy="loginError">
-        <strong>Failed to sign in!</strong> Please check your credentials and try again.
+      <div class="alert alert-danger" *ngIf="authenticationError" data-cy="loginError">
+        <strong>Échec de la connexion !</strong> Veuillez vérifier vos informations d'identification et réessayer
       </div>
       <form class="form" role="form" (ngSubmit)="login()" [formGroup]="loginForm">
         <div class="mb-3">
-          <label class="username-label" for="username" jhiTranslate="global.form.username.label">Username</label>
+          <label class="username-label" for="username">Nom d'utilisateur</label>
           <input
             type="text"
             class="form-control"
             name="username"
             id="username"
-            placeholder="{{ 'global.form.username.placeholder' | translate }}"
+            placeholder="Nom d'utilisateur"
             formControlName="username"
             #username
             data-cy="username"
@@ -21,13 +21,13 @@
         </div>
 
         <div class="mb-3">
-          <label for="password" jhiTranslate="login.form.password">Password</label>
+          <label for="password">Mot de passe</label>
           <input
             type="password"
             class="form-control"
             name="password"
             id="password"
-            placeholder="{{ 'login.form.password.placeholder' | translate }}"
+            placeholder="Mot de passe"
             formControlName="password"
             data-cy="password"
             autocomplete="off"
@@ -37,20 +37,15 @@
         <div class="form-check">
           <label class="form-check-label" for="rememberMe">
             <input class="form-check-input" type="checkbox" name="rememberMe" id="rememberMe" formControlName="rememberMe" />
-            <span jhiTranslate="login.form.rememberme">Remember me</span>
+            <span>Garder la session ouverte</span>
           </label>
         </div>
 
-        <button type="submit" class="btn btn-primary" jhiTranslate="login.form.button" data-cy="submit">Sign in</button>
+        <button type="submit" class="btn btn-primary" data-cy="submit">Se connecter</button>
       </form>
-      <div class="mt-3 alert alert-warning">
-        <a class="alert-link" routerLink="/account/reset/request" jhiTranslate="login.password.forgot" data-cy="forgetYourPasswordSelector"
-          >Did you forget your password?</a
-        >
-      </div>
 
       <div class="alert alert-warning">
-        <a class="alert-link" routerLink="/account/register" jhiTranslate="global.messages.info.register.link">Register a new account</a>
+        <a class="alert-link" routerLink="/account/register">Créer un nouveau compte</a>
       </div>
     </div>
   </div>

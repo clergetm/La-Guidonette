@@ -1,6 +1,7 @@
 {
   "register": {
-    "title": "Registration",
+    "title": "Registration | LaGuidonette",
+    "pageTitle": "Registration",
     "form": {
       "button": "Register"
     },
