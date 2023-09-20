@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { AccountService } from '../../core/auth/account.service';
 import { CartContentService } from '../../services/cart-content.service';
 
@@ -12,12 +12,9 @@ export class PaymentComponent {
 
   cardNumber = '';
   expiryDate = '';
-  cvv: string = '';
-  name: string = '';
-
+  cvv = '';
+  name = '';
   validInputs: boolean[] = [false, false, false, false]; // cc, date, cvv, name
-  constructor(public accountService: AccountService, public cartContentService: CartContentService) {}
-
   error_name = false;
   error_card_short = false;
   error_card_long = false;
@@ -25,6 +22,8 @@ export class PaymentComponent {
   error_date_incorrect = false;
   error_date_expired = false;
   error_date_format = false;
+
+  constructor(public accountService: AccountService, public cartContentService: CartContentService) {}
 
   formatCardNumber(): void {
     const formatted = this.cardNumber.replace(/\D/g, '').match(/.{1,4}/g);
@@ -57,7 +56,7 @@ export class PaymentComponent {
     this.checkCanGoNext();
   }
 
-  checkCanGoNext() {
+  checkCanGoNext(): void {
     const isValid = this.validInputs[0] && this.validInputs[1] && this.validInputs[2] && this.validInputs[3];
     this.canGoNext.emit(isValid);
   }
@@ -76,22 +75,23 @@ export class PaymentComponent {
   }
 
   isValidDate(): boolean {
-    this.error_date_format = !(this.expiryDate.length === 5);
+    this.error_date_format = this.expiryDate.length !== 5;
     if (this.error_date_format) {
       return false;
+    } else {
+      const month = Number(this.expiryDate.split('/')[0]);
+      const year = Number(this.expiryDate.split('/')[1]);
+
+      const currentDate = new Date();
+      const currentYear = currentDate.getFullYear() % 100; // Get the last two digits of the year
+      const currentMonth = currentDate.getMonth() + 1; // Months are 0-indexed in JS
+
+      this.error_date_incorrect = month < 1 || month > 12;
+      this.error_date_expired = currentYear * 12 + currentMonth > year * 12 + month;
+
+      const retour = !this.error_date_expired && !this.error_date_incorrect;
+      this.validInputs[1] = retour;
+      return retour;
     }
-    const month = parseInt(this.expiryDate.split('/')[0]);
-    const year = parseInt(this.expiryDate.split('/')[1]);
-
-    const currentDate = new Date();
-    const currentYear = currentDate.getFullYear() % 100; // Get the last two digits of the year
-    const currentMonth = currentDate.getMonth() + 1; // Months are 0-indexed in JS
-
-    this.error_date_incorrect = month < 1 || month > 12;
-    this.error_date_expired = !(currentYear * 12 + currentMonth <= year * 12 + month);
-
-    let retour = !this.error_date_expired && !this.error_date_format && !this.error_date_incorrect;
-    this.validInputs[1] = retour;
-    return retour;
   }
 }

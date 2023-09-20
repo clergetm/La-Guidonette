@@ -3,10 +3,8 @@ import { CartContentService } from '../../services/cart-content.service';
 import { ProductService } from '../../entities/product/service/product.service';
 import { NewOrderLine } from 'app/entities/order-line/order-line.model';
 import { IProduct } from '../../entities/product/product.model';
-import { PageEvent } from '@angular/material/paginator';
-import { min } from 'rxjs';
 import { CoupleProductQuantity } from '../../entities/dto/CoupleProductQuantity';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
 @Component({
@@ -53,7 +51,7 @@ export class OrderComponent implements OnInit {
     if (quantity === 0 || product.quantity === 0) {
       return 0;
     } else {
-      return (product.price ?? 0) * Math.min(product.quantity ?? 0, quantity ?? 0); // ?? is case if undefined
+      return (product.price ?? 0) * Math.min(product.quantity ?? 0, quantity); // ?? is case if undefined
     }
   }
 
@@ -62,7 +60,7 @@ export class OrderComponent implements OnInit {
    * @param productQuantity
    */
   notEnoughProduct(productQuantity: CoupleProductQuantity): boolean {
-    const stock = productQuantity.product?.quantity ?? 0;
+    const stock = productQuantity.product.quantity ?? 0;
     const quantity = productQuantity.quantity;
     let currentReturn = false;
     if (stock < quantity) {

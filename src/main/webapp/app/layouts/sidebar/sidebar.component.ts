@@ -18,13 +18,14 @@ export class SidebarComponent implements OnInit {
   selectedCategories: string[] = [];
   selectedBrands: string[] = [];
   selectedColors: string[] = [];
-  couleurMenu: boolean = false;
-  categoryMenu: boolean = false;
-  brandMenu: boolean = false;
+  couleurMenu = false;
+  categoryMenu = false;
+  brandMenu = false;
   @Input() query: string | null = null;
   @Output() selectedCategoriesEvent = new EventEmitter<string[]>();
   @Output() selectedColorsEvent = new EventEmitter<string[]>();
   @Output() selectedBrandsEvent = new EventEmitter<string[]>();
+  protected readonly MatSelectChange = MatSelectChange;
 
   constructor(protected categoryService: CategoryService) {}
 
@@ -33,13 +34,13 @@ export class SidebarComponent implements OnInit {
     this.getColors();
     this.getBrands();
   }
-  openColors() {
+  openColors(): void {
     this.couleurMenu = !this.couleurMenu;
   }
-  openCategories() {
+  openCategories(): void {
     this.categoryMenu = !this.categoryMenu;
   }
-  openBrands() {
+  openBrands(): void {
     this.brandMenu = !this.brandMenu;
   }
 
@@ -60,19 +61,19 @@ export class SidebarComponent implements OnInit {
       this.categories = data;
     });
   }
-  onCategorySelection(event: MatSelectionListChange) {
+  onCategorySelection(event: MatSelectionListChange): void {
     if (event.options[0].selectionList._value) {
       this.selectedCategories = event.options[0].selectionList._value;
     }
     this.selectedCategoriesEvent.emit(this.selectedCategories);
   }
-  onColorSelection(event: MatSelectionListChange) {
+  onColorSelection(event: MatSelectionListChange): void {
     if (event.options[0].selectionList._value) {
       this.selectedColors = event.options[0].selectionList._value;
     }
     this.selectedColorsEvent.emit(this.upperCase(this.selectedColors));
   }
-  onBrandSelection(event: MatSelectionListChange) {
+  onBrandSelection(event: MatSelectionListChange): void {
     if (event.options[0].selectionList._value) {
       this.selectedBrands = event.options[0].selectionList._value;
     }
@@ -85,7 +86,7 @@ export class SidebarComponent implements OnInit {
    * @private
    */
   private formatString(input: string): string {
-    const words = input.split(/[ \-]/);
+    const words = input.split(/[ -]/);
 
     const formattedWords = words.map((word: string): string => {
       if (word.length === 0) {
@@ -99,9 +100,7 @@ export class SidebarComponent implements OnInit {
 
     return formattedWords.join(' ');
   }
-  private upperCase(array: string[]) {
+  private upperCase(array: string[]): string[] {
     return array.map(a => a.toUpperCase());
   }
-
-  protected readonly MatSelectChange = MatSelectChange;
 }

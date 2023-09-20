@@ -11,8 +11,7 @@ import { IProduct } from '../entities/product/product.model';
 export class ListProductsComponent {
   @Input() products: IProduct[] | null = null;
   query: string | null = null;
+  protected readonly onsubmit = onsubmit;
 
   constructor(public productService: ProductService) {}
-
-  protected readonly onsubmit = onsubmit;
 }
