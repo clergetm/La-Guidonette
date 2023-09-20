@@ -1,7 +1,7 @@
 {
   "userManagement": {
     "home": {
-      "title": "Users",
+      "title": "Users | LaGuidonette",
       "refreshListLabel": "Refresh list",
       "createLabel": "Create a new user",
       "createOrEditLabel": "Create or edit a user"
@@ -13,7 +13,7 @@
       "question": "Are you sure you want to delete user {{ login }}?"
     },
     "detail": {
-      "title": "User"
+      "title": "User | LaGuidonette"
     },
     "login": "Login",
     "firstName": "First name",

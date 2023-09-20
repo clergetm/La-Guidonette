@@ -1,6 +1,6 @@
 {
   "error": {
-    "title": "Error page!",
+    "title": "Error page! | LaGuidonette",
     "http": {
       "400": "Bad request.",
       "403": "You are not authorized to access this page.",

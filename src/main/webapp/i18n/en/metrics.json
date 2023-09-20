@@ -1,6 +1,6 @@
 {
   "metrics": {
-    "title": "Application Metrics",
+    "title": "Application Metrics | LaGuidonette",
     "refresh.button": "Refresh",
     "updating": "Updating...",
     "jvm": {
@@ -12,7 +12,7 @@
         "nonheap": "Non-Heap Memory"
       },
       "threads": {
-        "title": "Threads",
+        "title": "Threads|LaGuidonette",
         "all": "All",
         "runnable": "Runnable",
         "timedwaiting": "Timed waiting",
