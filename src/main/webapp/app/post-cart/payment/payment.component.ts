@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { AccountService } from '../../core/auth/account.service';
 import { CartContentService } from '../../services/cart-content.service';
-
 @Component({
   selector: 'jhi-payment',
   templateUrl: './payment.component.html',
@@ -9,6 +8,7 @@ import { CartContentService } from '../../services/cart-content.service';
 })
 export class PaymentComponent {
   @Output() canGoNext = new EventEmitter<boolean>();
+  @Output() buyerName = new EventEmitter<string>();
 
   cardNumber = '';
   expiryDate = '';
@@ -53,6 +53,7 @@ export class PaymentComponent {
     this.name = this.name.replace(/[0-9]/g, '');
     this.error_name = !(this.name.length > 0);
     this.validInputs[3] = !this.error_name;
+    this.buyerName.emit(this.name);
     this.checkCanGoNext();
   }
 

@@ -24,7 +24,7 @@
       <h4>Attention toute commande sera livré dans notre magasin à Grenoble !</h4>
       <div class="payment-container">
         <form>
-          <jhi-payment (canGoNext)="handlePaymentValidation($event)"> </jhi-payment>
+          <jhi-payment (canGoNext)="handlePaymentValidation($event)" (buyerName)="setName($event)"> </jhi-payment>
         </form>
       </div>
     </div>

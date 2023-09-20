@@ -1,5 +1,6 @@
 package fr.uga.laguidonette.web.rest;
 
+import fr.uga.laguidonette.domain.ConfirmOrder;
 import fr.uga.laguidonette.domain.User;
 import fr.uga.laguidonette.repository.UserRepository;
 import fr.uga.laguidonette.security.SecurityUtils;
@@ -63,6 +64,12 @@ public class AccountResource {
         }
         User user = userService.registerUser(managedUserVM, managedUserVM.getPassword());
         mailService.sendActivationEmail(user);
+    }
+
+    @PostMapping("/confirm-order")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void confirmOrder(@RequestBody ConfirmOrder orderDetails) {
+        mailService.sendOrderConfirmationEmail(orderDetails);
     }
 
     /**

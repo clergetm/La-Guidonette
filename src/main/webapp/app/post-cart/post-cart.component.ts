@@ -6,6 +6,7 @@ import { NewOrderLine } from '../entities/order-line/order-line.model';
 import { ITorder } from '../entities/torder/torder.model';
 import { CartContentService } from '../services/cart-content.service';
 import { StateStorageService } from '../core/auth/state-storage.service';
+import { ConfirmOrderService } from './confirm-order.service';
 
 @Component({
   selector: 'jhi-post-cart',
@@ -18,12 +19,14 @@ export class PostCartComponent implements OnInit {
   step = 1;
   canValidate = false;
   canOrder = true;
+  onCardName = 'Non-specifié';
   constructor(
     public torderService: TorderService,
     public accountService: AccountService,
     public cartContentService: CartContentService,
     public router: Router,
-    private stateStorageService: StateStorageService
+    private stateStorageService: StateStorageService,
+    private confirmOrderService: ConfirmOrderService
   ) {}
 
   ngOnInit(): void {
@@ -35,6 +38,10 @@ export class PostCartComponent implements OnInit {
 
   handlePaymentValidation(status: boolean): void {
     this.canValidate = status;
+  }
+
+  setName(onCardName: string): void {
+    this.onCardName = onCardName;
   }
 
   handleCanOrder(status: boolean): void {
@@ -64,6 +71,23 @@ export class PostCartComponent implements OnInit {
       this.itorder = data;
       this.step = 3;
       this.cartContentService.removeAll();
+      // besoiin d'etre a l'interieur, car besoin de itorder +
+      // n'a pas lieu si l'order n'est pas validée.
+      this.accountService.identity().forEach(account => {
+        const acc_idOrder = this.itorder?.id ?? -1;
+        const acc_username = account?.login ?? 'Utilisateur';
+        const acc_mail = account?.email ?? 'rimshoy@gmail.com'; // keep track of mail if no mail found
+        const acc_local = account?.langKey ?? 'fr';
+        this.confirmOrderService
+          .confirmOrder({
+            username: acc_username,
+            mail: acc_mail,
+            commandId: acc_idOrder.toString(),
+            name: this.onCardName,
+            local: acc_local,
+          })
+          .subscribe();
+      });
     });
   }
 
