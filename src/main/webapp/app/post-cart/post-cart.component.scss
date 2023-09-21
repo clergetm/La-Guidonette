@@ -1,0 +1,23 @@
+.ligne-arianne {
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+  align-items: center;
+  align-content: center;
+  position: relative;
+  margin: 20px auto;
+}
+
+.ball-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+}
+
+.bottom-button {
+  width: 50%;
+  display: inline;
+  margin: 20px auto;
+}

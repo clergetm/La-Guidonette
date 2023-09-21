@@ -1,0 +1,10 @@
+{
+  "configuration": {
+    "title": "Configuration | LaGuidonette",
+    "filter": "Filter (by prefix)",
+    "table": {
+      "prefix": "Prefix",
+      "properties": "Properties"
+    }
+  }
+}

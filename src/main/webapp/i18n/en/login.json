@@ -1,0 +1,24 @@
+{
+  "login": {
+    "title": "Sign in | LaGuidonette",
+    "pageTitle": "Authentification",
+    "form": {
+      "password": "Mot de passe",
+      "password.placeholder": "Votre mot de passe",
+      "rememberme": "Se souvenir de moi",
+      "button": "Se connecter"
+    },
+    "messages": {
+      "error": {
+        "authentication": "<strong>Échec de la connexion !</strong> Veuillez vérifier vos informations d'identification et réessayer."
+      }
+    },
+    "password": {
+      "forgot": "Avez-vous oublié votre mot de passe ?"
+    },
+    "registration": {
+      "statement": "Vous n'avez pas encore de compte ?",
+      "button": "Créer un nouveau compte"
+    }
+  }
+}

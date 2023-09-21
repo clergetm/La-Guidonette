@@ -1,0 +1,14 @@
+{
+  "error": {
+    "title": "Page d'Erreur | LaGuidonette",
+    "http": {
+      "400": "Requête incorrecte.",
+      "403": "Vous n'êtes pas autorisé à accéder à cette page.",
+      "404": "La page n'existe pas.",
+      "405": "La méthode HTTP que vous avez utilisée n'est pas prise en charge pour cette URL.",
+      "500": "Erreur interne du serveur."
+    },
+    "concurrencyFailure": "Another user modified this data at the same time as you. Your changes were rejected.",
+    "validation": "Validation error on the server."
+  }
+}

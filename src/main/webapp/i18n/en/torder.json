@@ -1,0 +1,28 @@
+{
+  "laGuidonetteApp": {
+    "torder": {
+      "home": {
+        "title": "Orders | LaGuidonette",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Torder",
+        "createOrEditLabel": "Create or edit a Torder",
+        "notFound": "No Torders found"
+      },
+      "created": "A new Torder is created with identifier {{ param }}",
+      "updated": "A Torder is updated with identifier {{ param }}",
+      "deleted": "A Torder is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Torder {{ id }}?"
+      },
+      "detail": {
+        "title": "Order | LaGuidonette"
+      },
+      "id": "ID",
+      "date": "Date",
+      "total": "Total",
+      "status": "Status",
+      "userID": "User ID",
+      "orderLine": "Order Line"
+    }
+  }
+}

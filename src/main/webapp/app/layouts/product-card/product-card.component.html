@@ -1,0 +1,33 @@
+<mat-card class="bordered-card" *ngIf="product" (click)="goToProductPage()">
+  <mat-card-header>
+    <mat-card-title *ngIf="product.label"
+      >{{ product.label }} <span class="price-text">{{ product.price }}€</span></mat-card-title
+    >
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      <i>{{ product.description }}</i>
+    </p>
+  </mat-card-content>
+  <jhi-product-image *ngIf="product.imageName" [name]="product.imageName"></jhi-product-image>
+  <div class="stock-state-OK" *ngIf="product.quantity != undefined && product.quantity > 0; else offStock">En stock</div>
+  <ng-template #offStock><div class="stock-state-KO">Hors stock</div></ng-template>
+  <mat-card-actions>
+    <div class="btn-container">
+      <div>
+        <button
+          mat-button
+          (click)="addToCart($event)"
+          class="btns"
+          *ngIf="product.quantity != undefined && product.quantity > 0; else notStock"
+        >
+          AJOUTER AU PANIER
+        </button>
+        <ng-template #notStock><button mat-button class="btns" disabled>AJOUTER AU PANIER</button></ng-template>
+      </div>
+      <div class="bot-container" routerLinkActive="active">
+        <button mat-button type="button" id="btn-cart" class="btns" routerLink="/product/{{ product.id }}">VOIR PRODUIT</button>
+      </div>
+    </div>
+  </mat-card-actions>
+</mat-card>

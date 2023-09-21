@@ -1,0 +1,58 @@
+<div class="">
+  <div class="d-flex justify-content-center row bg-white">
+    <div class="col-md-8">
+      <div class="p-2">
+        <h2 style="font-weight: bold">Panier</h2>
+      </div>
+      <!-- Products --------------->
+      <div *ngIf="!cartService.isEmpty(); else cartEmpty">
+        <div
+          class="d-flex flex-row justify-content-between align-items-center p-2 mt-4 px-3 rounded cart-line"
+          *ngFor="let productQuantity of this.cartService?.getProductsAndQuantity()"
+        >
+          <div class="d-flex flex-column align-items-center product-details">
+            <span class="font-weight-bold">{{ productQuantity.product.label }}</span>
+          </div>
+
+          <div class="d-flex flex-column align-items-center product-details">
+            <div class="flex-row product-desc">
+              <div class="size mr-1">
+                <span class="text-grey">Marque:</span><span class="font-weight-bold">{{ productQuantity.product.brand }}</span>
+              </div>
+              <div class="color">
+                <span class="text-grey">Couleur:</span><span class="font-weight-bold">{{ productQuantity.product.color }}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex flex-row align-items-center qty">
+            <button type="button" class="button-74-small" (click)="deleteItem(productQuantity.product)">-</button>
+            <h5 class="text-grey mt-1 mr-1 ml-1">{{ productQuantity.quantity }}</h5>
+            <button type="button" class="button-74-small" (click)="addItem(productQuantity.product)">+</button>
+          </div>
+          <div>
+            <h5 class="text-grey">{{ productQuantity.product.price }}€</h5>
+          </div>
+          <button type="button" class="button-delete" (click)="cartService.removeAllFromCart(productQuantity.product)"></button>
+        </div>
+      </div>
+
+      <ng-template #cartEmpty>
+        <i> Votre panier est vide ! </i>
+      </ng-template>
+
+      <div class="d-flex flex-row align-items-center mt-3 p-2 rounded" routerLinkActive="active">
+        <button class="button-74" style="width: 100%; margin-right: 10px" type="button" routerLink="/">Retour à l'accueil</button>
+        <button
+          class="button-74"
+          style="width: 100%; margin-left: 10px"
+          type="button"
+          (click)="redirectToLogin()"
+          [disabled]="cartService.getSize() === 0 ? true : null"
+        >
+          Récapitulatif de ma commande
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

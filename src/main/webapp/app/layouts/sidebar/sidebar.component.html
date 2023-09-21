@@ -1,0 +1,36 @@
+<div class="sideBar">
+  <h3>Filtres</h3>
+  <div class="categories">
+    <button mat-flat-button (click)="openCategories()">
+      Catégories <mat-icon *ngIf="!categoryMenu">expand_more</mat-icon> <mat-icon *ngIf="categoryMenu">expand_less</mat-icon>
+    </button>
+    <mat-selection-list id="categories" *ngIf="categoryMenu" (selectionChange)="onCategorySelection($event)">
+      <mat-list-option *ngFor="let category of categories" value="{{ category.name }}">
+        {{ category.name }}
+      </mat-list-option>
+    </mat-selection-list>
+  </div>
+
+  <div class="couleurs">
+    <button mat-flat-button (click)="openColors()">
+      Couleurs<mat-icon *ngIf="!couleurMenu">expand_more</mat-icon>
+      <mat-icon *ngIf="couleurMenu">expand_less</mat-icon>
+    </button>
+    <mat-selection-list id="Couleurs" *ngIf="couleurMenu" (selectionChange)="onColorSelection($event)">
+      <mat-list-option *ngFor="let color of colors" value="{{ color }}">
+        {{ color }}
+      </mat-list-option>
+    </mat-selection-list>
+  </div>
+
+  <div class="marques">
+    <button mat-flat-button (click)="openBrands()">
+      Marques <mat-icon *ngIf="!brandMenu">expand_more</mat-icon> <mat-icon *ngIf="brandMenu">expand_less</mat-icon>
+    </button>
+    <mat-selection-list id="Marques" *ngIf="brandMenu" (selectionChange)="onBrandSelection($event)">
+      <mat-list-option *ngFor="let brand of brands" value="{{ brand }}">
+        {{ brand }}
+      </mat-list-option>
+    </mat-selection-list>
+  </div>
+</div>

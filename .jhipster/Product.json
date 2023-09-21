@@ -1,0 +1,73 @@
+{
+  "applications": ["LaGuidonette"],
+  "changelogDate": "20230909074810",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "product",
+  "fields": [
+    {
+      "fieldName": "label",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "price",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "brand",
+      "fieldType": "Brand",
+      "fieldValues": "BTWIN,SPECIALIZED,ORBEA,SANTA,CRUZ,WETHEPEOPLE,LAPIERRE,CANYON"
+    },
+    {
+      "fieldName": "model",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "color",
+      "fieldType": "Color",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "WHITE,BLACK,YELLOW,RED,BLUE,GREEN"
+    },
+    {
+      "fieldName": "quantity",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "imageName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "version",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Product",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "category",
+      "otherEntityRelationshipName": "product",
+      "ownerSide": false,
+      "relationshipName": "category",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "torder",
+      "otherEntityRelationshipName": "product",
+      "ownerSide": false,
+      "relationshipName": "torder",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

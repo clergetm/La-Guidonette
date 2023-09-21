@@ -1,0 +1,8 @@
+{
+  "generator-jhipster:7.9.4": {
+    "promptValues": {
+      "packageName": "fr.uga.laguidonette",
+      "nativeLanguage": "en"
+    }
+  }
+}

@@ -1,0 +1,71 @@
+<div class="ligne-arianne">
+  <div class="stage ball-wrapper">
+    <figure class="ball-passed"><span class="shadow"></span></figure>
+    <span>Recapitulatif</span>
+  </div>
+  <div class="stage ball-wrapper">
+    <figure [ngClass]="step >= 2 ? 'ball-passed' : 'ball'"><span class="shadow"></span></figure>
+    <span>Paiement</span>
+  </div>
+  <div class="stage ball-wrapper">
+    <figure [ngClass]="step >= 3 ? 'ball-passed' : 'ball'"><span class="shadow"></span></figure>
+    <span>Finalisation</span>
+  </div>
+</div>
+<div class="d-flex justify-content-center row">
+  <div class="col-md-8">
+    <div *ngIf="step === 1">
+      <jhi-order (canOrder)="handleCanOrder($event)" [cartContentService]="cartContentService"></jhi-order>
+    </div>
+
+    <div *ngIf="step === 2">
+      <jhi-alert-error></jhi-alert-error>
+      <h1>Reglement</h1>
+      <h4>Attention toute commande sera livré dans notre magasin à Grenoble !</h4>
+      <div class="payment-container">
+        <form>
+          <jhi-payment (canGoNext)="handlePaymentValidation($event)" (buyerName)="setName($event)"> </jhi-payment>
+        </form>
+      </div>
+    </div>
+
+    <div *ngIf="step === 3">
+      <jhi-finalisation [order]="itorder"></jhi-finalisation>
+    </div>
+
+    <div class="d-flex flex-row align-items-center mt-3 p-2 rounded">
+      <button class="button-74" style="width: 100%; margin-left: 10px" type="button" (click)="previousStep()" *ngIf="step != 3">
+        Retour
+      </button>
+      <button
+        class="button-74"
+        style="width: 100%; margin-left: 10px"
+        type="button"
+        (click)="nextStep()"
+        *ngIf="step == 1"
+        [disabled]="this.cartContentService.isEmpty() || !this.canOrder"
+      >
+        Continuer
+      </button>
+      <button
+        class="button-74"
+        style="width: 100%; margin-left: 10px"
+        type="button"
+        (click)="nextStep()"
+        *ngIf="step === 2"
+        [disabled]="!canValidate"
+      >
+        Commander
+      </button>
+      <button
+        class="button-74"
+        style="width: 100%; margin-left: 10px"
+        type="button"
+        (click)="this.router.navigate([''])"
+        *ngIf="step === 3"
+      >
+        Retour à l'accueil
+      </button>
+    </div>
+  </div>
+</div>

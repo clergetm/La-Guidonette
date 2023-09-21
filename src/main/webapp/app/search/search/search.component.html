@@ -1,0 +1,37 @@
+<div class="searchContainer">
+  <div class="searchPageBody">
+    <div class="left-part">
+      <jhi-sidebar
+        [query]="query"
+        (selectedCategoriesEvent)="getSelectedCategories($event)"
+        (selectedBrandsEvent)="getSelectedBrands($event)"
+        (selectedColorsEvent)="getSelectedColors($event)"
+      ></jhi-sidebar>
+      <button mat-stroked-button style="width: 100%" (click)="submitFilters()">Appliquer</button>
+    </div>
+    <div class="right-part">
+      <form class="example-form searchForm" (submit)="onSubmit($event)">
+        <mat-form-field class="example-full-width" style="width: 100%">
+          <mat-label>Recherchez votre vélo </mat-label>
+          <input matInput [(ngModel)]="query" name="query" />
+          <mat-icon matSuffix fontIcon="search">search</mat-icon>
+        </mat-form-field>
+      </form>
+      <h1 *ngIf="noProductMode">Aucun résultat pour votre recherche.</h1>
+      <h1 *ngIf="noProductMode">Les vélos les plus vendus : Découvrez les favoris de nos clients !</h1>
+      <jhi-list-products [products]="products"></jhi-list-products>
+    </div>
+  </div>
+
+  <mat-paginator
+    aria-label="Select Page"
+    [length]="totalProducts"
+    [pageSizeOptions]="size"
+    [pageSize]="currentPageSize"
+    (page)="onPageChange($event)"
+    class="paginator"
+    showFirstLastButtons
+    *ngIf="!noProductMode"
+  >
+  </mat-paginator>
+</div>

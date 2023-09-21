@@ -1,0 +1,34 @@
+<div class="product-page" *ngIf="product">
+  <div class="product">
+    <div class="product-image">
+      <jhi-product-image *ngIf="product && product.imageName" [name]="product.imageName"></jhi-product-image>
+    </div>
+    <div class="product-infos">
+      <div class="product-text">
+        <h1 class="product-text-title">{{ product.label }}</h1>
+        <h2 class="product-text-specs">{{ product.brand }} {{ product.model }} {{ product.color }}</h2>
+        <h2 class="product-text-price">{{ product.price }}€</h2>
+      </div>
+      <p class="product-desc">
+        {{ product.description }} Vélo polyvalent, confortable et dynamique pour vos balades régulières sur piste cyclable, route et
+        chemin.<br /><br />
+        Partez en balade en pleine nature ! Léger, maniable et confort, le {{ product.model }} saura vous convaincre de toute sa polyvalence
+        et sa robustesse.
+      </p>
+
+      <div class="product-purchase">
+        <div>
+          <div class="stock-state-OK" *ngIf="product.quantity != undefined && product.quantity > 0; else offStock">En stock</div>
+          <ng-template #offStock><div class="stock-state-KO">Hors stock</div></ng-template>
+
+          <button mat-button (click)="addToCart(product)" class="btns" *ngIf="product.quantity && product.quantity > 0; else notStock">
+            AJOUTER AU PANIER
+          </button>
+          <ng-template #notStock
+            ><button mat-button (click)="addToCart(product)" class="btns" disabled>AJOUTER AU PANIER</button></ng-template
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

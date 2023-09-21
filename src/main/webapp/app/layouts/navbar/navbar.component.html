@@ -1,0 +1,114 @@
+<nav data-cy="navbar" class="navbar navbar-dark navbar-expand-md bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
+      <span class="logo-img"></span>
+      <span class="navbar-title">LaGuidonette</span>
+    </a>
+    <a
+      class="navbar-toggler d-lg-none"
+      href="javascript:void(0);"
+      data-toggle="collapse"
+      data-target="#navbarResponsive"
+      aria-controls="navbarResponsive"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+      (click)="toggleNavbar()"
+    >
+      <fa-icon icon="bars"></fa-icon>
+    </a>
+    <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed" [ngSwitch]="account !== null">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <a class="nav-link" routerLink="/cart" (click)="collapseNavbar()">
+            <div class="cart-icon-container">
+              <span class="logo-cart"></span>
+              <span class="number-items-in-cart" *ngIf="cartContentService.getSize() > 0">{{ cartContentService.getSize() }}</span>
+              <span>Panier</span>
+            </div>
+          </a>
+        </li>
+        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <a class="nav-link" routerLink="" (click)="collapseNavbar()">
+            <span>
+              <fa-icon icon="home"></fa-icon>
+              <span>Accueil</span>
+            </span>
+          </a>
+        </li>
+        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <a class="nav-link" routerLink="/search" (click)="collapseNavbar()">
+            <span>
+              <fa-icon icon="search"></fa-icon>
+              <span>Recherche</span>
+            </span>
+          </a>
+        </li>
+        <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
+        <li *jhiHasAnyAuthority="'ROLE_ADMIN'" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <a class="nav-link" routerLink="entity/product" (click)="collapseNavbar()">
+            <span>
+              <fa-icon icon="bicycle"></fa-icon>
+              <span>Produits</span>
+            </span>
+          </a>
+        </li>
+        <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
+        <li
+          #accountMenu="ngbDropdown"
+          ngbDropdown
+          class="nav-item dropdown pointer"
+          display="dynamic"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <a
+            class="nav-link dropdown-toggle"
+            ngbDropdownToggle
+            id="account-menu"
+            data-cy="accountMenu"
+            (mouseenter)="onAccountIn()"
+            (mouseleave)="onAccountOut()"
+            (click)="clickOnAccount()"
+          >
+            <span *ngIf="!account?.imageUrl">
+              <fa-icon icon="user"></fa-icon>
+              <span>Compte</span>
+            </span>
+            <span *ngIf="account?.imageUrl">
+              <img [src]="account!.imageUrl" class="profile-image rounded-circle" alt="Avatar" />
+            </span>
+          </a>
+          <ul
+            class="dropdown-menu"
+            ngbDropdownMenu
+            aria-labelledby="account-menu"
+            (mouseenter)="onAccountIn()"
+            (mouseleave)="onAccountOut()"
+          >
+            <li *ngSwitchCase="true">
+              <a
+                class="dropdown-item"
+                routerLink="account/user-page"
+                routerLinkActive="active"
+                (click)="collapseNavbar()"
+                data-cy="settings"
+              >
+                <fa-icon icon="user" [fixedWidth]="true"></fa-icon>
+                <span>Compte</span>
+              </a>
+            </li>
+            <li *ngSwitchCase="true">
+              <a class="dropdown-item" (click)="logout()" id="logout" data-cy="logout">
+                <fa-icon icon="sign-out-alt" [fixedWidth]="true"></fa-icon>
+                <span>Déconnexion</span>
+              </a>
+            </li>
+            <li *ngSwitchCase="false">
+              <jhi-pocket-login></jhi-pocket-login>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
